@@ -1,183 +1,309 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Search, Plus, Filter, MapPin, AlertTriangle, CheckCircle } from "lucide-react";
-import fieldImage from "@assets/generated_images/Aerial_farm_field_view_84f23bc5.png";
+import { MapPin, ChevronDown } from "lucide-react";
+import { Link } from "wouter";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 //todo: remove mock functionality
 const mockFields = [
-  { id: "F001", name: "North Field", producer: "John Omondi", size: "2.5 ha", crop: "Coffee", status: "compliant", location: "Kisumu, Kenya" },
-  { id: "F002", name: "South Field", producer: "John Omondi", size: "3.2 ha", crop: "Tea", status: "compliant", location: "Kisumu, Kenya" },
-  { id: "F003", name: "East Field", producer: "John Omondi", size: "1.8 ha", crop: "Coffee", status: "pending", location: "Kisumu, Kenya" },
-  { id: "F004", name: "Highland Plot", producer: "Maria Santos", size: "4.1 ha", crop: "Rice", status: "compliant", location: "Benguet, Philippines" },
-  { id: "F005", name: "Valley Field", producer: "Maria Santos", size: "2.9 ha", crop: "Vegetables", status: "warning", location: "Benguet, Philippines" },
-  { id: "F006", name: "Coffee Estate", producer: "Carlos Rodriguez", size: "5.3 ha", crop: "Coffee", status: "compliant", location: "Antioquia, Colombia" },
+  {
+    fieldId: "FN8049.62.4",
+    fieldName: "f3",
+    size: "4.67",
+    gpsInaccuracy: "",
+    farmer: "Imam Effendi",
+    groups: "Nuku",
+    farmerTags: "",
+    plantingCampaign: "Palm Oil Production Campaign 2024-25",
+    cropVariety: "Palm Fruits (Dura and Tenera)",
+    plantingDate: "12/11/2024",
+    dataQuality: "Not reviewed",
+    compliance: "Not reviewed",
+    status: "Active",
+    deforestationStatus: "Unavailable",
+    inUse: "Yes",
+  },
+  {
+    fieldId: "FN8049.62.1",
+    fieldName: "f1",
+    size: "7.76",
+    gpsInaccuracy: "",
+    farmer: "Bima Anwar",
+    groups: "2",
+    farmerTags: "",
+    plantingCampaign: "Palm Oil Production Campaign 2024-25",
+    cropVariety: "Palm Fruits (Dura and Tenera)",
+    plantingDate: "11/11/2024",
+    dataQuality: "Not reviewed",
+    compliance: "Not reviewed",
+    status: "Active",
+    deforestationStatus: "Unavailable",
+    inUse: "Yes",
+  },
+  {
+    fieldId: "INA-2011-F1",
+    fieldName: "AHMAD GUNAWAN's Field-1",
+    size: "5.0",
+    gpsInaccuracy: "",
+    farmer: "AHMAD GUNAWAN",
+    groups: "",
+    farmerTags: "Demo",
+    plantingCampaign: "",
+    cropVariety: "",
+    plantingDate: "",
+    dataQuality: "",
+    compliance: "",
+    status: "Non-active",
+    deforestationStatus: "",
+    inUse: "Yes",
+  },
+  {
+    fieldId: "INA-2010-F1",
+    fieldName: "MAT SABURI's Field-1",
+    size: "13.0",
+    gpsInaccuracy: "",
+    farmer: "MAT SABURI",
+    groups: "",
+    farmerTags: "Demo",
+    plantingCampaign: "",
+    cropVariety: "",
+    plantingDate: "",
+    dataQuality: "",
+    compliance: "",
+    status: "Non-active",
+    deforestationStatus: "",
+    inUse: "Yes",
+  },
+  {
+    fieldId: "INA-2009-F1",
+    fieldName: "ARI SAMSIR's Field-1",
+    size: "10.0",
+    gpsInaccuracy: "",
+    farmer: "ARI SAMSIR",
+    groups: "",
+    farmerTags: "Demo",
+    plantingCampaign: "",
+    cropVariety: "",
+    plantingDate: "",
+    dataQuality: "",
+    compliance: "",
+    status: "Non-active",
+    deforestationStatus: "",
+    inUse: "Yes",
+  },
+  {
+    fieldId: "INA-2008-F1",
+    fieldName: "NURU ARIF's Field-1",
+    size: "15.0",
+    gpsInaccuracy: "",
+    farmer: "NURU ARIF",
+    groups: "",
+    farmerTags: "Demo",
+    plantingCampaign: "",
+    cropVariety: "",
+    plantingDate: "",
+    dataQuality: "",
+    compliance: "",
+    status: "Non-active",
+    deforestationStatus: "",
+    inUse: "Yes",
+  },
 ];
 
 export default function Fields() {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filteredFields = mockFields.filter((field) =>
-    field.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    field.producer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    field.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    field.crop.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "compliant": return "secondary";
-      case "warning": return "outline";
-      case "pending": return "outline";
-      default: return "outline";
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "compliant": return <CheckCircle className="h-4 w-4 text-primary" />;
-      case "warning": return <AlertTriangle className="h-4 w-4 text-yellow-600" />;
-      default: return null;
-    }
-  };
-
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <h1 className="text-3xl font-semibold" data-testid="text-page-title">Fields</h1>
-          <p className="text-muted-foreground mt-1">Manage field boundaries and compliance</p>
-        </div>
-        <Button data-testid="button-add-field">
-          <Plus className="h-4 w-4 mr-2" />
-          Map New Field
-        </Button>
+    <div className="space-y-4 -m-6">
+      {/* Header */}
+      <div className="px-6 pt-6 flex items-center justify-between">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/producers">Farmers</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="font-medium">Fields</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="default" data-testid="button-actions">
+              Actions
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Add New Field</DropdownMenuItem>
+            <DropdownMenuItem>Import Fields</DropdownMenuItem>
+            <DropdownMenuItem>Export to CSV</DropdownMenuItem>
+            <DropdownMenuItem>View Map</DropdownMenuItem>
+            <DropdownMenuItem>Check Deforestation</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Field Map Overview</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="relative rounded-md overflow-hidden border">
-              <img 
-                src={fieldImage} 
-                alt="Field map overview" 
-                className="w-full h-64 object-cover"
-              />
-              <div className="absolute top-4 right-4 flex gap-2">
-                <Button variant="secondary" size="sm" data-testid="button-map-fullscreen">
-                  View Full Map
-                </Button>
-              </div>
-            </div>
-            <div className="grid grid-cols-3 gap-3 mt-4">
-              <div className="text-center p-3 rounded-md bg-muted/50">
-                <p className="text-2xl font-semibold text-primary">{mockFields.filter(f => f.status === "compliant").length}</p>
-                <p className="text-xs text-muted-foreground mt-1">Compliant</p>
-              </div>
-              <div className="text-center p-3 rounded-md bg-muted/50">
-                <p className="text-2xl font-semibold text-yellow-600">{mockFields.filter(f => f.status === "warning").length}</p>
-                <p className="text-xs text-muted-foreground mt-1">Warnings</p>
-              </div>
-              <div className="text-center p-3 rounded-md bg-muted/50">
-                <p className="text-2xl font-semibold text-muted-foreground">{mockFields.filter(f => f.status === "pending").length}</p>
-                <p className="text-xs text-muted-foreground mt-1">Pending</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-4 flex-wrap">
-              <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search fields..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9"
-                  data-testid="input-search-fields"
-                />
-              </div>
-              <Button variant="outline" size="sm" data-testid="button-filter">
-                <Filter className="h-4 w-4 mr-2" />
-                Filters
-              </Button>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2 max-h-[400px] overflow-y-auto">
-              {filteredFields.map((field) => (
-                <div 
-                  key={field.id}
-                  className="flex items-center gap-3 p-3 rounded-md border hover-elevate cursor-pointer"
-                  data-testid={`card-field-${field.id}`}
+      {/* Table */}
+      <div className="border-t">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-muted/50 hover:bg-muted/50">
+                <TableHead className="font-medium">Field Id</TableHead>
+                <TableHead className="font-medium">Field Name</TableHead>
+                <TableHead className="font-medium">Size</TableHead>
+                <TableHead className="font-medium">GPS Inaccuracy (meters)</TableHead>
+                <TableHead className="font-medium">Farmer</TableHead>
+                <TableHead className="font-medium">Groups</TableHead>
+                <TableHead className="font-medium">Farmer Tags</TableHead>
+                <TableHead className="font-medium">Planting Campaign</TableHead>
+                <TableHead className="font-medium">Crop Variety</TableHead>
+                <TableHead className="font-medium">Planting Date</TableHead>
+                <TableHead className="font-medium">Data Quality</TableHead>
+                <TableHead className="font-medium">Compliance</TableHead>
+                <TableHead className="font-medium">Status</TableHead>
+                <TableHead className="font-medium">Deforestation Status</TableHead>
+                <TableHead className="font-medium">In Use</TableHead>
+                <TableHead className="w-[100px]"></TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {mockFields.map((field, index) => (
+                <TableRow 
+                  key={field.fieldId}
+                  className="hover:bg-muted/30"
+                  data-testid={`row-field-${index}`}
                 >
-                  <div className="flex-shrink-0">
-                    {getStatusIcon(field.status)}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h4 className="font-medium text-sm">{field.name}</h4>
-                      <Badge variant={getStatusColor(field.status)} className="text-xs">
+                  <TableCell className="font-medium">
+                    <Link href={`/fields/${field.fieldId}`}>
+                      <span className="text-primary hover:underline cursor-pointer">
+                        {field.fieldId}
+                      </span>
+                    </Link>
+                  </TableCell>
+                  <TableCell>{field.fieldName}</TableCell>
+                  <TableCell className="text-right">{field.size}</TableCell>
+                  <TableCell className="text-muted-foreground text-sm">
+                    {field.gpsInaccuracy}
+                  </TableCell>
+                  <TableCell>
+                    {field.farmer && (
+                      <Link href={`/producers/${field.farmer}`}>
+                        <span className="text-primary hover:underline cursor-pointer text-sm">
+                          {field.farmer}
+                        </span>
+                      </Link>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {field.groups && (
+                      <Link href={`/groups/${field.groups}`}>
+                        <span className="text-primary hover:underline cursor-pointer text-sm">
+                          {field.groups}
+                        </span>
+                      </Link>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {field.farmerTags && (
+                      <Badge variant="outline" className="text-xs">
+                        {field.farmerTags}
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell className="max-w-[200px]">
+                    <span className="text-sm truncate block">{field.plantingCampaign}</span>
+                  </TableCell>
+                  <TableCell className="max-w-[150px]">
+                    <span className="text-sm truncate block">{field.cropVariety}</span>
+                  </TableCell>
+                  <TableCell className="text-sm">{field.plantingDate}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground">
+                    {field.dataQuality}
+                  </TableCell>
+                  <TableCell className="text-sm text-muted-foreground">
+                    {field.compliance}
+                  </TableCell>
+                  <TableCell>
+                    {field.status && (
+                      <Badge 
+                        variant={field.status === "Active" ? "secondary" : "outline"}
+                        className="text-xs"
+                      >
                         {field.status}
                       </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {field.deforestationStatus && (
+                      <Badge 
+                        variant={field.deforestationStatus === "Unavailable" ? "outline" : "secondary"}
+                        className="text-xs"
+                      >
+                        {field.deforestationStatus}
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-sm">{field.inUse}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2 justify-end">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7"
+                        data-testid={`button-map-${index}`}
+                      >
+                        <MapPin className="h-4 w-4 text-muted-foreground" />
+                      </Button>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            data-testid={`button-row-actions-${index}`}
+                          >
+                            <ChevronDown className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          <DropdownMenuItem>Edit Field</DropdownMenuItem>
+                          <DropdownMenuItem>View on Map</DropdownMenuItem>
+                          <DropdownMenuItem>Check Boundaries</DropdownMenuItem>
+                          <DropdownMenuItem>Deforestation Check</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {field.producer} • {field.size} • {field.crop}
-                    </p>
-                  </div>
-                  <div className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground">
-                    <MapPin className="h-3 w-3" />
-                    <span className="truncate max-w-[150px]">{field.location}</span>
-                  </div>
-                </div>
+                  </TableCell>
+                </TableRow>
               ))}
-            </div>
-
-            {filteredFields.length === 0 && (
-              <div className="text-center py-8">
-                <p className="text-muted-foreground text-sm">No fields found matching your search.</p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+            </TableBody>
+          </Table>
+        </div>
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Compliance Summary</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 rounded-md bg-primary/5 border border-primary/20">
-              <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-primary" />
-                <div>
-                  <h4 className="font-medium">All fields within allowed zones</h4>
-                  <p className="text-sm text-muted-foreground mt-0.5">No deforestation alerts detected</p>
-                </div>
-              </div>
-              <Badge variant="secondary">All Clear</Badge>
-            </div>
-            <div className="flex items-center justify-between p-4 rounded-md border">
-              <div className="flex items-center gap-3">
-                <AlertTriangle className="h-5 w-5 text-yellow-600" />
-                <div>
-                  <h4 className="font-medium">1 field requires verification</h4>
-                  <p className="text-sm text-muted-foreground mt-0.5">Valley Field (F005) - Boundary review needed</p>
-                </div>
-              </div>
-              <Button variant="outline" size="sm" data-testid="button-review-field">Review</Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }
