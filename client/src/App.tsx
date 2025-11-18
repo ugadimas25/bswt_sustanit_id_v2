@@ -18,6 +18,11 @@ import Harvests from "@/pages/Harvests";
 import Reports from "@/pages/Reports";
 import Users from "@/pages/Users";
 import PlantingCampaigns from "@/pages/PlantingCampaigns";
+import CroppingCycleFinancials from "@/pages/CroppingCycleFinancials";
+import FieldProductivity from "@/pages/FieldProductivity";
+import PlantingCampaignGroups from "@/pages/PlantingCampaignGroups";
+import PlantingCampaignTemplates from "@/pages/PlantingCampaignTemplates";
+import WeeklyYieldForecasts from "@/pages/WeeklyYieldForecasts";
 import FarmingInputs from "@/pages/FarmingInputs";
 import Traceability from "@/pages/Traceability";
 import Accounts from "@/pages/Accounts";
@@ -41,6 +46,11 @@ function Router() {
       <Route path="/producers" component={Producers} />
       <Route path="/producers/:id" component={ProducerDetail} />
       <Route path="/planting-campaigns" component={PlantingCampaigns} />
+      <Route path="/cropping-cycle-financials" component={CroppingCycleFinancials} />
+      <Route path="/field-productivity" component={FieldProductivity} />
+      <Route path="/planting-campaign-groups" component={PlantingCampaignGroups} />
+      <Route path="/planting-campaign-templates" component={PlantingCampaignTemplates} />
+      <Route path="/weekly-yield-forecasts" component={WeeklyYieldForecasts} />
       <Route path="/farming-inputs" component={FarmingInputs} />
       <Route path="/harvests" component={Harvests} />
       <Route path="/traceability" component={Traceability} />
