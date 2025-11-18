@@ -76,6 +76,19 @@ import AreaTypes from "@/pages/AreaTypes";
 import Certifications from "@/pages/Certifications";
 import FamilyMembers from "@/pages/FamilyMembers";
 import Farms from "@/pages/Farms";
+import CertificateStates from "@/pages/CertificateStates";
+import FamilyMemberEducation from "@/pages/FamilyMemberEducation";
+import FamilyMemberRelationships from "@/pages/FamilyMemberRelationships";
+import FarmObjectImages from "@/pages/FarmObjectImages";
+import FarmObjects from "@/pages/FarmObjects";
+import FarmerCertifications from "@/pages/FarmerCertifications";
+import FarmerLastActivity from "@/pages/FarmerLastActivity";
+import FarmerPremiums from "@/pages/FarmerPremiums";
+import FarmersAttributes from "@/pages/FarmersAttributes";
+import FieldQuotas from "@/pages/FieldQuotas";
+import FieldsDeforestation from "@/pages/FieldsDeforestation";
+import FieldsDeforestationSummary from "@/pages/FieldsDeforestationSummary";
+import GAOperatorCosts from "@/pages/GAOperatorCosts";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -151,6 +164,19 @@ function Router() {
       <Route path="/certifications" component={Certifications} />
       <Route path="/family-members" component={FamilyMembers} />
       <Route path="/farms" component={Farms} />
+      <Route path="/certificate-states" component={CertificateStates} />
+      <Route path="/family-member-education" component={FamilyMemberEducation} />
+      <Route path="/family-member-relationships" component={FamilyMemberRelationships} />
+      <Route path="/farm-object-images" component={FarmObjectImages} />
+      <Route path="/farm-objects" component={FarmObjects} />
+      <Route path="/farmer-certifications" component={FarmerCertifications} />
+      <Route path="/farmer-last-activity" component={FarmerLastActivity} />
+      <Route path="/farmer-premiums" component={FarmerPremiums} />
+      <Route path="/farmers-attributes" component={FarmersAttributes} />
+      <Route path="/field-quotas" component={FieldQuotas} />
+      <Route path="/fields-deforestation" component={FieldsDeforestation} />
+      <Route path="/fields-deforestation-summary" component={FieldsDeforestationSummary} />
+      <Route path="/ga-operator-costs" component={GAOperatorCosts} />
       <Route component={NotFound} />
     </Switch>
   );

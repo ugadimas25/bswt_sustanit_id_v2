@@ -48,7 +48,6 @@ const mainCategories: MenuItem[] = [
   { title: "Surveys", url: "/surveys", icon: FileText },
   { title: "Financial Services", url: "/accounts", icon: CreditCard },
   { title: "Administration", url: "/users", icon: Settings },
-  { title: "Master Data", url: "/area-types", icon: Database },
   { title: "Cases", url: "/cases", icon: AlertCircle },
   { title: "Reports", url: "/reports", icon: ChartBar },
 ];
@@ -57,7 +56,24 @@ const categorySubmenus: Record<string, SubMenuItem[]> = {
   "Dashboard": [],
   "Farmers": [
     { title: "All Farmers", url: "/producers" },
+    { title: "Area Types", url: "/area-types" },
+    { title: "Certificate States", url: "/certificate-states" },
+    { title: "Certifications", url: "/certifications" },
+    { title: "Family Member Education", url: "/family-member-education" },
+    { title: "Family Member Relationships", url: "/family-member-relationships" },
+    { title: "Family Members", url: "/family-members" },
+    { title: "Farm Object Images", url: "/farm-object-images" },
+    { title: "Farm Objects", url: "/farm-objects" },
+    { title: "Farmer Certifications", url: "/farmer-certifications" },
+    { title: "Farmer Last Activity", url: "/farmer-last-activity" },
+    { title: "Farmer Premiums", url: "/farmer-premiums" },
+    { title: "Farmers Attributes", url: "/farmers-attributes" },
+    { title: "Farms", url: "/farms" },
+    { title: "Field Quotas", url: "/field-quotas" },
     { title: "Fields", url: "/fields" },
+    { title: "Fields Deforestation", url: "/fields-deforestation" },
+    { title: "Fields Deforestation Summary", url: "/fields-deforestation-summary" },
+    { title: "GA Operator Costs", url: "/ga-operator-costs" },
   ],
   "Planting Campaigns": [
     { title: "All Campaigns", url: "/planting-campaigns" },
@@ -129,12 +145,6 @@ const categorySubmenus: Record<string, SubMenuItem[]> = {
     { title: "Devices", url: "/devices" },
     { title: "Partners", url: "/partners" },
   ],
-  "Master Data": [
-    { title: "Area Types", url: "/area-types" },
-    { title: "Certifications", url: "/certifications" },
-    { title: "Family Members", url: "/family-members" },
-    { title: "Farms", url: "/farms" },
-  ],
   "Cases": [
     { title: "All Cases", url: "/cases" },
   ],
@@ -179,7 +189,7 @@ function getCurrentCategory(pathname: string): string {
   if (pathname.startsWith("/report")) {
     return "Reports";
   }
-  if (pathname.startsWith("/producer") || pathname === "/fields") {
+  if (pathname.startsWith("/producer") || pathname.startsWith("/area-type") || pathname.startsWith("/certificate-state") || pathname.startsWith("/certification") || pathname.startsWith("/family-member") || pathname.startsWith("/farm") || pathname.startsWith("/farmer") || pathname.startsWith("/field") || pathname.startsWith("/ga-operator")) {
     return "Farmers";
   }
   if (pathname.startsWith("/account") || pathname.startsWith("/location") || pathname.startsWith("/loan") || pathname.startsWith("/saving") || pathname.startsWith("/company-sales")) {
@@ -187,9 +197,6 @@ function getCurrentCategory(pathname: string): string {
   }
   if (pathname.startsWith("/user") || pathname.startsWith("/device") || pathname.startsWith("/partner")) {
     return "Administration";
-  }
-  if (pathname.startsWith("/area-type") || pathname.startsWith("/certification") || pathname.startsWith("/family-member") || pathname.startsWith("/farm")) {
-    return "Master Data";
   }
   
   return "Dashboard";
