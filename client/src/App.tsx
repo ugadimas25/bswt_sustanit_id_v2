@@ -16,6 +16,7 @@ import Surveys from "@/pages/Surveys";
 import Cases from "@/pages/Cases";
 import Harvests from "@/pages/Harvests";
 import Reports from "@/pages/Reports";
+import Users from "@/pages/Users";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/cases" component={Cases} />
       <Route path="/harvests" component={Harvests} />
       <Route path="/reports" component={Reports} />
+      <Route path="/users" component={Users} />
       <Route component={NotFound} />
     </Switch>
   );
