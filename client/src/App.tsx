@@ -26,6 +26,7 @@ import InputCosts from "@/pages/InputCosts";
 import InputDistribution from "@/pages/InputDistribution";
 import InputPurchases from "@/pages/InputPurchases";
 
+import Harvests from "@/pages/Harvests";
 import HarvestGroupBags from "@/pages/HarvestGroupBags";
 import HarvestActivities from "@/pages/HarvestActivities";
 import HarvestAlerts from "@/pages/HarvestAlerts";
@@ -40,6 +41,8 @@ import HarvestScheduling from "@/pages/HarvestScheduling";
 import HarvestTracking from "@/pages/HarvestTracking";
 import HarvestDeliveries from "@/pages/HarvestDeliveries";
 import HarvestReports from "@/pages/HarvestReports";
+import HarvestInputStore from "@/pages/HarvestInputStore";
+import HarvestInputUnit from "@/pages/HarvestInputUnit";
 
 import Traceability from "@/pages/Traceability";
 import TraceabilityFarmerHarvest from "@/pages/TraceabilityFarmerHarvest";
@@ -109,6 +112,8 @@ function Router() {
       <Route path="/harvest-tracking" component={HarvestTracking} />
       <Route path="/harvest-deliveries" component={HarvestDeliveries} />
       <Route path="/harvest-reports" component={HarvestReports} />
+      <Route path="/harvest-input-store" component={HarvestInputStore} />
+      <Route path="/harvest-input-unit" component={HarvestInputUnit} />
       
       <Route path="/traceability" component={Traceability} />
       <Route path="/traceability-farmer-harvest" component={TraceabilityFarmerHarvest} />
