@@ -34,7 +34,7 @@ function Router() {
 
 function App() {
   const style = {
-    "--sidebar-width": "20rem",
+    "--sidebar-width": "38rem",
     "--sidebar-width-icon": "4rem",
   };
 
