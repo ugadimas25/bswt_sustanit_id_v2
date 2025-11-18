@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 import Producers from "@/pages/Producers";
 import ProducerDetail from "@/pages/ProducerDetail";
@@ -18,6 +19,7 @@ import NotFound from "@/pages/not-found";
 function Router() {
   return (
     <Switch>
+      <Route path="/login" component={Login} />
       <Route path="/" component={Dashboard} />
       <Route path="/producers" component={Producers} />
       <Route path="/producers/:id" component={ProducerDetail} />
