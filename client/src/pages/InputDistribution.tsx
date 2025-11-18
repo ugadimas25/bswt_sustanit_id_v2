@@ -86,17 +86,17 @@ export default function InputDistribution() {
                     <span className="text-primary hover:underline cursor-pointer">{dist.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{dist.date}</TableCell>
-                <TableCell className="text-sm">{dist.recipient}</TableCell>
-                <TableCell>{dist.input}</TableCell>
-                <TableCell className="text-right font-medium">{dist.quantity}</TableCell>
+                <TableCell data-testid={`text-date-${index}`}>{dist.date}</TableCell>
+                <TableCell className="text-sm" data-testid={`text-recipient-${index}`}>{dist.recipient}</TableCell>
+                <TableCell data-testid={`text-input-${index}`}>{dist.input}</TableCell>
+                <TableCell className="text-right font-medium" data-testid={`text-quantity-${index}`}>{dist.quantity}</TableCell>
                 <TableCell>
                   <Link href={`/users/${dist.distributor}`} data-testid={`link-distributor-${index}`}>
                     <span className="text-sm hover:underline cursor-pointer">{dist.distributor}</span>
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Badge variant={dist.status === "Completed" ? "secondary" : "outline"} className="text-xs">
+                  <Badge variant={dist.status === "Completed" ? "secondary" : "outline"} className="text-xs" data-testid={`badge-status-${index}`}>
                     {dist.status}
                   </Badge>
                 </TableCell>

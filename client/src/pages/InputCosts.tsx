@@ -74,7 +74,7 @@ export default function InputCosts() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-semibold" data-testid="stat-total-costs">$22,282.50</div>
-              <p className="text-xs text-muted-foreground mt-1">Q1 2024</p>
+              <p className="text-xs text-muted-foreground mt-1" data-testid="text-period">Q1 2024</p>
             </CardContent>
           </Card>
 
@@ -85,7 +85,7 @@ export default function InputCosts() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-semibold" data-testid="stat-fertilizer-costs">$17,940</div>
-              <p className="text-xs text-muted-foreground mt-1">80.5% of total</p>
+              <p className="text-xs text-muted-foreground mt-1" data-testid="text-fertilizer-percent">80.5% of total</p>
             </CardContent>
           </Card>
 
@@ -96,7 +96,7 @@ export default function InputCosts() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-semibold" data-testid="stat-chemical-costs">$4,342.50</div>
-              <p className="text-xs text-muted-foreground mt-1">19.5% of total</p>
+              <p className="text-xs text-muted-foreground mt-1" data-testid="text-chemical-percent">19.5% of total</p>
             </CardContent>
           </Card>
         </div>
@@ -124,14 +124,14 @@ export default function InputCosts() {
                     <span className="text-primary hover:underline cursor-pointer">{cost.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{cost.inputName}</TableCell>
+                <TableCell data-testid={`text-input-name-${index}`}>{cost.inputName}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{cost.category}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-category-${index}`}>{cost.category}</Badge>
                 </TableCell>
-                <TableCell className="text-right">{cost.unitCost}</TableCell>
-                <TableCell className="text-right">{cost.quantity}</TableCell>
-                <TableCell className="text-right font-medium">{cost.totalCost}</TableCell>
-                <TableCell className="text-sm">{cost.period}</TableCell>
+                <TableCell className="text-right" data-testid={`text-unit-cost-${index}`}>{cost.unitCost}</TableCell>
+                <TableCell className="text-right" data-testid={`text-quantity-${index}`}>{cost.quantity}</TableCell>
+                <TableCell className="text-right font-medium" data-testid={`text-total-cost-${index}`}>{cost.totalCost}</TableCell>
+                <TableCell className="text-sm" data-testid={`text-period-${index}`}>{cost.period}</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

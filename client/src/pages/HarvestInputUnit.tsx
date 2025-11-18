@@ -85,14 +85,14 @@ export default function HarvestInputUnit() {
                     <span className="text-primary hover:underline cursor-pointer">{unit.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{unit.name}</TableCell>
-                <TableCell className="font-mono text-sm">{unit.symbol}</TableCell>
+                <TableCell data-testid={`text-name-${index}`}>{unit.name}</TableCell>
+                <TableCell className="font-mono text-sm" data-testid={`text-symbol-${index}`}>{unit.symbol}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{unit.type}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-type-${index}`}>{unit.type}</Badge>
                 </TableCell>
-                <TableCell className="text-right font-mono">{unit.conversionFactor}</TableCell>
+                <TableCell className="text-right font-mono" data-testid={`text-conversion-${index}`}>{unit.conversionFactor}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{unit.status}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-status-${index}`}>{unit.status}</Badge>
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>

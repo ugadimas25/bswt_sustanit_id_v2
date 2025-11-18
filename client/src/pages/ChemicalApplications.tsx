@@ -96,11 +96,11 @@ export default function ChemicalApplications() {
                     <span className="text-sm hover:underline cursor-pointer">{app.field}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{app.chemical}</TableCell>
-                <TableCell className="text-right">{app.quantity}</TableCell>
-                <TableCell>{app.date}</TableCell>
+                <TableCell data-testid={`text-chemical-${index}`}>{app.chemical}</TableCell>
+                <TableCell className="text-right" data-testid={`text-quantity-${index}`}>{app.quantity}</TableCell>
+                <TableCell data-testid={`text-date-${index}`}>{app.date}</TableCell>
                 <TableCell>
-                  <Badge variant={app.status === "Completed" ? "secondary" : "outline"} className="text-xs">
+                  <Badge variant={app.status === "Completed" ? "secondary" : "outline"} className="text-xs" data-testid={`badge-status-${index}`}>
                     {app.status}
                   </Badge>
                 </TableCell>

@@ -85,14 +85,14 @@ export default function ChemicalApplicationVarieties() {
                     <span className="text-primary hover:underline cursor-pointer">{variety.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{variety.name}</TableCell>
+                <TableCell data-testid={`text-name-${index}`}>{variety.name}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{variety.type}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-type-${index}`}>{variety.type}</Badge>
                 </TableCell>
-                <TableCell className="text-sm">{variety.manufacturer}</TableCell>
-                <TableCell>{variety.concentration}</TableCell>
+                <TableCell className="text-sm" data-testid={`text-manufacturer-${index}`}>{variety.manufacturer}</TableCell>
+                <TableCell data-testid={`text-concentration-${index}`}>{variety.concentration}</TableCell>
                 <TableCell>
-                  <Badge variant={variety.status === "Approved" ? "secondary" : "outline"} className="text-xs">
+                  <Badge variant={variety.status === "Approved" ? "secondary" : "outline"} className="text-xs" data-testid={`badge-status-${index}`}>
                     {variety.status}
                   </Badge>
                 </TableCell>

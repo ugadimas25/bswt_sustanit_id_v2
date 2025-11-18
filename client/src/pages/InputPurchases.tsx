@@ -86,17 +86,17 @@ export default function InputPurchases() {
                     <span className="text-primary hover:underline cursor-pointer">{purchase.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{purchase.date}</TableCell>
+                <TableCell data-testid={`text-date-${index}`}>{purchase.date}</TableCell>
                 <TableCell>
                   <Link href={`/suppliers/${purchase.supplier}`} data-testid={`link-supplier-${index}`}>
                     <span className="text-sm hover:underline cursor-pointer">{purchase.supplier}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{purchase.inputName}</TableCell>
-                <TableCell className="text-right">{purchase.quantity}</TableCell>
-                <TableCell className="text-right font-medium">{purchase.totalCost}</TableCell>
+                <TableCell data-testid={`text-input-name-${index}`}>{purchase.inputName}</TableCell>
+                <TableCell className="text-right" data-testid={`text-quantity-${index}`}>{purchase.quantity}</TableCell>
+                <TableCell className="text-right font-medium" data-testid={`text-total-cost-${index}`}>{purchase.totalCost}</TableCell>
                 <TableCell>
-                  <Badge variant={purchase.paymentStatus === "Paid" ? "secondary" : "outline"} className="text-xs">
+                  <Badge variant={purchase.paymentStatus === "Paid" ? "secondary" : "outline"} className="text-xs" data-testid={`badge-payment-status-${index}`}>
                     {purchase.paymentStatus}
                   </Badge>
                 </TableCell>

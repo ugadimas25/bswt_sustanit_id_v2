@@ -85,14 +85,14 @@ export default function ChemicalApplicationTargets() {
                     <span className="text-primary hover:underline cursor-pointer">{target.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{target.name}</TableCell>
+                <TableCell data-testid={`text-name-${index}`}>{target.name}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{target.category}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-category-${index}`}>{target.category}</Badge>
                 </TableCell>
-                <TableCell className="text-sm text-muted-foreground">{target.description}</TableCell>
-                <TableCell>{target.season}</TableCell>
+                <TableCell className="text-sm text-muted-foreground" data-testid={`text-description-${index}`}>{target.description}</TableCell>
+                <TableCell data-testid={`text-season-${index}`}>{target.season}</TableCell>
                 <TableCell>
-                  <Badge variant={target.status === "Active" ? "secondary" : "outline"} className="text-xs">
+                  <Badge variant={target.status === "Active" ? "secondary" : "outline"} className="text-xs" data-testid={`badge-status-${index}`}>
                     {target.status}
                   </Badge>
                 </TableCell>

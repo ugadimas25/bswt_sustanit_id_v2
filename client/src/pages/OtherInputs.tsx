@@ -85,18 +85,18 @@ export default function OtherInputs() {
                     <span className="text-primary hover:underline cursor-pointer">{input.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{input.name}</TableCell>
+                <TableCell data-testid={`text-name-${index}`}>{input.name}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{input.category}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-category-${index}`}>{input.category}</Badge>
                 </TableCell>
                 <TableCell className="text-sm">
                   <Link href={`/suppliers/${input.supplier}`} data-testid={`link-supplier-${index}`}>
                     <span className="hover:underline cursor-pointer">{input.supplier}</span>
                   </Link>
                 </TableCell>
-                <TableCell className="text-right font-medium">{input.unitPrice}</TableCell>
+                <TableCell className="text-right font-medium" data-testid={`text-price-${index}`}>{input.unitPrice}</TableCell>
                 <TableCell>
-                  <Badge variant={input.stockStatus === "In Stock" ? "secondary" : "outline"} className="text-xs">
+                  <Badge variant={input.stockStatus === "In Stock" ? "secondary" : "outline"} className="text-xs" data-testid={`badge-stock-status-${index}`}>
                     {input.stockStatus}
                   </Badge>
                 </TableCell>

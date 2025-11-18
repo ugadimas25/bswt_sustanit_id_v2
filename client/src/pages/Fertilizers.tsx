@@ -86,15 +86,15 @@ export default function Fertilizers() {
                     <span className="text-primary hover:underline cursor-pointer">{fert.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{fert.name}</TableCell>
+                <TableCell data-testid={`text-name-${index}`}>{fert.name}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{fert.type}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-type-${index}`}>{fert.type}</Badge>
                 </TableCell>
-                <TableCell className="font-mono text-sm">{fert.nutrientRatio}</TableCell>
-                <TableCell className="text-sm">{fert.manufacturer}</TableCell>
-                <TableCell className="font-medium">{fert.unitPrice}</TableCell>
+                <TableCell className="font-mono text-sm" data-testid={`text-ratio-${index}`}>{fert.nutrientRatio}</TableCell>
+                <TableCell className="text-sm" data-testid={`text-manufacturer-${index}`}>{fert.manufacturer}</TableCell>
+                <TableCell className="font-medium" data-testid={`text-price-${index}`}>{fert.unitPrice}</TableCell>
                 <TableCell>
-                  <Badge variant={fert.status === "In Stock" ? "secondary" : "outline"} className="text-xs">
+                  <Badge variant={fert.status === "In Stock" ? "secondary" : "outline"} className="text-xs" data-testid={`badge-status-${index}`}>
                     {fert.status}
                   </Badge>
                 </TableCell>

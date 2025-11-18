@@ -74,7 +74,7 @@ export default function PlantedArea() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-semibold" data-testid="stat-total-area">15.3 ha</div>
-              <p className="text-xs text-muted-foreground mt-1">All crops</p>
+              <p className="text-xs text-muted-foreground mt-1" data-testid="text-all-crops">All crops</p>
             </CardContent>
           </Card>
 
@@ -85,7 +85,7 @@ export default function PlantedArea() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-semibold" data-testid="stat-coffee-area">10.3 ha</div>
-              <p className="text-xs text-muted-foreground mt-1">67.3% of total</p>
+              <p className="text-xs text-muted-foreground mt-1" data-testid="text-coffee-percent">67.3% of total</p>
             </CardContent>
           </Card>
 
@@ -96,7 +96,7 @@ export default function PlantedArea() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-semibold" data-testid="stat-active-plantings">5</div>
-              <p className="text-xs text-muted-foreground mt-1">This season</p>
+              <p className="text-xs text-muted-foreground mt-1" data-testid="text-season">This season</p>
             </CardContent>
           </Card>
         </div>
@@ -135,12 +135,12 @@ export default function PlantedArea() {
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{area.crop}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-crop-${index}`}>{area.crop}</Badge>
                 </TableCell>
-                <TableCell className="text-right font-medium">{area.areaPlanted}</TableCell>
-                <TableCell>{area.plantingDate}</TableCell>
+                <TableCell className="text-right font-medium" data-testid={`text-area-${index}`}>{area.areaPlanted}</TableCell>
+                <TableCell data-testid={`text-planting-date-${index}`}>{area.plantingDate}</TableCell>
                 <TableCell>
-                  <Badge variant={area.status === "Growing" || area.status === "Mature" ? "secondary" : "outline"} className="text-xs">
+                  <Badge variant={area.status === "Growing" || area.status === "Mature" ? "secondary" : "outline"} className="text-xs" data-testid={`badge-status-${index}`}>
                     {area.status}
                   </Badge>
                 </TableCell>

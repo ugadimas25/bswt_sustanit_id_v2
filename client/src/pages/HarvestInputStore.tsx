@@ -86,17 +86,17 @@ export default function HarvestInputStore() {
                     <span className="text-primary hover:underline cursor-pointer">{store.id}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{store.name}</TableCell>
-                <TableCell className="text-sm">{store.location}</TableCell>
+                <TableCell data-testid={`text-name-${index}`}>{store.name}</TableCell>
+                <TableCell className="text-sm" data-testid={`text-location-${index}`}>{store.location}</TableCell>
                 <TableCell>
                   <Link href={`/users/${store.manager}`} data-testid={`link-manager-${index}`}>
                     <span className="text-sm hover:underline cursor-pointer">{store.manager}</span>
                   </Link>
                 </TableCell>
-                <TableCell className="text-right">{store.capacity}</TableCell>
-                <TableCell className="text-right font-medium">{store.currentStock}</TableCell>
+                <TableCell className="text-right" data-testid={`text-capacity-${index}`}>{store.capacity}</TableCell>
+                <TableCell className="text-right font-medium" data-testid={`text-stock-${index}`}>{store.currentStock}</TableCell>
                 <TableCell className="text-right">
-                  <Badge variant={parseInt(store.utilization) > 80 ? "outline" : "secondary"} className="text-xs">
+                  <Badge variant={parseInt(store.utilization) > 80 ? "outline" : "secondary"} className="text-xs" data-testid={`badge-utilization-${index}`}>
                     {store.utilization}
                   </Badge>
                 </TableCell>

@@ -96,11 +96,11 @@ export default function FertilizerApplications() {
                     <span className="text-sm hover:underline cursor-pointer">{app.field}</span>
                   </Link>
                 </TableCell>
-                <TableCell>{app.fertilizer}</TableCell>
-                <TableCell className="text-right font-medium">{app.quantity}</TableCell>
-                <TableCell>{app.date}</TableCell>
+                <TableCell data-testid={`text-fertilizer-${index}`}>{app.fertilizer}</TableCell>
+                <TableCell className="text-right font-medium" data-testid={`text-quantity-${index}`}>{app.quantity}</TableCell>
+                <TableCell data-testid={`text-date-${index}`}>{app.date}</TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="text-xs">{app.method}</Badge>
+                  <Badge variant="secondary" className="text-xs" data-testid={`badge-method-${index}`}>{app.method}</Badge>
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
