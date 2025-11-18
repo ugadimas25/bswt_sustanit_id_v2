@@ -14,6 +14,7 @@ import Fields from "@/pages/Fields";
 import Trainings from "@/pages/Trainings";
 import Surveys from "@/pages/Surveys";
 import Cases from "@/pages/Cases";
+import Harvests from "@/pages/Harvests";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/trainings" component={Trainings} />
       <Route path="/surveys" component={Surveys} />
       <Route path="/cases" component={Cases} />
+      <Route path="/harvests" component={Harvests} />
       <Route component={NotFound} />
     </Switch>
   );
