@@ -17,6 +17,20 @@ import Cases from "@/pages/Cases";
 import Harvests from "@/pages/Harvests";
 import Reports from "@/pages/Reports";
 import Users from "@/pages/Users";
+import PlantingCampaigns from "@/pages/PlantingCampaigns";
+import FarmingInputs from "@/pages/FarmingInputs";
+import Traceability from "@/pages/Traceability";
+import Accounts from "@/pages/Accounts";
+import Locations from "@/pages/Locations";
+import Loans from "@/pages/Loans";
+import Savings from "@/pages/Savings";
+import CompanySales from "@/pages/CompanySales";
+import Partners from "@/pages/Partners";
+import Devices from "@/pages/Devices";
+import AreaTypes from "@/pages/AreaTypes";
+import Certifications from "@/pages/Certifications";
+import FamilyMembers from "@/pages/FamilyMembers";
+import Farms from "@/pages/Farms";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,13 +40,27 @@ function Router() {
       <Route path="/" component={Dashboard} />
       <Route path="/producers" component={Producers} />
       <Route path="/producers/:id" component={ProducerDetail} />
-      <Route path="/fields" component={Fields} />
+      <Route path="/planting-campaigns" component={PlantingCampaigns} />
+      <Route path="/farming-inputs" component={FarmingInputs} />
+      <Route path="/harvests" component={Harvests} />
+      <Route path="/traceability" component={Traceability} />
       <Route path="/trainings" component={Trainings} />
       <Route path="/surveys" component={Surveys} />
-      <Route path="/cases" component={Cases} />
-      <Route path="/harvests" component={Harvests} />
+      <Route path="/accounts" component={Accounts} />
+      <Route path="/locations" component={Locations} />
+      <Route path="/loans" component={Loans} />
+      <Route path="/savings" component={Savings} />
+      <Route path="/company-sales" component={CompanySales} />
+      <Route path="/partners" component={Partners} />
+      <Route path="/devices" component={Devices} />
       <Route path="/reports" component={Reports} />
       <Route path="/users" component={Users} />
+      <Route path="/cases" component={Cases} />
+      <Route path="/fields" component={Fields} />
+      <Route path="/area-types" component={AreaTypes} />
+      <Route path="/certifications" component={Certifications} />
+      <Route path="/family-members" component={FamilyMembers} />
+      <Route path="/farms" component={Farms} />
       <Route component={NotFound} />
     </Switch>
   );
