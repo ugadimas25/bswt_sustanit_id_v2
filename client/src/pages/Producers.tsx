@@ -1,165 +1,318 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, Plus, Filter, MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, ChevronDown, User } from "lucide-react";
 import { Link } from "wouter";
-import farmer1 from "@assets/generated_images/African_farmer_portrait_1_8df294e0.png";
-import farmer2 from "@assets/generated_images/Asian_female_farmer_portrait_ba60ae0b.png";
-import farmer3 from "@assets/generated_images/Latin_farmer_portrait_86471c75.png";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 //todo: remove mock functionality
 const mockProducers = [
   {
-    id: "P001",
-    name: "John Omondi",
-    location: "Kisumu County, Kenya",
-    phone: "+254 712 345 678",
-    email: "j.omondi@email.com",
-    fields: 3,
-    status: "active",
-    image: farmer1,
+    farmerId: "PN8049.64.2",
+    firstName: "",
+    lastName: "",
+    mobileNumber: "",
+    certificationId: "",
+    village: "",
+    nationalIdType: "",
+    groups: "",
+    farmerTags: "Demo",
+    hasLocation: false,
   },
   {
-    id: "P002",
-    name: "Maria Santos",
-    location: "Benguet Province, Philippines",
-    phone: "+63 917 234 5678",
-    email: "m.santos@email.com",
-    fields: 5,
-    status: "active",
-    image: farmer2,
+    farmerId: "INA-1860",
+    firstName: "ADEDEJI",
+    lastName: "ABU HALIFAH",
+    mobileNumber: "",
+    certificationId: "INA-1860",
+    village: "",
+    nationalIdType: "",
+    groups: "",
+    farmerTags: "Demo",
+    hasLocation: false,
   },
   {
-    id: "P003",
-    name: "Carlos Rodriguez",
-    location: "Antioquia, Colombia",
-    phone: "+57 310 234 5678",
-    email: "c.rodriguez@email.com",
-    fields: 2,
-    status: "pending",
-    image: farmer3,
+    farmerId: "INA-1915",
+    firstName: "ADEDOKUN",
+    lastName: "ADAM",
+    mobileNumber: "",
+    certificationId: "INA-1915",
+    village: "",
+    nationalIdType: "",
+    groups: "",
+    farmerTags: "Demo",
+    hasLocation: false,
   },
   {
-    id: "P004",
-    name: "Grace Mutua",
-    location: "Nakuru County, Kenya",
-    phone: "+254 723 456 789",
-    email: "g.mutua@email.com",
-    fields: 4,
-    status: "active",
-    image: null,
+    farmerId: "INA-1968",
+    firstName: "AINA",
+    lastName: "ADDA",
+    mobileNumber: "",
+    certificationId: "INA-1968",
+    village: "",
+    nationalIdType: "",
+    groups: "",
+    farmerTags: "Demo",
+    hasLocation: false,
   },
   {
-    id: "P005",
-    name: "Ahmed Hassan",
-    location: "Kilimanjaro, Tanzania",
-    phone: "+255 754 123 456",
-    email: "a.hassan@email.com",
-    fields: 6,
-    status: "active",
-    image: null,
+    farmerId: "INA-1591",
+    firstName: "AJIBOYE",
+    lastName: "ADEL AWARIDZA",
+    mobileNumber: "",
+    certificationId: "INA-1591",
+    village: "",
+    nationalIdType: "",
+    groups: "",
+    farmerTags: "Demo",
+    hasLocation: false,
+  },
+  {
+    farmerId: "INA-1711",
+    firstName: "AGNES",
+    lastName: "Adeleye",
+    mobileNumber: "+2347056404840",
+    certificationId: "INA-1711",
+    village: "AASA",
+    nationalIdType: "",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+  },
+  {
+    farmerId: "INA-1588",
+    firstName: "MARIAM",
+    lastName: "Adeleye",
+    mobileNumber: "+2347033298559",
+    certificationId: "INA-1588",
+    village: "AASA",
+    nationalIdType: "",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+  },
+  {
+    farmerId: "INA-1589",
+    firstName: "ORIOWO",
+    lastName: "Adeleye",
+    mobileNumber: "+2348066526522",
+    certificationId: "INA-1589",
+    village: "AASA",
+    nationalIdType: "",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+  },
+  {
+    farmerId: "INA-1906",
+    firstName: "RAJI",
+    lastName: "ADELOGBA",
+    mobileNumber: "+2348060242495",
+    certificationId: "INA-1906",
+    village: "AASA",
+    nationalIdType: "",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+  },
+  {
+    farmerId: "INA-1729",
+    firstName: "RASIDI",
+    lastName: "Adelogoye",
+    mobileNumber: "+2347056404848",
+    certificationId: "INA-1729",
+    village: "AASA",
+    nationalIdType: "",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+  },
+  {
+    farmerId: "INA-1548",
+    firstName: "Akanji",
+    lastName: "ADELOKUN",
+    mobileNumber: "+2347033298552",
+    certificationId: "INA-1548",
+    village: "AASA",
+    nationalIdType: "",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+  },
+  {
+    farmerId: "INA-1415",
+    firstName: "BEATRICE",
+    lastName: "ADELOLA",
+    mobileNumber: "+2348060242490",
+    certificationId: "INA-1415",
+    village: "AASA",
+    nationalIdType: "",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
   },
 ];
 
 export default function Producers() {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filteredProducers = mockProducers.filter((producer) =>
-    producer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    producer.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    producer.id.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <h1 className="text-3xl font-semibold" data-testid="text-page-title">Producers</h1>
-          <p className="text-muted-foreground mt-1">Manage and monitor farmer registrations</p>
-        </div>
-        <Button data-testid="button-add-producer">
-          <Plus className="h-4 w-4 mr-2" />
-          Add Producer
-        </Button>
+    <div className="space-y-4 -m-6">
+      {/* Header */}
+      <div className="px-6 pt-6 flex items-center justify-between">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/producers">Farmers</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="font-medium">Farmers</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="default" data-testid="button-actions">
+              Actions
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Add New Farmer</DropdownMenuItem>
+            <DropdownMenuItem>Import Farmers</DropdownMenuItem>
+            <DropdownMenuItem>Export to CSV</DropdownMenuItem>
+            <DropdownMenuItem>Bulk Edit</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-4 flex-wrap">
-            <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search by name, ID, or location..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
-                data-testid="input-search-producers"
-              />
-            </div>
-            <Button variant="outline" data-testid="button-filter">
-              <Filter className="h-4 w-4 mr-2" />
-              Filters
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {filteredProducers.map((producer) => (
-              <Link href={`/producers/${producer.id}`} key={producer.id}>
-                <div 
-                  className="flex items-center gap-4 p-4 rounded-md border hover-elevate cursor-pointer"
-                  data-testid={`card-producer-${producer.id}`}
+      {/* Table */}
+      <div className="border-t">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-muted/50 hover:bg-muted/50">
+                <TableHead className="font-medium">Farmer ID</TableHead>
+                <TableHead className="font-medium">First Name</TableHead>
+                <TableHead className="font-medium">Last Name</TableHead>
+                <TableHead className="font-medium">Mobile Number</TableHead>
+                <TableHead className="font-medium">Certification ID</TableHead>
+                <TableHead className="font-medium">Village</TableHead>
+                <TableHead className="font-medium">National ID Type</TableHead>
+                <TableHead className="font-medium">Groups</TableHead>
+                <TableHead className="font-medium">Farmer Tags</TableHead>
+                <TableHead className="w-[100px]"></TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {mockProducers.map((producer, index) => (
+                <TableRow 
+                  key={producer.farmerId}
+                  className="hover:bg-muted/30"
+                  data-testid={`row-farmer-${index}`}
                 >
-                  <Avatar className="h-12 w-12">
-                    {producer.image && <AvatarImage src={producer.image} alt={producer.name} />}
-                    <AvatarFallback className="bg-primary/10 text-primary">
-                      {producer.name.split(" ").map((n) => n[0]).join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="font-medium">{producer.name}</h3>
+                  <TableCell className="font-medium">
+                    <Link href={`/producers/${producer.farmerId}`}>
+                      <span className="text-primary hover:underline cursor-pointer">
+                        {producer.farmerId}
+                      </span>
+                    </Link>
+                  </TableCell>
+                  <TableCell>{producer.firstName}</TableCell>
+                  <TableCell>{producer.lastName}</TableCell>
+                  <TableCell className="text-muted-foreground text-sm">
+                    {producer.mobileNumber}
+                  </TableCell>
+                  <TableCell>{producer.certificationId}</TableCell>
+                  <TableCell>{producer.village}</TableCell>
+                  <TableCell>{producer.nationalIdType}</TableCell>
+                  <TableCell>
+                    {producer.groups && (
+                      <Link href={`/groups/${producer.groups}`}>
+                        <span className="text-primary hover:underline cursor-pointer text-sm">
+                          {producer.groups}
+                        </span>
+                      </Link>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {producer.farmerTags && (
                       <Badge 
-                        variant={producer.status === "active" ? "secondary" : "outline"}
+                        variant={producer.farmerTags === "Certified" ? "secondary" : "outline"}
                         className="text-xs"
                       >
-                        {producer.status}
+                        {producer.farmerTags}
                       </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2 justify-end">
+                      {producer.hasLocation && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7"
+                          data-testid={`button-map-${index}`}
+                        >
+                          <MapPin className="h-4 w-4 text-muted-foreground" />
+                        </Button>
+                      )}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7"
+                        data-testid={`button-profile-${index}`}
+                      >
+                        <User className="h-4 w-4 text-muted-foreground" />
+                      </Button>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            data-testid={`button-row-actions-${index}`}
+                          >
+                            <ChevronDown className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          <DropdownMenuItem>Edit Farmer</DropdownMenuItem>
+                          <DropdownMenuItem>View Fields</DropdownMenuItem>
+                          <DropdownMenuItem>View Training</DropdownMenuItem>
+                          <DropdownMenuItem>View Surveys</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-1">ID: {producer.id}</p>
-                  </div>
-
-                  <div className="hidden md:flex flex-col gap-1 min-w-0">
-                    <div className="flex items-center gap-2 text-sm">
-                      <MapPin className="h-3 w-3 text-muted-foreground flex-shrink-0" />
-                      <span className="text-muted-foreground truncate">{producer.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Phone className="h-3 w-3 text-muted-foreground flex-shrink-0" />
-                      <span className="text-muted-foreground">{producer.phone}</span>
-                    </div>
-                  </div>
-
-                  <div className="hidden lg:block text-right">
-                    <p className="text-sm font-medium">{producer.fields}</p>
-                    <p className="text-xs text-muted-foreground">Fields</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {filteredProducers.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">No producers found matching your search.</p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
     </div>
   );
 }
