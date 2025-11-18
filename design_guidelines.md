@@ -10,6 +10,20 @@ Combining Material Design principles for data-dense interfaces with modern SaaS 
 - Progressive disclosure to prevent overwhelming users
 - Guided workflows for common tasks
 
+## Brand Identity
+
+**Color Palette (Farmforce Official):**
+- Primary (Golden Yellow): #F8BC28 - Main brand color, CTAs, highlights
+- Secondary (Soft Yellow): #E3DB57 - Accents, secondary actions
+- Text (Deep Blue): #0B2534 - Primary text, headers
+- Accent (Warm Tan): #F2E8DA - Backgrounds, subtle highlights
+- Tan Light: #F8F3EC - Page backgrounds, cards
+- Mint: #BFD5CC - Success states, positive indicators
+- Tomato: #F06C4D - Destructive actions, errors, warnings
+
+**Design Philosophy:**
+The warm yellow and earth-tone palette reflects agricultural heritage while maintaining professional credibility for enterprise users.
+
 ## Core Design Elements
 
 ### Typography
@@ -17,6 +31,7 @@ Combining Material Design principles for data-dense interfaces with modern SaaS 
 **Font Families:**
 - Primary: Inter (headings, UI elements, data tables)
 - Secondary: System font stack for forms and dense text
+- Consistent with Farmforce brand guidelines
 
 **Hierarchy:**
 - Page Titles: text-3xl font-semibold
@@ -24,7 +39,7 @@ Combining Material Design principles for data-dense interfaces with modern SaaS 
 - Card Titles: text-lg font-medium
 - Body Text: text-base
 - Labels: text-sm font-medium
-- Help Text: text-sm text-gray-600
+- Help Text: text-sm text-muted-foreground
 
 ### Layout System
 
