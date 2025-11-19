@@ -25,6 +25,14 @@ import FarmingInputs from "@/pages/FarmingInputs";
 import InputCosts from "@/pages/InputCosts";
 import InputDistribution from "@/pages/InputDistribution";
 import InputPurchases from "@/pages/InputPurchases";
+import Fertilizers from "@/pages/Fertilizers";
+import FertilizerApplications from "@/pages/FertilizerApplications";
+import ChemicalApplications from "@/pages/ChemicalApplications";
+import ChemicalApplicationTargets from "@/pages/ChemicalApplicationTargets";
+import ChemicalApplicationVarieties from "@/pages/ChemicalApplicationVarieties";
+import OtherInputs from "@/pages/OtherInputs";
+import OtherApplications from "@/pages/OtherApplications";
+import PlantedArea from "@/pages/PlantedArea";
 
 import Harvests from "@/pages/Harvests";
 import HarvestGroupBags from "@/pages/HarvestGroupBags";
@@ -127,6 +135,14 @@ function Router() {
       <Route path="/input-costs" component={InputCosts} />
       <Route path="/input-distribution" component={InputDistribution} />
       <Route path="/input-purchases" component={InputPurchases} />
+      <Route path="/fertilizers" component={Fertilizers} />
+      <Route path="/fertilizer-applications" component={FertilizerApplications} />
+      <Route path="/chemical-applications" component={ChemicalApplications} />
+      <Route path="/chemical-application-targets" component={ChemicalApplicationTargets} />
+      <Route path="/chemical-application-varieties" component={ChemicalApplicationVarieties} />
+      <Route path="/other-inputs" component={OtherInputs} />
+      <Route path="/other-applications" component={OtherApplications} />
+      <Route path="/planted-area" component={PlantedArea} />
       
       <Route path="/harvests" component={Harvests} />
       <Route path="/harvest-group-bags" component={HarvestGroupBags} />
