@@ -32,7 +32,7 @@ export default function RSPO() {
           <h1 className="text-3xl font-bold" data-testid="text-page-title">Penilaian Keberlanjutan</h1>
           <p className="text-muted-foreground mt-1">Penilaian mandiri terhadap standar RSPO/ISPO</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button variant="outline" data-testid="button-tab-rspo">RSPO</Button>
           <Button variant="outline" data-testid="button-tab-ispo">ISPO</Button>
           <Button data-testid="button-add-assessment">
