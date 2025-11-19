@@ -192,12 +192,13 @@ export default function Dashboard() {
 
               {/* Farm location markers */}
               {farmLocations.map((location) => {
-                const colors = {
+                const colors: Record<string, string> = {
                   high: "#22c55e",
                   medium: "#f59e0b",
                   low: "#ef4444"
                 };
                 const radius = Math.min(8, 3 + location.farmers / 40);
+                const color = colors[location.status] || "#6b7280";
                 
                 return (
                   <g key={location.id}>
@@ -205,7 +206,7 @@ export default function Dashboard() {
                       cx={location.x}
                       cy={location.y}
                       r={radius}
-                      fill={colors[location.status]}
+                      fill={color}
                       opacity="0.6"
                       className="hover:opacity-100 transition-opacity cursor-pointer"
                       data-testid={`marker-${location.id}`}
@@ -216,7 +217,7 @@ export default function Dashboard() {
                       cx={location.x}
                       cy={location.y}
                       r={radius - 1}
-                      fill={colors[location.status]}
+                      fill={color}
                       opacity="0.9"
                       className="hover:opacity-100 transition-opacity cursor-pointer pointer-events-none"
                     />
@@ -228,7 +229,7 @@ export default function Dashboard() {
                         transform: 'translate(-50%, -100%)',
                         width: '16px',
                         height: '16px',
-                        color: colors[location.status]
+                        color: color
                       }}
                     />
                   </g>
