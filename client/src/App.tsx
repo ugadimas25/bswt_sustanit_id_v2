@@ -184,7 +184,7 @@ function Router() {
 
 function App() {
   const style = {
-    "--sidebar-width": "38rem",
+    "--sidebar-width": "20rem",
     "--sidebar-width-icon": "4rem",
   };
 
@@ -195,8 +195,8 @@ function App() {
           <div className="flex h-screen w-full">
             <AppSidebar />
             <div className="flex flex-col flex-1">
-              <header className="flex items-center justify-between p-4 border-b">
-                <SidebarTrigger data-testid="button-sidebar-toggle" />
+              <header className="flex items-center justify-between p-4 border-b bg-card shadow-sm">
+                <SidebarTrigger data-testid="button-sidebar-toggle" className="h-10 w-10" />
                 <ThemeToggle />
               </header>
               <main className="flex-1 overflow-auto">
