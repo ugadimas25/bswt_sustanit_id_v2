@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { InstallPWA } from "@/components/InstallPWA";
 import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 import Producers from "@/pages/Producers";
@@ -288,6 +289,7 @@ function App() {
           </div>
         </SidebarProvider>
         <Toaster />
+        <InstallPWA />
       </TooltipProvider>
     </QueryClientProvider>
   );
