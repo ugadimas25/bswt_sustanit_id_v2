@@ -48,20 +48,24 @@ export default function ISPO() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {principles.map((principle) => (
-              <div
+              <Card
                 key={principle.number}
-                className="flex items-start gap-3 p-4 border rounded-lg hover-elevate active-elevate-2 cursor-pointer"
+                className="hover-elevate active-elevate-2 cursor-pointer"
                 data-testid={`card-principle-${principle.number}`}
               >
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground font-bold flex-shrink-0">
-                  {principle.number}
-                </div>
-                <div className="flex-1 pt-1">
-                  <h3 className="font-semibold" data-testid={`text-principle-title-${principle.number}`}>
-                    Prinsip {principle.number}: {principle.title}
-                  </h3>
-                </div>
-              </div>
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground font-bold flex-shrink-0">
+                      {principle.number}
+                    </div>
+                    <div className="flex-1 pt-1">
+                      <h3 className="font-semibold" data-testid={`text-principle-title-${principle.number}`}>
+                        Prinsip {principle.number}: {principle.title}
+                      </h3>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </CardContent>
