@@ -51,7 +51,7 @@ const columns: Column[] = [
     key: "certificationStatus", 
     label: "Status",
     sortable: true,
-    render: (value: any) => {
+    render: (value: any, row: any) => {
       const variants: Record<string, { variant: any, icon: any }> = {
         "Certified": { variant: "default", icon: CheckCircle },
         "Pending Audit": { variant: "secondary", icon: Clock },
@@ -59,7 +59,7 @@ const columns: Column[] = [
         "In Corrective Action": { variant: "secondary", icon: AlertTriangle },
         "Not Certified": { variant: "outline", icon: XCircle },
       };
-      const config = variants[value as string] || { variant: "outline", icon: AlertTriangle };
+      const config = variants[String(value)] || { variant: "outline", icon: AlertTriangle };
       const Icon = config.icon;
       return (
         <Badge variant={config.variant as any} className="gap-1">
@@ -73,7 +73,7 @@ const columns: Column[] = [
     key: "complianceScore", 
     label: "Compliance Score",
     sortable: true,
-    render: (value: any) => {
+    render: (value: any, row: any) => {
       const score = Number(value);
       if (score === 0) return <span className="text-muted-foreground">-</span>;
       const color = score >= 90 ? "text-green-600 dark:text-green-400" : score >= 80 ? "text-amber-600 dark:text-amber-400" : "text-red-600 dark:text-red-400";
@@ -84,7 +84,7 @@ const columns: Column[] = [
     key: "criticalNonCompliances", 
     label: "Critical",
     sortable: true,
-    render: (value: any) => {
+    render: (value: any, row: any) => {
       const count = Number(value);
       return count > 0 ? <Badge variant="destructive">{count}</Badge> : <span className="text-muted-foreground">0</span>;
     }
@@ -93,7 +93,7 @@ const columns: Column[] = [
     key: "majorNonCompliances", 
     label: "Major",
     sortable: true,
-    render: (value: any) => {
+    render: (value: any, row: any) => {
       const count = Number(value);
       return count > 0 ? <Badge variant="secondary">{count}</Badge> : <span className="text-muted-foreground">0</span>;
     }
@@ -102,7 +102,7 @@ const columns: Column[] = [
     key: "minorNonCompliances", 
     label: "Minor",
     sortable: true,
-    render: (value: any) => {
+    render: (value: any, row: any) => {
       const count = Number(value);
       return count > 0 ? <Badge variant="outline">{count}</Badge> : <span className="text-muted-foreground">0</span>;
     }
@@ -116,6 +116,10 @@ const columns: Column[] = [
     key: "hectares", 
     label: "Hectares",
     sortable: true,
+    render: (value: any, row: any) => {
+      const hectares = Number(value);
+      return <span>{hectares.toFixed(1)} ha</span>;
+    }
   },
   { 
     key: "auditDate", 
