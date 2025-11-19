@@ -1,93 +1,9 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, ChevronDown, User } from "lucide-react";
-import { Link } from "wouter";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { MapPin, Phone, Award, TrendingUp, Users, UserCheck, AlertCircle } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { EnhancedDataTable, Column, AIInsight } from "@/components/EnhancedDataTable";
 
-//todo: remove mock functionality
 const mockProducers = [
-  {
-    farmerId: "PN8049.64.2",
-    firstName: "",
-    lastName: "",
-    mobileNumber: "",
-    certificationId: "",
-    village: "",
-    nationalIdType: "",
-    groups: "",
-    farmerTags: "Demo",
-    hasLocation: false,
-  },
-  {
-    farmerId: "INA-1860",
-    firstName: "ADEDEJI",
-    lastName: "ABU HALIFAH",
-    mobileNumber: "",
-    certificationId: "INA-1860",
-    village: "",
-    nationalIdType: "",
-    groups: "",
-    farmerTags: "Demo",
-    hasLocation: false,
-  },
-  {
-    farmerId: "INA-1915",
-    firstName: "ADEDOKUN",
-    lastName: "ADAM",
-    mobileNumber: "",
-    certificationId: "INA-1915",
-    village: "",
-    nationalIdType: "",
-    groups: "",
-    farmerTags: "Demo",
-    hasLocation: false,
-  },
-  {
-    farmerId: "INA-1968",
-    firstName: "AINA",
-    lastName: "ADDA",
-    mobileNumber: "",
-    certificationId: "INA-1968",
-    village: "",
-    nationalIdType: "",
-    groups: "",
-    farmerTags: "Demo",
-    hasLocation: false,
-  },
-  {
-    farmerId: "INA-1591",
-    firstName: "AJIBOYE",
-    lastName: "ADEL AWARIDZA",
-    mobileNumber: "",
-    certificationId: "INA-1591",
-    village: "",
-    nationalIdType: "",
-    groups: "",
-    farmerTags: "Demo",
-    hasLocation: false,
-  },
   {
     farmerId: "INA-1711",
     firstName: "AGNES",
@@ -95,10 +11,14 @@ const mockProducers = [
     mobileNumber: "+2347056404840",
     certificationId: "INA-1711",
     village: "AASA",
-    nationalIdType: "",
+    nationalIdType: "National ID",
     groups: "Nigeria",
     farmerTags: "Certified",
     hasLocation: true,
+    lastActivity: "2 days ago",
+    fieldsCount: 3,
+    totalHectares: 4.5,
+    certificationStatus: "Active",
   },
   {
     farmerId: "INA-1588",
@@ -107,10 +27,14 @@ const mockProducers = [
     mobileNumber: "+2347033298559",
     certificationId: "INA-1588",
     village: "AASA",
-    nationalIdType: "",
+    nationalIdType: "National ID",
     groups: "Nigeria",
     farmerTags: "Certified",
     hasLocation: true,
+    lastActivity: "1 day ago",
+    fieldsCount: 2,
+    totalHectares: 3.2,
+    certificationStatus: "Active",
   },
   {
     farmerId: "INA-1589",
@@ -119,10 +43,14 @@ const mockProducers = [
     mobileNumber: "+2348066526522",
     certificationId: "INA-1589",
     village: "AASA",
-    nationalIdType: "",
+    nationalIdType: "National ID",
     groups: "Nigeria",
     farmerTags: "Certified",
     hasLocation: true,
+    lastActivity: "5 hours ago",
+    fieldsCount: 4,
+    totalHectares: 6.1,
+    certificationStatus: "Active",
   },
   {
     farmerId: "INA-1906",
@@ -131,10 +59,14 @@ const mockProducers = [
     mobileNumber: "+2348060242495",
     certificationId: "INA-1906",
     village: "AASA",
-    nationalIdType: "",
+    nationalIdType: "National ID",
     groups: "Nigeria",
     farmerTags: "Certified",
     hasLocation: true,
+    lastActivity: "3 days ago",
+    fieldsCount: 2,
+    totalHectares: 2.8,
+    certificationStatus: "Expiring Soon",
   },
   {
     farmerId: "INA-1729",
@@ -143,10 +75,14 @@ const mockProducers = [
     mobileNumber: "+2347056404848",
     certificationId: "INA-1729",
     village: "AASA",
-    nationalIdType: "",
+    nationalIdType: "National ID",
     groups: "Nigeria",
     farmerTags: "Certified",
     hasLocation: true,
+    lastActivity: "1 week ago",
+    fieldsCount: 3,
+    totalHectares: 5.0,
+    certificationStatus: "Active",
   },
   {
     farmerId: "INA-1548",
@@ -155,10 +91,14 @@ const mockProducers = [
     mobileNumber: "+2347033298552",
     certificationId: "INA-1548",
     village: "AASA",
-    nationalIdType: "",
+    nationalIdType: "National ID",
     groups: "Nigeria",
     farmerTags: "Certified",
     hasLocation: true,
+    lastActivity: "4 days ago",
+    fieldsCount: 5,
+    totalHectares: 7.3,
+    certificationStatus: "Active",
   },
   {
     farmerId: "INA-1415",
@@ -167,152 +107,294 @@ const mockProducers = [
     mobileNumber: "+2348060242490",
     certificationId: "INA-1415",
     village: "AASA",
-    nationalIdType: "",
+    nationalIdType: "National ID",
     groups: "Nigeria",
     farmerTags: "Certified",
     hasLocation: true,
+    lastActivity: "6 days ago",
+    fieldsCount: 2,
+    totalHectares: 3.5,
+    certificationStatus: "Active",
+  },
+  {
+    farmerId: "PN8049.64.2",
+    firstName: "JOHN",
+    lastName: "SMITH",
+    mobileNumber: "+2347012345678",
+    certificationId: "",
+    village: "Demo Village",
+    nationalIdType: "",
+    groups: "",
+    farmerTags: "Demo",
+    hasLocation: false,
+    lastActivity: "30 days ago",
+    fieldsCount: 0,
+    totalHectares: 0,
+    certificationStatus: "Pending",
+  },
+  {
+    farmerId: "INA-1860",
+    firstName: "ADEDEJI",
+    lastName: "ABU HALIFAH",
+    mobileNumber: "+2347023456789",
+    certificationId: "INA-1860",
+    village: "Northern Region",
+    nationalIdType: "National ID",
+    groups: "Nigeria",
+    farmerTags: "Demo",
+    hasLocation: false,
+    lastActivity: "15 days ago",
+    fieldsCount: 1,
+    totalHectares: 1.2,
+    certificationStatus: "Active",
+  },
+  {
+    farmerId: "INA-1915",
+    firstName: "ADEDOKUN",
+    lastName: "ADAM",
+    mobileNumber: "+2347034567890",
+    certificationId: "INA-1915",
+    village: "Central Region",
+    nationalIdType: "Voter ID",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+    lastActivity: "8 days ago",
+    fieldsCount: 3,
+    totalHectares: 4.0,
+    certificationStatus: "Active",
+  },
+  {
+    farmerId: "INA-2001",
+    firstName: "OLUWASEUN",
+    lastName: "OGUNLEYE",
+    mobileNumber: "+2348045678901",
+    certificationId: "INA-2001",
+    village: "AASA",
+    nationalIdType: "National ID",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+    lastActivity: "2 days ago",
+    fieldsCount: 4,
+    totalHectares: 5.5,
+    certificationStatus: "Active",
+  },
+  {
+    farmerId: "INA-2002",
+    firstName: "BLESSING",
+    lastName: "OKORO",
+    mobileNumber: "+2348056789012",
+    certificationId: "INA-2002",
+    village: "Northern Region",
+    nationalIdType: "National ID",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+    lastActivity: "5 days ago",
+    fieldsCount: 2,
+    totalHectares: 3.0,
+    certificationStatus: "Active",
+  },
+  {
+    farmerId: "INA-2003",
+    firstName: "CHIOMA",
+    lastName: "NWANKWO",
+    mobileNumber: "+2348067890123",
+    certificationId: "INA-2003",
+    village: "Central Region",
+    nationalIdType: "Voter ID",
+    groups: "Nigeria",
+    farmerTags: "Certified",
+    hasLocation: true,
+    lastActivity: "1 day ago",
+    fieldsCount: 3,
+    totalHectares: 4.2,
+    certificationStatus: "Active",
+  },
+];
+
+const columns: Column[] = [
+  {
+    key: "farmerId",
+    label: "Farmer ID",
+    sortable: true,
+    render: (value, row) => (
+      <Link href={`/producers/${value}`}>
+        <span className="text-primary hover:underline cursor-pointer font-medium">
+          {value}
+        </span>
+      </Link>
+    ),
+  },
+  {
+    key: "firstName",
+    label: "First Name",
+    sortable: true,
+  },
+  {
+    key: "lastName",
+    label: "Last Name",
+    sortable: true,
+  },
+  {
+    key: "mobileNumber",
+    label: "Mobile",
+    render: (value) => (
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        {value && <Phone className="h-3 w-3" />}
+        {value}
+      </div>
+    ),
+  },
+  {
+    key: "village",
+    label: "Village",
+    sortable: true,
+  },
+  {
+    key: "fieldsCount",
+    label: "Fields",
+    sortable: true,
+    render: (value, row) => (
+      <div className="text-center">
+        <span className="font-medium">{value}</span>
+        <span className="text-xs text-muted-foreground ml-1">({row.totalHectares}ha)</span>
+      </div>
+    ),
+  },
+  {
+    key: "certificationStatus",
+    label: "Certification",
+    sortable: true,
+    render: (value) => (
+      <Badge 
+        variant={
+          value === "Active" ? "secondary" : 
+          value === "Expiring Soon" ? "destructive" : 
+          "outline"
+        }
+      >
+        {value === "Active" && <Award className="h-3 w-3 mr-1" />}
+        {value === "Expiring Soon" && <AlertCircle className="h-3 w-3 mr-1" />}
+        {value}
+      </Badge>
+    ),
+  },
+  {
+    key: "lastActivity",
+    label: "Last Activity",
+    sortable: true,
+    render: (value) => (
+      <span className="text-sm text-muted-foreground">{value}</span>
+    ),
+  },
+  {
+    key: "hasLocation",
+    label: "GPS",
+    render: (value) => (
+      <div className="flex justify-center">
+        {value ? (
+          <MapPin className="h-4 w-4 text-green-600 dark:text-green-400" />
+        ) : (
+          <MapPin className="h-4 w-4 text-muted-foreground opacity-30" />
+        )}
+      </div>
+    ),
+  },
+];
+
+const stats = [
+  {
+    label: "Total Farmers",
+    value: "10,234",
+    change: 12,
+    trend: "up" as const,
+    icon: Users,
+  },
+  {
+    label: "Certified Farmers",
+    value: "8,547",
+    change: 8,
+    trend: "up" as const,
+    icon: UserCheck,
+  },
+  {
+    label: "GPS Mapped",
+    value: "78%",
+    change: 15,
+    trend: "up" as const,
+    icon: MapPin,
+  },
+  {
+    label: "Active (30 days)",
+    value: "7,892",
+    change: 5,
+    trend: "up" as const,
+    icon: TrendingUp,
+  },
+];
+
+const aiInsights: AIInsight[] = [
+  {
+    type: "recommendation",
+    message: "67 farmers haven't submitted data in 30+ days. AI suggests personalized outreach to re-engage inactive farmers.",
+    severity: "medium",
+  },
+  {
+    type: "trend",
+    message: "Certification renewal rate increased by 23% this month. Training program showing positive impact.",
+    severity: "low",
+  },
+  {
+    type: "anomaly",
+    message: "45 farmers approaching certification expiry in next 30 days. Schedule renewal assessments to maintain compliance.",
+    severity: "high",
   },
 ];
 
 export default function Producers() {
-  return (
-    <div className="space-y-4 -m-6">
-      {/* Header */}
-      <div className="px-6 pt-6 flex items-center justify-between">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/producers">Farmers</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage className="font-medium">Farmers</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-        
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="default" data-testid="button-actions">
-              Actions
-              <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>Add New Farmer</DropdownMenuItem>
-            <DropdownMenuItem>Import Farmers</DropdownMenuItem>
-            <DropdownMenuItem>Export to CSV</DropdownMenuItem>
-            <DropdownMenuItem>Bulk Edit</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+  const [, setLocation] = useLocation();
 
-      {/* Table */}
-      <div className="border-t">
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-muted/50 hover:bg-muted/50">
-                <TableHead className="font-medium">Farmer ID</TableHead>
-                <TableHead className="font-medium">First Name</TableHead>
-                <TableHead className="font-medium">Last Name</TableHead>
-                <TableHead className="font-medium">Mobile Number</TableHead>
-                <TableHead className="font-medium">Certification ID</TableHead>
-                <TableHead className="font-medium">Village</TableHead>
-                <TableHead className="font-medium">National ID Type</TableHead>
-                <TableHead className="font-medium">Groups</TableHead>
-                <TableHead className="font-medium">Farmer Tags</TableHead>
-                <TableHead className="w-[100px]"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {mockProducers.map((producer, index) => (
-                <TableRow 
-                  key={producer.farmerId}
-                  className="hover:bg-muted/30"
-                  data-testid={`row-farmer-${index}`}
-                >
-                  <TableCell className="font-medium">
-                    <Link href={`/producers/${producer.farmerId}`}>
-                      <span className="text-primary hover:underline cursor-pointer">
-                        {producer.farmerId}
-                      </span>
-                    </Link>
-                  </TableCell>
-                  <TableCell>{producer.firstName}</TableCell>
-                  <TableCell>{producer.lastName}</TableCell>
-                  <TableCell className="text-muted-foreground text-sm">
-                    {producer.mobileNumber}
-                  </TableCell>
-                  <TableCell>{producer.certificationId}</TableCell>
-                  <TableCell>{producer.village}</TableCell>
-                  <TableCell>{producer.nationalIdType}</TableCell>
-                  <TableCell>
-                    {producer.groups && (
-                      <Link href={`/groups/${producer.groups}`}>
-                        <span className="text-primary hover:underline cursor-pointer text-sm">
-                          {producer.groups}
-                        </span>
-                      </Link>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {producer.farmerTags && (
-                      <Badge 
-                        variant={producer.farmerTags === "Certified" ? "secondary" : "outline"}
-                        className="text-xs"
-                      >
-                        {producer.farmerTags}
-                      </Badge>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2 justify-end">
-                      {producer.hasLocation && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-7 w-7"
-                          data-testid={`button-map-${index}`}
-                        >
-                          <MapPin className="h-4 w-4 text-muted-foreground" />
-                        </Button>
-                      )}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-7 w-7"
-                        data-testid={`button-profile-${index}`}
-                      >
-                        <User className="h-4 w-4 text-muted-foreground" />
-                      </Button>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7"
-                            data-testid={`button-row-actions-${index}`}
-                          >
-                            <ChevronDown className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem>View Details</DropdownMenuItem>
-                          <DropdownMenuItem>Edit Farmer</DropdownMenuItem>
-                          <DropdownMenuItem>View Fields</DropdownMenuItem>
-                          <DropdownMenuItem>View Training</DropdownMenuItem>
-                          <DropdownMenuItem>View Surveys</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
+  const rowActions = (row: any) => [
+    {
+      label: "View Profile",
+      onClick: () => setLocation(`/producers/${row.farmerId}`),
+    },
+    {
+      label: "View Fields",
+      onClick: () => console.log("View fields for", row.farmerId),
+    },
+    {
+      label: "View Training Records",
+      onClick: () => console.log("View training for", row.farmerId),
+    },
+    {
+      label: "View Surveys",
+      onClick: () => console.log("View surveys for", row.farmerId),
+    },
+    {
+      label: "Edit Farmer",
+      onClick: () => console.log("Edit farmer", row.farmerId),
+    },
+  ];
+
+  return (
+    <div className="p-6" data-testid="page-farmers">
+      <EnhancedDataTable
+        title="Farmer Management"
+        description="Comprehensive farmer database with GPS mapping, certification tracking, and engagement analytics"
+        data={mockProducers}
+        columns={columns}
+        stats={stats}
+        aiInsights={aiInsights}
+        searchable
+        filterable
+        exportable
+        bulkActions
+        rowActions={rowActions}
+        onRowClick={(row) => setLocation(`/producers/${row.farmerId}`)}
+      />
     </div>
   );
 }

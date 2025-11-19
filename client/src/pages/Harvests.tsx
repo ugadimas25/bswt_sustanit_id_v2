@@ -1,376 +1,335 @@
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, ChevronDown, Filter } from "lucide-react";
-import { Link } from "wouter";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { Link, useLocation } from "wouter";
+import { 
+  Boxes, Scale, TrendingUp, AlertTriangle, 
+  Package, CheckCircle2, MapPin
+} from "lucide-react";
+import { EnhancedDataTable, Column, AIInsight } from "@/components/EnhancedDataTable";
 
-//todo: remove mock functionality
 const mockHarvests = [
   {
     collectedAt: "24/06/2025",
     harvestCollectionNumber: "HC8049.65.8",
-    type: "1",
-    certifications: "",
-    comment: "",
     farmers: "ADEYEMO ADELOWO",
     farmerIds: "INA-1111",
     lotNumber: "1291-240625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
     balanceKg: "36.0",
-    positions: "1 (map)",
+    qualityGrade: "Premium",
+    status: "In Transit",
+    positions: "1",
+    activities: 1,
   },
   {
     collectedAt: "24/06/2025",
     harvestCollectionNumber: "HC8049.65.33",
-    type: "1",
-    certifications: "",
-    comment: "",
     farmers: "ADEYEMO ADELOWO",
     farmerIds: "INA-1111",
     lotNumber: "1291-240625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
     balanceKg: "90.0",
-    positions: "1 (map)",
+    qualityGrade: "Premium",
+    status: "Processed",
+    positions: "1",
+    activities: 1,
   },
   {
     collectedAt: "24/06/2025",
     harvestCollectionNumber: "HC8049.65.31",
-    type: "1",
-    certifications: "",
-    comment: "",
     farmers: "ADEYEMO ADELOWO",
     farmerIds: "INA-1111",
     lotNumber: "1291-240625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
     balanceKg: "65.0",
-    positions: "1 (map)",
+    qualityGrade: "Standard",
+    status: "Quality Check",
+    positions: "1",
+    activities: 1,
   },
   {
     collectedAt: "24/06/2025",
     harvestCollectionNumber: "HC8049.65.20",
-    type: "1",
-    certifications: "",
-    comment: "",
     farmers: "A. ADELUGBA",
     farmerIds: "INA-1983",
     lotNumber: "1291-240625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
     balanceKg: "590.0",
-    positions: "1 (map)",
+    qualityGrade: "Premium",
+    status: "Stored",
+    positions: "1",
+    activities: 2,
   },
   {
     collectedAt: "24/06/2025",
     harvestCollectionNumber: "HC8049.65.19",
-    type: "1",
-    certifications: "",
-    comment: "",
     farmers: "A. ADELUGBA",
     farmerIds: "INA-1983",
     lotNumber: "1291-240625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
     balanceKg: "590.0",
-    positions: "1 (map)",
+    qualityGrade: "Premium",
+    status: "Processed",
+    positions: "1",
+    activities: 1,
   },
   {
     collectedAt: "24/06/2025",
     harvestCollectionNumber: "HC8049.65.18",
-    type: "1",
-    certifications: "",
-    comment: "",
     farmers: "A. ADELUGBA",
     farmerIds: "INA-1983",
     lotNumber: "1291-240625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
     balanceKg: "590.0",
-    positions: "1 (map)",
+    qualityGrade: "Standard",
+    status: "In Transit",
+    positions: "1",
+    activities: 1,
   },
   {
     collectedAt: "24/06/2025",
     harvestCollectionNumber: "HC8049.65.17",
-    type: "1",
-    certifications: "",
-    comment: "",
     farmers: "A. ADELUGBA",
     farmerIds: "INA-1983",
     lotNumber: "1291-240625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
     balanceKg: "590.0",
-    positions: "1 (map)",
+    qualityGrade: "Premium",
+    status: "Processed",
+    positions: "1",
+    activities: 2,
   },
   {
-    collectedAt: "24/06/2025",
+    collectedAt: "23/06/2025",
     harvestCollectionNumber: "HC8049.65.16",
-    type: "1",
-    certifications: "",
-    comment: "",
-    farmers: "A. ADELUGBA",
-    farmerIds: "INA-1983",
-    lotNumber: "1291-240625",
+    farmers: "AGNES Adeleye",
+    farmerIds: "INA-1711",
+    lotNumber: "1291-230625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
-    balanceKg: "590.0",
-    positions: "1 (map)",
+    balanceKg: "320.0",
+    qualityGrade: "Premium",
+    status: "Stored",
+    positions: "1",
+    activities: 1,
   },
   {
-    collectedAt: "24/06/2025",
+    collectedAt: "23/06/2025",
     harvestCollectionNumber: "HC8049.65.15",
-    type: "1",
-    certifications: "",
-    comment: "",
-    farmers: "A. ADELUGBA",
-    farmerIds: "INA-1983",
-    lotNumber: "1291-240625",
+    farmers: "MARIAM Adeleye",
+    farmerIds: "INA-1588",
+    lotNumber: "1291-230625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
-    balanceKg: "590.0",
-    positions: "1 (map)",
+    balanceKg: "245.0",
+    qualityGrade: "Standard",
+    status: "Quality Check",
+    positions: "1",
+    activities: 1,
   },
   {
-    collectedAt: "24/06/2025",
+    collectedAt: "23/06/2025",
     harvestCollectionNumber: "HC8049.65.14",
-    type: "1",
-    certifications: "",
-    comment: "",
-    farmers: "A. ADELUGBA",
-    farmerIds: "INA-1983",
-    lotNumber: "1291-240625",
+    farmers: "ORIOWO Adeleye",
+    farmerIds: "INA-1589",
+    lotNumber: "1291-230625",
     containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
-    balanceKg: "590.0",
-    positions: "1 (map)",
+    balanceKg: "410.0",
+    qualityGrade: "Premium",
+    status: "Processed",
+    positions: "1",
+    activities: 2,
+  },
+];
+
+const columns: Column[] = [
+  {
+    key: "collectedAt",
+    label: "Date",
+    sortable: true,
+    render: (value) => (
+      <span className="text-sm font-medium">{value}</span>
+    ),
   },
   {
-    collectedAt: "24/06/2025",
-    harvestCollectionNumber: "HC8049.65.13",
-    type: "1",
-    certifications: "",
-    comment: "",
-    farmers: "A. ADELUGBA",
-    farmerIds: "INA-1983",
-    lotNumber: "1291-240625",
-    containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
-    balanceKg: "590.0",
-    positions: "1 (map)",
+    key: "harvestCollectionNumber",
+    label: "Collection #",
+    sortable: true,
+    render: (value) => (
+      <Link href={`/harvests/${value}`}>
+        <span className="text-primary hover:underline cursor-pointer font-medium">
+          {value}
+        </span>
+      </Link>
+    ),
   },
   {
-    collectedAt: "24/06/2025",
-    harvestCollectionNumber: "HC8049.65.12",
-    type: "1",
-    certifications: "",
-    comment: "",
-    farmers: "A. ADELUGBA",
-    farmerIds: "INA-1983",
-    lotNumber: "1291-240625",
-    containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
-    balanceKg: "590.0",
-    positions: "1 (map)",
+    key: "farmers",
+    label: "Farmer",
+    render: (value, row) => (
+      <Link href={`/producers/${row.farmerIds}`}>
+        <span className="hover:underline cursor-pointer">{value}</span>
+      </Link>
+    ),
   },
   {
-    collectedAt: "24/06/2025",
-    harvestCollectionNumber: "HC8049.65.11",
-    type: "1",
-    certifications: "",
-    comment: "",
-    farmers: "A. ADELUGBA",
-    farmerIds: "INA-1983",
-    lotNumber: "1291-240625",
-    containerId: "AASA (Mill)",
-    latestFacility: "",
-    harvestingActivities: "1",
-    balanceKg: "590.0",
-    positions: "1 (map)",
+    key: "balanceKg",
+    label: "Weight (Kg)",
+    sortable: true,
+    render: (value) => (
+      <div className="flex items-center gap-2">
+        <Scale className="h-3 w-3 text-muted-foreground" />
+        <span className="font-medium">{value}</span>
+      </div>
+    ),
+  },
+  {
+    key: "qualityGrade",
+    label: "Quality",
+    sortable: true,
+    render: (value) => (
+      <Badge 
+        variant={value === "Premium" ? "default" : "secondary"}
+      >
+        {value}
+      </Badge>
+    ),
+  },
+  {
+    key: "status",
+    label: "Status",
+    sortable: true,
+    render: (value) => (
+      <Badge 
+        variant={
+          value === "Processed" ? "secondary" :
+          value === "Stored" ? "outline" :
+          value === "In Transit" ? "default" :
+          "destructive"
+        }
+      >
+        {value === "Processed" && <CheckCircle2 className="h-3 w-3 mr-1" />}
+        {value === "Quality Check" && <AlertTriangle className="h-3 w-3 mr-1" />}
+        {value}
+      </Badge>
+    ),
+  },
+  {
+    key: "lotNumber",
+    label: "Lot #",
+    render: (value) => (
+      <span className="text-sm text-muted-foreground">{value}</span>
+    ),
+  },
+  {
+    key: "containerId",
+    label: "Container",
+    render: (value) => (
+      <div className="flex items-center gap-2">
+        <Package className="h-3 w-3 text-muted-foreground" />
+        <span className="text-sm">{value}</span>
+      </div>
+    ),
+  },
+  {
+    key: "positions",
+    label: "GPS",
+    render: (value) => (
+      <div className="flex justify-center">
+        {value && <MapPin className="h-4 w-4 text-green-600 dark:text-green-400" />}
+      </div>
+    ),
+  },
+];
+
+const stats = [
+  {
+    label: "Total Collections",
+    value: "3,847",
+    change: 18,
+    trend: "up" as const,
+    icon: Boxes,
+  },
+  {
+    label: "Total Volume (Kg)",
+    value: "152,340",
+    change: 22,
+    trend: "up" as const,
+    icon: Scale,
+  },
+  {
+    label: "Premium Grade",
+    value: "68%",
+    change: 5,
+    trend: "up" as const,
+    icon: TrendingUp,
+  },
+  {
+    label: "In Quality Check",
+    value: "23",
+    change: -12,
+    trend: "down" as const,
+    icon: AlertTriangle,
+  },
+];
+
+const aiInsights: AIInsight[] = [
+  {
+    type: "prediction",
+    message: "Predicted 15% increase in harvest volume next month based on weather patterns and historical data. Prepare additional storage capacity.",
+    severity: "low",
+  },
+  {
+    type: "recommendation",
+    message: "Premium grade rate increased by 12% after implementing AI-recommended quality control measures. Continue current protocols.",
+    severity: "low",
+  },
+  {
+    type: "anomaly",
+    message: "3 collections showing unusual weight discrepancies (>10% variance). Recommend immediate verification and scale calibration.",
+    severity: "high",
   },
 ];
 
 export default function Harvests() {
-  return (
-    <div className="space-y-4 -m-6">
-      {/* Header */}
-      <div className="px-6 pt-6 flex items-center justify-between">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/harvests">Harvests</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage className="font-medium">Harvest Collections</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-        
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" data-testid="button-filter">
-            <Filter className="h-4 w-4" />
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="default" data-testid="button-actions">
-                Actions
-                <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>Add Collection</DropdownMenuItem>
-              <DropdownMenuItem>Import Collections</DropdownMenuItem>
-              <DropdownMenuItem>Export to CSV</DropdownMenuItem>
-              <DropdownMenuItem>View Analytics</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
+  const [, setLocation] = useLocation();
 
-      {/* Table */}
-      <div className="border-t">
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-muted/50 hover:bg-muted/50">
-                <TableHead className="font-medium">Collected At</TableHead>
-                <TableHead className="font-medium">Harvest Collection Number</TableHead>
-                <TableHead className="font-medium">Type</TableHead>
-                <TableHead className="font-medium">Certifications</TableHead>
-                <TableHead className="font-medium">Comment</TableHead>
-                <TableHead className="font-medium">Farmers</TableHead>
-                <TableHead className="font-medium">Farmer IDs</TableHead>
-                <TableHead className="font-medium">Lot Number</TableHead>
-                <TableHead className="font-medium">Container Id</TableHead>
-                <TableHead className="font-medium">Latest Facility</TableHead>
-                <TableHead className="font-medium">Harvesting Activities</TableHead>
-                <TableHead className="font-medium">Balance (Kg)</TableHead>
-                <TableHead className="font-medium">Positions</TableHead>
-                <TableHead className="w-[80px]"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {mockHarvests.map((harvest, index) => (
-                <TableRow 
-                  key={harvest.harvestCollectionNumber}
-                  className="hover:bg-muted/30"
-                  data-testid={`row-harvest-${index}`}
-                >
-                  <TableCell className="text-sm">{harvest.collectedAt}</TableCell>
-                  <TableCell className="font-medium">
-                    <Link href={`/harvests/${harvest.harvestCollectionNumber}`}>
-                      <span className="text-primary hover:underline cursor-pointer">
-                        {harvest.harvestCollectionNumber}
-                      </span>
-                    </Link>
-                  </TableCell>
-                  <TableCell className="text-sm">{harvest.type}</TableCell>
-                  <TableCell className="text-muted-foreground text-sm">
-                    {harvest.certifications}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground text-sm">
-                    {harvest.comment}
-                  </TableCell>
-                  <TableCell>
-                    {harvest.farmers && (
-                      <Link href={`/producers/${harvest.farmerIds}`}>
-                        <span className="text-sm cursor-pointer hover:underline">
-                          {harvest.farmers}
-                        </span>
-                      </Link>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {harvest.farmerIds && (
-                      <Link href={`/producers/${harvest.farmerIds}`}>
-                        <span className="text-primary hover:underline cursor-pointer text-sm">
-                          {harvest.farmerIds}
-                        </span>
-                      </Link>
-                    )}
-                  </TableCell>
-                  <TableCell className="text-sm">{harvest.lotNumber}</TableCell>
-                  <TableCell className="text-sm">{harvest.containerId}</TableCell>
-                  <TableCell className="text-muted-foreground text-sm">
-                    {harvest.latestFacility}
-                  </TableCell>
-                  <TableCell className="text-sm">{harvest.harvestingActivities}</TableCell>
-                  <TableCell className="text-right font-medium">{harvest.balanceKg}</TableCell>
-                  <TableCell className="text-sm text-muted-foreground">
-                    {harvest.positions}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1 justify-end">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-7 w-7"
-                        data-testid={`button-details-${index}`}
-                      >
-                        <span className="text-muted-foreground text-xs">📋</span>
-                      </Button>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7"
-                            data-testid={`button-row-actions-${index}`}
-                          >
-                            <ChevronDown className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem>View Details</DropdownMenuItem>
-                          <DropdownMenuItem>Edit Collection</DropdownMenuItem>
-                          <DropdownMenuItem>View on Map</DropdownMenuItem>
-                          <DropdownMenuItem>View Activities</DropdownMenuItem>
-                          <DropdownMenuItem>Print Receipt</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
+  const rowActions = (row: any) => [
+    {
+      label: "View Details",
+      onClick: () => setLocation(`/harvests/${row.harvestCollectionNumber}`),
+    },
+    {
+      label: "View on Map",
+      onClick: () => console.log("View map for", row.harvestCollectionNumber),
+    },
+    {
+      label: "View Activities",
+      onClick: () => console.log("View activities for", row.harvestCollectionNumber),
+    },
+    {
+      label: "Edit Collection",
+      onClick: () => console.log("Edit collection", row.harvestCollectionNumber),
+    },
+    {
+      label: "Print Receipt",
+      onClick: () => console.log("Print receipt for", row.harvestCollectionNumber),
+    },
+  ];
+
+  return (
+    <div className="p-6" data-testid="page-harvests">
+      <EnhancedDataTable
+        title="Harvest Operations"
+        description="Complete harvest tracking with quality control, batch management, and real-time analytics"
+        data={mockHarvests}
+        columns={columns}
+        stats={stats}
+        aiInsights={aiInsights}
+        searchable
+        filterable
+        exportable
+        bulkActions
+        rowActions={rowActions}
+        onRowClick={(row) => setLocation(`/harvests/${row.harvestCollectionNumber}`)}
+      />
     </div>
   );
 }
