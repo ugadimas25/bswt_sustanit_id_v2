@@ -82,6 +82,7 @@ import SurveySurveysByStaff from "@/pages/SurveySurveysByStaff";
 import Accounts from "@/pages/Accounts";
 import Locations from "@/pages/Locations";
 import Loans from "@/pages/Loans";
+import LoanDetail from "@/pages/LoanDetail";
 import Savings from "@/pages/Savings";
 import CompanySales from "@/pages/CompanySales";
 import Partners from "@/pages/Partners";
@@ -192,6 +193,7 @@ function Router() {
       <Route path="/accounts" component={Accounts} />
       <Route path="/locations" component={Locations} />
       <Route path="/loans" component={Loans} />
+      <Route path="/loans/:id" component={LoanDetail} />
       <Route path="/loan-deductions" component={LoanDeductions} />
       <Route path="/savings" component={Savings} />
       <Route path="/company-sales" component={CompanySales} />
