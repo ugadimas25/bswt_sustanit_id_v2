@@ -209,13 +209,13 @@ export function AppSidebar() {
 
   return (
     <Sidebar data-testid="sidebar-main" className="border-r">
-      <SidebarHeader className="p-4 border-b">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-            <Sprout className="h-5 w-5 text-primary-foreground" />
+      <SidebarHeader className="p-6 border-b bg-card">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center shadow-sm">
+            <Sprout className="h-6 w-6 text-primary-foreground" />
           </div>
           <div>
-            <h2 className="text-sm font-semibold">Farmforce</h2>
+            <h2 className="text-base font-bold text-foreground">Farmforce</h2>
             <p className="text-xs text-muted-foreground">Agricultural Management</p>
           </div>
         </div>
@@ -227,7 +227,7 @@ export function AppSidebar() {
             {/* Left Column - Main Categories */}
             <div className="bg-background">
               <SidebarGroup className="p-0">
-                <SidebarGroupLabel className="px-3 py-2 text-xs font-semibold text-muted-foreground">
+                <SidebarGroupLabel className="px-4 py-3 text-xs font-bold text-foreground uppercase tracking-wide bg-muted/50">
                   Main Menu
                 </SidebarGroupLabel>
                 <SidebarGroupContent>
@@ -239,12 +239,12 @@ export function AppSidebar() {
                           <SidebarMenuButton
                             asChild
                             isActive={isActive}
-                            className="rounded-none justify-start gap-2 h-9 px-3"
+                            className="rounded-none justify-start gap-3 h-10 px-4 font-medium transition-all duration-150"
                             data-testid={`link-sidebar-${item.title.toLowerCase().replace(/\s/g, '-')}`}
                           >
                             <Link href={item.url}>
                               <item.icon className="h-4 w-4 flex-shrink-0" />
-                              <span className="text-xs">{item.title}</span>
+                              <span className="text-sm">{item.title}</span>
                             </Link>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
@@ -258,7 +258,7 @@ export function AppSidebar() {
             {/* Right Column - Submenu Items */}
             <div className="bg-background">
               <SidebarGroup className="p-0">
-                <SidebarGroupLabel className="px-3 py-2 text-xs font-semibold text-muted-foreground">
+                <SidebarGroupLabel className="px-4 py-3 text-xs font-bold text-foreground uppercase tracking-wide bg-muted/50">
                   {currentCategory === "Dashboard" ? "Quick Access" : currentCategory}
                 </SidebarGroupLabel>
                 <SidebarGroupContent>
@@ -269,19 +269,19 @@ export function AppSidebar() {
                           <SidebarMenuButton
                             asChild
                             isActive={location === item.url}
-                            className="rounded-none justify-start h-9 px-3"
+                            className="rounded-none justify-start h-10 px-4 transition-all duration-150"
                             data-testid={`link-submenu-${item.title.toLowerCase().replace(/\s/g, '-')}`}
                           >
                             <Link href={item.url}>
-                              <span className="text-xs">{item.title}</span>
+                              <span className="text-sm">{item.title}</span>
                             </Link>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                       ))}
                     </SidebarMenu>
                   ) : (
-                    <div className="px-3 py-6 text-center">
-                      <p className="text-xs text-muted-foreground">No submenu items</p>
+                    <div className="px-4 py-8 text-center">
+                      <p className="text-sm text-muted-foreground">No submenu items</p>
                     </div>
                   )}
                 </SidebarGroupContent>
