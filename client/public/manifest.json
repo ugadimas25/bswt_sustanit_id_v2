@@ -1,0 +1,51 @@
+{
+  "name": "Bentang Sawit - Platform Keberlanjutan Kelapa Sawit",
+  "short_name": "Bentang Sawit",
+  "description": "Platform keberlanjutan dan ketertelusuran untuk petani swadaya kelapa sawit Indonesia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FEFBF6",
+  "theme_color": "#6D4C3D",
+  "orientation": "portrait-primary",
+  "lang": "id",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["agriculture", "productivity", "business"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Akses dashboard utama",
+      "url": "/",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Penilaian",
+      "short_name": "Penilaian",
+      "description": "Penilaian keberlanjutan RSPO/ISPO",
+      "url": "/penilaian",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Ketertelusuran",
+      "short_name": "Ketertelusuran",
+      "description": "Sistem ketertelusuran produksi",
+      "url": "/ketertelusuran",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
