@@ -12,13 +12,11 @@ import {
   SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
 import { 
-  Users, MapPin, GraduationCap, FileText, AlertCircle, Smartphone, 
+  Users, GraduationCap, FileText, 
   Settings, LayoutDashboard, Sprout, TrendingUp, DollarSign, 
-  Building2, MapPinned, CreditCard, Leaf, Award, UserCheck, 
-  Activity, Boxes, ChartBar, Layers, TreeDeciduous, Calculator,
-  ClipboardList, Package, Warehouse, TruckIcon, BarChart3,
-  GitBranch, Navigation, FlaskConical, CheckCircle2, Database,
-  ShieldCheck, UserCircle, Home, ChevronDown, ChevronRight
+  MapPinned, Leaf, 
+  Activity, Boxes, BarChart3,
+  ShieldCheck, ChevronDown, ChevronRight
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -46,11 +44,26 @@ const menuStructure: MenuItem[] = [
     submenu: []
   },
   { 
-    title: "Farmers Database & GPS", 
+    title: "Farmer Management", 
     url: "/producers", 
-    icon: MapPinned,
+    icon: Users,
     submenu: [
       { title: "All Farmers", url: "/producers" },
+      { title: "Farmer Certifications", url: "/farmer-certifications" },
+      { title: "Farmer Last Activity", url: "/farmer-last-activity" },
+      { title: "Farmers Attributes", url: "/farmers-attributes" },
+      { title: "Family Members", url: "/family-members" },
+      { title: "Family Member Education", url: "/family-member-education" },
+      { title: "Family Member Relationships", url: "/family-member-relationships" },
+      { title: "GA Operator Costs", url: "/ga-operator-costs" },
+      { title: "Partners", url: "/partners" },
+    ]
+  },
+  { 
+    title: "Land & Field Management", 
+    url: "/fields", 
+    icon: MapPinned,
+    submenu: [
       { title: "GPS-Mapped Fields", url: "/fields" },
       { title: "Farms", url: "/farms" },
       { title: "Planted Area", url: "/planted-area" },
@@ -58,26 +71,31 @@ const menuStructure: MenuItem[] = [
       { title: "Area Types", url: "/area-types" },
       { title: "Farm Objects", url: "/farm-objects" },
       { title: "Farm Object Images", url: "/farm-object-images" },
-      { title: "Farmer Certifications", url: "/farmer-certifications" },
-      { title: "Farmer Last Activity", url: "/farmer-last-activity" },
-      { title: "Farmers Attributes", url: "/farmers-attributes" },
+      { title: "Fields Deforestation", url: "/fields-deforestation" },
+      { title: "Deforestation Summary", url: "/fields-deforestation-summary" },
     ]
   },
   { 
-    title: "Inputs & Planting", 
+    title: "Crop Production", 
     url: "/planting-campaigns", 
     icon: Sprout,
     submenu: [
       { title: "Planting Campaigns", url: "/planting-campaigns" },
       { title: "Campaign Groups", url: "/planting-campaign-groups" },
       { title: "Campaign Templates", url: "/planting-campaign-templates" },
+      { title: "Field Productivity", url: "/field-productivity" },
       { title: "Cropping Cycle Financials", url: "/cropping-cycle-financials" },
-      { title: "Farming Inputs", url: "/farming-inputs" },
+    ]
+  },
+  { 
+    title: "Input Management", 
+    url: "/farming-inputs", 
+    icon: Leaf,
+    submenu: [
+      { title: "Farming Inputs Overview", url: "/farming-inputs" },
       { title: "Input Distribution", url: "/input-distribution" },
       { title: "Input Purchases", url: "/input-purchases" },
       { title: "Input Costs", url: "/input-costs" },
-      { title: "Input Store", url: "/harvest-input-store" },
-      { title: "Input Unit", url: "/harvest-input-unit" },
       { title: "Fertilizers", url: "/fertilizers" },
       { title: "Fertilizer Applications", url: "/fertilizer-applications" },
       { title: "Chemical Applications", url: "/chemical-applications" },
@@ -93,14 +111,93 @@ const menuStructure: MenuItem[] = [
     icon: Boxes,
     submenu: [
       { title: "All Harvests", url: "/harvests" },
-      { title: "Harvest Scheduling", url: "/harvest-scheduling" },
-      { title: "Harvest Tracking", url: "/harvest-tracking" },
-      { title: "Group Bags", url: "/harvest-group-bags" },
-      { title: "Batches", url: "/harvest-batches" },
       { title: "Collections", url: "/harvest-collections" },
+      { title: "Deliveries", url: "/harvest-deliveries" },
+      { title: "Activities", url: "/harvest-activities" },
+      { title: "Scheduling", url: "/harvest-scheduling" },
+      { title: "Tracking", url: "/harvest-tracking" },
       { title: "Quality Control", url: "/harvest-quality" },
-      { title: "Activities Log", url: "/harvest-activities" },
+      { title: "Batches", url: "/harvest-batches" },
+      { title: "Group Bags", url: "/harvest-group-bags" },
+      { title: "Warehouse", url: "/harvest-warehouse" },
+      { title: "Purchases", url: "/harvest-purchases" },
+      { title: "Costs", url: "/harvest-costs" },
+      { title: "Input Store", url: "/harvest-input-store" },
+      { title: "Input Unit", url: "/harvest-input-unit" },
       { title: "Alerts", url: "/harvest-alerts" },
+      { title: "Reports", url: "/harvest-reports" },
+    ]
+  },
+  { 
+    title: "Supply Chain & Traceability", 
+    url: "/traceability", 
+    icon: Activity,
+    submenu: [
+      { title: "Traceability Overview", url: "/traceability" },
+      { title: "Farmer Harvest Traceability", url: "/traceability-farmer-harvest" },
+      { title: "Custom Transaction Fields", url: "/traceability/custom-fields" },
+      { title: "Purchases", url: "/traceability-purchases" },
+      { title: "Processing", url: "/traceability-processing" },
+      { title: "Shipment", url: "/traceability-shipment" },
+      { title: "Containers", url: "/traceability-containers" },
+      { title: "Locations", url: "/traceability-locations" },
+      { title: "Input Usage", url: "/traceability-input-usage" },
+      { title: "Section Deliveries", url: "/traceability-section-deliveries" },
+      { title: "Quota Management", url: "/traceability-quotas" },
+      { title: "Deductions", url: "/traceability-deductions" },
+    ]
+  },
+  { 
+    title: "Financial Management", 
+    url: "/accounts", 
+    icon: DollarSign,
+    submenu: [
+      { title: "Accounts", url: "/accounts" },
+      { title: "Loans", url: "/loans" },
+      { title: "Loan Deductions", url: "/loan-deductions" },
+      { title: "Savings", url: "/savings" },
+      { title: "Company Sales", url: "/company-sales" },
+      { title: "Farmer Premiums", url: "/farmer-premiums" },
+      { title: "Premium Rules", url: "/premium-rules" },
+      { title: "Volume Tracking", url: "/premium-volume-tracking" },
+      { title: "Payment Locations", url: "/locations" },
+    ]
+  },
+  { 
+    title: "Compliance & Certification", 
+    url: "/certifications", 
+    icon: ShieldCheck,
+    submenu: [
+      { title: "Certifications", url: "/certifications" },
+      { title: "Certificate States", url: "/certificate-states" },
+      { title: "Farmer Compliance", url: "/survey-farmer-compliance" },
+      { title: "Compliance Categories", url: "/survey-compliance-categories" },
+      { title: "Questions Ranking", url: "/survey-questions-ranking" },
+      { title: "Proposed Actions", url: "/survey-proposed-actions" },
+      { title: "Cases & Incidents", url: "/cases" },
+    ]
+  },
+  { 
+    title: "Surveys & Assessments", 
+    url: "/surveys", 
+    icon: FileText,
+    submenu: [
+      { title: "All Surveys", url: "/surveys" },
+      { title: "Custom Surveys", url: "/surveys/custom" },
+      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
+      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
+    ]
+  },
+  { 
+    title: "Training & Development", 
+    url: "/trainings", 
+    icon: GraduationCap,
+    submenu: [
+      { title: "Training Programs", url: "/trainings" },
+      { title: "Training Events", url: "/training-events" },
+      { title: "Trainers", url: "/trainers" },
+      { title: "Trainer Groups", url: "/trainer-groups" },
+      { title: "Training Topics", url: "/training-topics" },
     ]
   },
   { 
@@ -110,69 +207,16 @@ const menuStructure: MenuItem[] = [
     submenu: [
       { title: "Weekly Yield Forecasts", url: "/weekly-yield-forecasts" },
       { title: "Harvest Forecasts", url: "/harvest-forecasts" },
-      { title: "Field Productivity", url: "/field-productivity" },
-      { title: "Harvest Reports", url: "/harvest-reports" },
     ]
   },
   { 
-    title: "Supply Chain & Traceability", 
-    url: "/traceability", 
-    icon: TruckIcon,
+    title: "Sustainability & Reports", 
+    url: "/reports", 
+    icon: BarChart3,
     submenu: [
-      { title: "Traceability Overview", url: "/traceability" },
-      { title: "Farmer Harvest Trace", url: "/traceability-farmer-harvest" },
-      { title: "Purchases", url: "/traceability-purchases" },
-      { title: "Processing", url: "/traceability-processing" },
-      { title: "Warehouse", url: "/harvest-warehouse" },
-      { title: "Shipment", url: "/traceability-shipment" },
-      { title: "Deliveries", url: "/harvest-deliveries" },
-      { title: "Containers", url: "/traceability-containers" },
-      { title: "Locations", url: "/traceability-locations" },
-      { title: "Section Deliveries", url: "/traceability-section-deliveries" },
-      { title: "Custom Fields", url: "/traceability/custom-fields" },
-    ]
-  },
-  { 
-    title: "Financial Management", 
-    url: "/accounts", 
-    icon: DollarSign,
-    submenu: [
-      { title: "Accounts Overview", url: "/accounts" },
-      { title: "Harvest Costs", url: "/harvest-costs" },
-      { title: "Harvest Purchases", url: "/harvest-purchases" },
-      { title: "Loans", url: "/loans" },
-      { title: "Loan Deductions", url: "/loan-deductions" },
-      { title: "Savings", url: "/savings" },
-      { title: "Company Sales", url: "/company-sales" },
-      { title: "Farmer Premiums", url: "/farmer-premiums" },
-      { title: "Premium Rules", url: "/premium-rules" },
-      { title: "Volume Tracking", url: "/premium-volume-tracking" },
-      { title: "Quota Management", url: "/traceability-quotas" },
-      { title: "Deductions", url: "/traceability-deductions" },
-      { title: "Payment Locations", url: "/locations" },
-    ]
-  },
-  { 
-    title: "Workflow", 
-    url: "/certifications", 
-    icon: GitBranch,
-    submenu: [
-      { title: "Certifications", url: "/certifications" },
-      { title: "Certificate States", url: "/certificate-states" },
-      { title: "Farmer Compliance", url: "/survey-farmer-compliance" },
-      { title: "Compliance Categories", url: "/survey-compliance-categories" },
-      { title: "All Surveys", url: "/surveys" },
-      { title: "Custom Surveys", url: "/surveys/custom" },
-      { title: "Questions Ranking", url: "/survey-questions-ranking" },
-      { title: "Proposed Actions", url: "/survey-proposed-actions" },
-      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
-      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
-      { title: "Family Members", url: "/family-members" },
-      { title: "School Attendance", url: "/family-member-education" },
-      { title: "Family Relationships", url: "/family-member-relationships" },
-      { title: "Cases & Incidents", url: "/cases" },
-      { title: "Fields Deforestation", url: "/fields-deforestation" },
-      { title: "Deforestation Summary", url: "/fields-deforestation-summary" },
+      { title: "Sustainability Reports", url: "/reports" },
+      { title: "Custom Dashboards", url: "/reports/dashboards" },
+      { title: "Report Builder", url: "/reports/builder" },
     ]
   },
   { 
@@ -183,7 +227,6 @@ const menuStructure: MenuItem[] = [
       { title: "Users", url: "/users" },
       { title: "Staff Management", url: "/admin/staff" },
       { title: "Buyers", url: "/admin/buyers" },
-      { title: "Partners", url: "/partners" },
       { title: "Country Settings", url: "/admin/country" },
       { title: "Region Settings", url: "/admin/regions" },
       { title: "Data Import (AI)", url: "/admin/import" },
@@ -225,7 +268,7 @@ export function AppSidebar() {
           />
         </div>
       </SidebarHeader>
-
+      
       <SidebarContent>
         <ScrollArea className="h-full">
           <SidebarGroup className="px-2 py-2">
