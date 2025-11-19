@@ -1,232 +1,452 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Users, MapPin, Smartphone, Monitor, Maximize2, Layers, MapPinOff, AlertTriangle, FileText, BarChart3, Sprout, TrendingUp, Package, GraduationCap, FileCheck, Boxes, ClipboardList } from "lucide-react";
-import { Link } from "wouter";
-import fieldImage from "@assets/generated_images/Aerial_farm_field_view_84f23bc5.png";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  Users, MapPin, TrendingUp, TrendingDown, DollarSign, Package, 
+  Sprout, AlertTriangle, CheckCircle, Clock, Target, Award,
+  BarChart3, PieChart, LineChart, Activity, Leaf, Boxes
+} from "lucide-react";
+import { 
+  AreaChart, Area, BarChart, Bar, LineChart as RechartsLineChart, Line,
+  PieChart as RechartsPieChart, Pie, Cell,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+} from "recharts";
 
-//todo: remove mock functionality
-const reportLinks = [
-  { id: 1, name: "Completed Surveys", icon: FileCheck, href: "/surveys" },
-  { id: 2, name: "Crop Yield Forecast", icon: BarChart3, href: "/reports/yield" },
-  { id: 3, name: "Inputs Used For Growing Activities", icon: Sprout, href: "/reports/inputs" },
-  { id: 4, name: "Loans Issued", icon: TrendingUp, href: "/reports/loans" },
-  { id: 5, name: "Training by Staff", icon: GraduationCap, href: "/trainings" },
-  { id: 6, name: "Trainings", icon: GraduationCap, href: "/trainings" },
-  { id: 7, name: "Warehouse Inventory", icon: Package, href: "/reports/inventory" },
-  { id: 8, name: "Container ID Certification Data", icon: Boxes, href: "/reports/certification" },
-  { id: 9, name: "Crop Yield Forecast Per Month", icon: BarChart3, href: "/reports/monthly-yield" },
-  { id: 10, name: "Delivery Traceability and Diligence Report", icon: ClipboardList, href: "/reports/delivery" },
-  { id: 11, name: "Farmer Group Quotas", icon: Users, href: "/reports/quotas" },
+const monthlyHarvestData = [
+  { month: 'Jan', volume: 18500, target: 20000, quality: 92 },
+  { month: 'Feb', volume: 22000, target: 20000, quality: 95 },
+  { month: 'Mar', volume: 19800, target: 21000, quality: 90 },
+  { month: 'Apr', volume: 24500, target: 22000, quality: 94 },
+  { month: 'May', volume: 28000, target: 25000, quality: 96 },
+  { month: 'Jun', volume: 26500, target: 26000, quality: 93 },
+];
+
+const cropDistributionData = [
+  { name: 'Coffee', value: 45000, color: '#8B4513' },
+  { name: 'Cocoa', value: 32000, color: '#D2691E' },
+  { name: 'Tea', value: 18000, color: '#2F4F2F' },
+  { name: 'Cotton', value: 15000, color: '#F5F5DC' },
+];
+
+const farmerComplianceData = [
+  { category: 'Fully Compliant', count: 780, color: '#22c55e' },
+  { category: 'Partial Compliance', count: 180, color: '#f59e0b' },
+  { category: 'Non-Compliant', count: 52, color: '#ef4444' },
+];
+
+const weeklyActivityData = [
+  { day: 'Mon', surveys: 45, harvests: 120, trainings: 12 },
+  { day: 'Tue', surveys: 52, harvests: 135, trainings: 8 },
+  { day: 'Wed', surveys: 48, harvests: 128, trainings: 15 },
+  { day: 'Thu', surveys: 61, harvests: 145, trainings: 10 },
+  { day: 'Fri', surveys: 55, harvests: 132, trainings: 18 },
+  { day: 'Sat', surveys: 38, harvests: 98, trainings: 5 },
+  { day: 'Sun', surveys: 25, harvests: 72, trainings: 3 },
+];
+
+const regionalPerformanceData = [
+  { region: 'Northern', farmers: 320, hectares: 2400, yield: 2.8, compliance: 92 },
+  { region: 'Central', farmers: 450, hectares: 3200, yield: 3.2, compliance: 88 },
+  { region: 'Eastern', farmers: 180, hectares: 1350, yield: 2.5, compliance: 95 },
+  { region: 'Western', farmers: 62, hectares: 480, yield: 2.1, compliance: 85 },
 ];
 
 export default function Dashboard() {
-  const [showDeforestation, setShowDeforestation] = useState(false);
-  const [markerClusters, setMarkerClusters] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
-    <div className="space-y-6 -m-6">
-      {/* Stats Cards */}
-      <div className="px-6 pt-6 grid gap-6 md:grid-cols-3">
-        {/* Farms Card */}
+    <div className="space-y-6 -m-6 p-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground" data-testid="text-dashboard-title">Dashboard</h1>
+          <p className="text-muted-foreground mt-1">Comprehensive agricultural management overview</p>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" data-testid="button-refresh">
+            <Activity className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+          <Button variant="outline" size="sm" data-testid="button-export">
+            <BarChart3 className="h-4 w-4 mr-2" />
+            Export
+          </Button>
+        </div>
+      </div>
+
+      {/* Key Metrics Row */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base font-medium text-muted-foreground">Farms</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Farmers</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-semibold text-primary" data-testid="text-stat-farmers">1,012</div>
-                <p className="text-xs text-muted-foreground mt-1">Farmers</p>
+            <div className="text-2xl font-bold text-foreground" data-testid="text-metric-farmers">1,012</div>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant="default" className="bg-green-500 text-white">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                +12.5%
+              </Badge>
+              <p className="text-xs text-muted-foreground">vs last month</p>
+            </div>
+            <Progress value={85} className="mt-3" />
+            <p className="text-xs text-muted-foreground mt-2">85% active this month</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Harvest</CardTitle>
+            <Boxes className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground" data-testid="text-metric-harvest">230,662 kg</div>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant="default" className="bg-green-500 text-white">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                +8.2%
+              </Badge>
+              <p className="text-xs text-muted-foreground">vs target</p>
+            </div>
+            <Progress value={100} className="mt-3" />
+            <p className="text-xs text-muted-foreground mt-2">108% of monthly target (exceeded)</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Quality Score</CardTitle>
+            <Award className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground" data-testid="text-metric-quality">94.2%</div>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant="default" className="bg-green-500 text-white">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                +2.1%
+              </Badge>
+              <p className="text-xs text-muted-foreground">improved</p>
+            </div>
+            <Progress value={94} className="mt-3" />
+            <p className="text-xs text-muted-foreground mt-2">Above industry standard</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Compliance Rate</CardTitle>
+            <CheckCircle className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground" data-testid="text-metric-compliance">77.0%</div>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant="default" className="bg-amber-500 text-white">
+                <TrendingDown className="h-3 w-3 mr-1" />
+                -3.5%
+              </Badge>
+              <p className="text-xs text-muted-foreground">needs attention</p>
+            </div>
+            <Progress value={77} className="mt-3" />
+            <p className="text-xs text-muted-foreground mt-2">780 of 1,012 farmers</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Charts Section */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Monthly Harvest Trend */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Monthly Harvest Performance</CardTitle>
+            <p className="text-sm text-muted-foreground">Volume vs Target with Quality Scores</p>
+          </CardHeader>
+          <CardContent>
+            {isClient ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={monthlyHarvestData}>
+                <defs>
+                  <linearGradient id="volumeGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#f8bc28" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#f8bc28" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                <XAxis dataKey="month" className="text-xs" />
+                <YAxis className="text-xs" />
+                <Tooltip />
+                <Legend />
+                <Area 
+                  type="monotone" 
+                  dataKey="volume" 
+                  stroke="#f8bc28" 
+                  fillOpacity={1} 
+                  fill="url(#volumeGradient)" 
+                  name="Actual Volume (kg)"
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="target" 
+                  stroke="#0b2534" 
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  name="Target (kg)"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+            ) : (
+              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+                Loading chart...
               </div>
-              <div>
-                <div className="text-2xl font-semibold text-primary" data-testid="text-stat-fields">1,024</div>
-                <p className="text-xs text-muted-foreground mt-1">Fields</p>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Crop Distribution */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Crop Distribution</CardTitle>
+            <p className="text-sm text-muted-foreground">Total volume by crop type</p>
+          </CardHeader>
+          <CardContent>
+            {isClient ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <RechartsPieChart>
+                <Pie
+                  data={cropDistributionData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {cropDistributionData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </RechartsPieChart>
+            </ResponsiveContainer>
+            ) : (
+              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+                Loading chart...
               </div>
-              <div>
-                <div className="text-2xl font-semibold text-primary" data-testid="text-stat-fields-mapped">39</div>
-                <p className="text-xs text-muted-foreground mt-1">Fields Mapped</p>
-              </div>
+            )}
+            <div className="grid grid-cols-2 gap-3 mt-4">
+              {cropDistributionData.map((crop) => (
+                <div key={crop.name} className="flex items-center gap-2">
+                  <div 
+                    className="h-3 w-3 rounded-sm" 
+                    style={{ backgroundColor: crop.color }}
+                  />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium">{crop.name}</p>
+                    <p className="text-xs text-muted-foreground">{crop.value.toLocaleString()} kg</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Volume Card */}
+        {/* Weekly Activity */}
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base font-medium text-muted-foreground">Volume</CardTitle>
+          <CardHeader>
+            <CardTitle className="text-lg">Weekly Activity Trends</CardTitle>
+            <p className="text-sm text-muted-foreground">Daily operations across all activities</p>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-semibold text-primary" data-testid="text-stat-campaigns">1</div>
-                <p className="text-xs text-muted-foreground mt-1">Open Production Campaigns</p>
+            {isClient ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={weeklyActivityData}>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                <XAxis dataKey="day" className="text-xs" />
+                <YAxis className="text-xs" />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="harvests" fill="#f8bc28" name="Harvests" />
+                <Bar dataKey="surveys" fill="#0b2534" name="Surveys" />
+                <Bar dataKey="trainings" fill="#22c55e" name="Trainings" />
+              </BarChart>
+            </ResponsiveContainer>
+            ) : (
+              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+                Loading chart...
               </div>
-              <div>
-                <div className="text-2xl font-semibold text-primary" data-testid="text-stat-volume">230,662</div>
-                <p className="text-xs text-muted-foreground mt-1">Volume Kg</p>
-              </div>
-            </div>
+            )}
           </CardContent>
         </Card>
 
-        {/* Users Card */}
+        {/* Farmer Compliance */}
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base font-medium text-muted-foreground">Users</CardTitle>
+          <CardHeader>
+            <CardTitle className="text-lg">Farmer Compliance Status</CardTitle>
+            <p className="text-sm text-muted-foreground">Certification and compliance breakdown</p>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-semibold text-primary" data-testid="text-stat-mobile-users">8</div>
-                <p className="text-xs text-muted-foreground mt-1">Mobile Users</p>
-              </div>
-              <div>
-                <div className="text-2xl font-semibold text-primary" data-testid="text-stat-devices">17</div>
-                <p className="text-xs text-muted-foreground mt-1">Devices Syncing</p>
-              </div>
-              <div>
-                <div className="text-2xl font-semibold text-primary" data-testid="text-stat-web-users">16</div>
-                <p className="text-xs text-muted-foreground mt-1">Web Users</p>
+            <div className="space-y-4">
+              {farmerComplianceData.map((item) => (
+                <div key={item.category} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div 
+                        className="h-3 w-3 rounded-full" 
+                        style={{ backgroundColor: item.color }}
+                      />
+                      <span className="text-sm font-medium">{item.category}</span>
+                    </div>
+                    <span className="text-sm font-semibold">{item.count}</span>
+                  </div>
+                  <div className="relative h-2 w-full overflow-hidden rounded-full bg-secondary">
+                    <div 
+                      className="h-full transition-all" 
+                      style={{ 
+                        width: `${(item.count / 1012) * 100}%`,
+                        backgroundColor: item.color
+                      }}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {((item.count / 1012) * 100).toFixed(1)}% of total farmers
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/20 rounded-md">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-amber-900 dark:text-amber-100">
+                    Action Required
+                  </p>
+                  <p className="text-xs text-amber-800 dark:text-amber-200 mt-1">
+                    232 farmers require compliance follow-up this week
+                  </p>
+                </div>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Main Content: Reports Sidebar + Map */}
-      <div className="px-6 pb-6 grid gap-6 lg:grid-cols-[300px_1fr]">
-        {/* Reports Sidebar */}
+      {/* Regional Performance Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Regional Performance Overview</CardTitle>
+          <p className="text-sm text-muted-foreground">Comparing metrics across all regions</p>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Region</th>
+                  <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Farmers</th>
+                  <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Hectares</th>
+                  <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Avg Yield (t/ha)</th>
+                  <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Compliance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {regionalPerformanceData.map((region) => (
+                  <tr key={region.region} className="border-b hover-elevate">
+                    <td className="py-3 px-4 font-medium">{region.region}</td>
+                    <td className="py-3 px-4 text-right">{region.farmers}</td>
+                    <td className="py-3 px-4 text-right">{region.hectares.toLocaleString()}</td>
+                    <td className="py-3 px-4 text-right">{region.yield}</td>
+                    <td className="py-3 px-4 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <Progress value={region.compliance} className="w-20 h-2" />
+                        <span className="text-sm font-medium">{region.compliance}%</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Quick Stats Grid */}
+      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Reports</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-1">
-              {reportLinks.map((report) => (
-                <Link key={report.id} href={report.href}>
-                  <button
-                    className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md hover-elevate text-left"
-                    data-testid={`link-report-${report.id}`}
-                  >
-                    <report.icon className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span className="text-muted-foreground hover:text-foreground transition-colors">
-                      {report.name}
-                    </span>
-                  </button>
-                </Link>
-              ))}
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Active Campaigns</p>
+                <p className="text-2xl font-bold mt-1" data-testid="text-stat-campaigns">3</p>
+              </div>
+              <Sprout className="h-8 w-8 text-primary opacity-50" />
             </div>
           </CardContent>
         </Card>
 
-        {/* Map View */}
-        <Card className="overflow-hidden">
-          <CardHeader className="flex flex-row items-center justify-between gap-2 space-y-0 pb-3">
-            <CardTitle className="text-lg">Geographic Overview</CardTitle>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" data-testid="button-map-fullscreen">
-                <Maximize2 className="h-4 w-4" />
-              </Button>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Fields Mapped</p>
+                <p className="text-2xl font-bold mt-1" data-testid="text-stat-fields">1,024</p>
+              </div>
+              <MapPin className="h-8 w-8 text-primary opacity-50" />
             </div>
-          </CardHeader>
-          <CardContent className="p-0">
-            {/* Map Controls Overlay */}
-            <div className="relative">
-              <div className="absolute top-4 left-4 z-10 space-y-2">
-                <div className="bg-background/95 backdrop-blur-sm rounded-md border p-3 space-y-3">
-                  <div className="space-y-2">
-                    <Label className="text-xs font-medium">Map View</Label>
-                    <div className="flex gap-2">
-                      <Button variant="secondary" size="sm" className="text-xs">
-                        Satellite
-                      </Button>
-                      <Button variant="outline" size="sm" className="text-xs">
-                        Map
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="border-t pt-3 space-y-2">
-                    <div className="flex items-center justify-between gap-3">
-                      <Label htmlFor="marker-clusters" className="text-xs font-normal">
-                        Marker Clusters
-                      </Label>
-                      <Switch
-                        id="marker-clusters"
-                        checked={markerClusters}
-                        onCheckedChange={setMarkerClusters}
-                        data-testid="switch-marker-clusters"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between gap-3">
-                      <Label htmlFor="deforestation" className="text-xs font-normal">
-                        Show Deforestation
-                      </Label>
-                      <Switch
-                        id="deforestation"
-                        checked={showDeforestation}
-                        onCheckedChange={setShowDeforestation}
-                        data-testid="switch-deforestation"
-                      />
-                    </div>
-                  </div>
+          </CardContent>
+        </Card>
 
-                  <div className="border-t pt-3">
-                    <Button variant="outline" size="sm" className="w-full text-xs" data-testid="button-map-layers">
-                      <Layers className="h-3 w-3 mr-2" />
-                      Map Layers
-                    </Button>
-                  </div>
-                </div>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Pending Surveys</p>
+                <p className="text-2xl font-bold mt-1" data-testid="text-stat-surveys">48</p>
               </div>
+              <Clock className="h-8 w-8 text-amber-500 opacity-50" />
+            </div>
+          </CardContent>
+        </Card>
 
-              {/* Map Image */}
-              <div className="relative h-[500px] bg-muted">
-                <img 
-                  src={fieldImage} 
-                  alt="Geographic map showing farm locations" 
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* Map Markers - Simulated */}
-                <div className="absolute inset-0">
-                  {/* West Africa */}
-                  <div className="absolute top-[45%] left-[35%]">
-                    <div className="relative group cursor-pointer">
-                      <div className="h-8 w-8 rounded-full bg-destructive/90 flex items-center justify-center border-2 border-white shadow-lg">
-                        <span className="text-xs font-bold text-white">12</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* East Africa */}
-                  <div className="absolute top-[52%] left-[48%]">
-                    <div className="relative group cursor-pointer">
-                      <div className="h-8 w-8 rounded-full bg-yellow-500/90 flex items-center justify-center border-2 border-white shadow-lg">
-                        <span className="text-xs font-bold text-white">8</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Southeast Asia */}
-                  <div className="absolute top-[55%] left-[78%]">
-                    <div className="relative group cursor-pointer">
-                      <div className="h-8 w-8 rounded-full bg-yellow-500/90 flex items-center justify-center border-2 border-white shadow-lg">
-                        <span className="text-xs font-bold text-white">5</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Map Attribution */}
-                <div className="absolute bottom-2 right-2 text-xs text-muted-foreground bg-background/80 backdrop-blur-sm px-2 py-1 rounded">
-                  Map data ©2024 Google, Imagery ©2023 NASA
-                </div>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Total Premiums</p>
+                <p className="text-2xl font-bold mt-1" data-testid="text-stat-premiums">$28.5k</p>
               </div>
+              <DollarSign className="h-8 w-8 text-green-500 opacity-50" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Training Events</p>
+                <p className="text-2xl font-bold mt-1" data-testid="text-stat-trainings">24</p>
+              </div>
+              <Target className="h-8 w-8 text-blue-500 opacity-50" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Active Loans</p>
+                <p className="text-2xl font-bold mt-1" data-testid="text-stat-loans">156</p>
+              </div>
+              <Package className="h-8 w-8 text-purple-500 opacity-50" />
             </div>
           </CardContent>
         </Card>

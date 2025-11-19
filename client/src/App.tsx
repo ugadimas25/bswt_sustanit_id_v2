@@ -51,6 +51,11 @@ import TraceabilityLocations from "@/pages/TraceabilityLocations";
 import TraceabilityPurchases from "@/pages/TraceabilityPurchases";
 import TraceabilityInputUsage from "@/pages/TraceabilityInputUsage";
 import TraceabilitySectionDeliveries from "@/pages/TraceabilitySectionDeliveries";
+import TraceabilityCustomFields from "@/pages/TraceabilityCustomFields";
+import TraceabilityProcessing from "@/pages/TraceabilityProcessing";
+import TraceabilityShipment from "@/pages/TraceabilityShipment";
+import TraceabilityQuotas from "@/pages/TraceabilityQuotas";
+import TraceabilityDeductions from "@/pages/TraceabilityDeductions";
 
 import Trainings from "@/pages/Trainings";
 import TrainerGroups from "@/pages/TrainerGroups";
@@ -59,6 +64,7 @@ import TrainingEvents from "@/pages/TrainingEvents";
 import TrainingTopics from "@/pages/TrainingTopics";
 
 import Surveys from "@/pages/Surveys";
+import CustomSurveys from "@/pages/CustomSurveys";
 import SurveyComplianceCategories from "@/pages/SurveyComplianceCategories";
 import SurveyQuestionsRanking from "@/pages/SurveyQuestionsRanking";
 import SurveyFarmerCompliance from "@/pages/SurveyFarmerCompliance";
@@ -89,6 +95,18 @@ import FieldQuotas from "@/pages/FieldQuotas";
 import FieldsDeforestation from "@/pages/FieldsDeforestation";
 import FieldsDeforestationSummary from "@/pages/FieldsDeforestationSummary";
 import GAOperatorCosts from "@/pages/GAOperatorCosts";
+import PremiumRules from "@/pages/PremiumRules";
+import PremiumVolumeTracking from "@/pages/PremiumVolumeTracking";
+import LoanDeductions from "@/pages/LoanDeductions";
+import ReportsDashboards from "@/pages/ReportsDashboards";
+import ReportsBuilder from "@/pages/ReportsBuilder";
+import AdminCountry from "@/pages/AdminCountry";
+import AdminRegions from "@/pages/AdminRegions";
+import AdminImport from "@/pages/AdminImport";
+import AdminBuyers from "@/pages/AdminBuyers";
+import AdminStaff from "@/pages/AdminStaff";
+import AdminLoginLogs from "@/pages/AdminLoginLogs";
+import AdminOffice from "@/pages/AdminOffice";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -130,6 +148,11 @@ function Router() {
       
       <Route path="/traceability" component={Traceability} />
       <Route path="/traceability-farmer-harvest" component={TraceabilityFarmerHarvest} />
+      <Route path="/traceability/custom-fields" component={TraceabilityCustomFields} />
+      <Route path="/traceability-processing" component={TraceabilityProcessing} />
+      <Route path="/traceability-shipment" component={TraceabilityShipment} />
+      <Route path="/traceability-quotas" component={TraceabilityQuotas} />
+      <Route path="/traceability-deductions" component={TraceabilityDeductions} />
       <Route path="/traceability-containers" component={TraceabilityContainers} />
       <Route path="/traceability-locations" component={TraceabilityLocations} />
       <Route path="/traceability-purchases" component={TraceabilityPurchases} />
@@ -143,6 +166,7 @@ function Router() {
       <Route path="/training-topics" component={TrainingTopics} />
       
       <Route path="/surveys" component={Surveys} />
+      <Route path="/surveys/custom" component={CustomSurveys} />
       <Route path="/survey-compliance-categories" component={SurveyComplianceCategories} />
       <Route path="/survey-questions-ranking" component={SurveyQuestionsRanking} />
       <Route path="/survey-farmer-compliance" component={SurveyFarmerCompliance} />
@@ -152,12 +176,22 @@ function Router() {
       <Route path="/accounts" component={Accounts} />
       <Route path="/locations" component={Locations} />
       <Route path="/loans" component={Loans} />
+      <Route path="/loan-deductions" component={LoanDeductions} />
       <Route path="/savings" component={Savings} />
       <Route path="/company-sales" component={CompanySales} />
       <Route path="/partners" component={Partners} />
       <Route path="/devices" component={Devices} />
       <Route path="/reports" component={Reports} />
+      <Route path="/reports/dashboards" component={ReportsDashboards} />
+      <Route path="/reports/builder" component={ReportsBuilder} />
       <Route path="/users" component={Users} />
+      <Route path="/admin/country" component={AdminCountry} />
+      <Route path="/admin/regions" component={AdminRegions} />
+      <Route path="/admin/import" component={AdminImport} />
+      <Route path="/admin/buyers" component={AdminBuyers} />
+      <Route path="/admin/staff" component={AdminStaff} />
+      <Route path="/admin/login-logs" component={AdminLoginLogs} />
+      <Route path="/admin/office" component={AdminOffice} />
       <Route path="/cases" component={Cases} />
       <Route path="/fields" component={Fields} />
       <Route path="/area-types" component={AreaTypes} />
@@ -172,6 +206,8 @@ function Router() {
       <Route path="/farmer-certifications" component={FarmerCertifications} />
       <Route path="/farmer-last-activity" component={FarmerLastActivity} />
       <Route path="/farmer-premiums" component={FarmerPremiums} />
+      <Route path="/premium-rules" component={PremiumRules} />
+      <Route path="/premium-volume-tracking" component={PremiumVolumeTracking} />
       <Route path="/farmers-attributes" component={FarmersAttributes} />
       <Route path="/field-quotas" component={FieldQuotas} />
       <Route path="/fields-deforestation" component={FieldsDeforestation} />

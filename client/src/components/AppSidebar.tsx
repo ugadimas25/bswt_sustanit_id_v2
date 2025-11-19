@@ -24,6 +24,7 @@ import { Link, useLocation } from "wouter";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
+import farmforceLogo from "@assets/Farmforce_Logo_WHITE_1763527950704.png";
 
 interface MenuItem {
   title: string;
@@ -251,14 +252,13 @@ export function AppSidebar() {
   return (
     <Sidebar data-testid="sidebar-main" className="border-r">
       <SidebarHeader className="p-6 border-b border-sidebar-border bg-sidebar">
-        <div className="flex items-center gap-3">
-          <div className="h-12 w-12 rounded-lg bg-primary flex items-center justify-center shadow-md">
-            <Sprout className="h-7 w-7 text-primary-foreground" />
-          </div>
-          <div>
-            <h2 className="text-lg font-bold text-sidebar-foreground">Farmforce</h2>
-            <p className="text-sm text-sidebar-foreground/70">Agricultural Management</p>
-          </div>
+        <div className="flex items-center justify-center">
+          <img 
+            src={farmforceLogo} 
+            alt="Farmforce" 
+            className="h-10 w-auto"
+            data-testid="img-farmforce-logo"
+          />
         </div>
       </SidebarHeader>
       
