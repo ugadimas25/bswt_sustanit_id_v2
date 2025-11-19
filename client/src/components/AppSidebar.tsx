@@ -88,37 +88,58 @@ const menuStructure: MenuItem[] = [
     ]
   },
   { 
-    title: "Traceability", 
+    title: "Harvest Operations", 
     url: "/harvests", 
-    icon: Activity,
+    icon: Boxes,
     submenu: [
       { title: "All Harvests", url: "/harvests" },
-      { title: "Collections", url: "/harvest-collections" },
-      { title: "Deliveries", url: "/harvest-deliveries" },
-      { title: "Activities", url: "/harvest-activities" },
-      { title: "Scheduling", url: "/harvest-scheduling" },
-      { title: "Tracking", url: "/harvest-tracking" },
-      { title: "Quality Control", url: "/harvest-quality" },
-      { title: "Batches", url: "/harvest-batches" },
+      { title: "Harvest Scheduling", url: "/harvest-scheduling" },
+      { title: "Harvest Tracking", url: "/harvest-tracking" },
       { title: "Group Bags", url: "/harvest-group-bags" },
-      { title: "Warehouse", url: "/harvest-warehouse" },
-      { title: "Purchases", url: "/harvest-purchases" },
-      { title: "Costs", url: "/harvest-costs" },
+      { title: "Batches", url: "/harvest-batches" },
+      { title: "Collections", url: "/harvest-collections" },
+      { title: "Quality Control", url: "/harvest-quality" },
+      { title: "Activities Log", url: "/harvest-activities" },
       { title: "Alerts", url: "/harvest-alerts" },
+    ]
+  },
+  { 
+    title: "Forecasting & Analytics", 
+    url: "/weekly-yield-forecasts", 
+    icon: TrendingUp,
+    submenu: [
+      { title: "Weekly Yield Forecasts", url: "/weekly-yield-forecasts" },
+      { title: "Harvest Forecasts", url: "/harvest-forecasts" },
+      { title: "Field Productivity", url: "/field-productivity" },
       { title: "Harvest Reports", url: "/harvest-reports" },
+    ]
+  },
+  { 
+    title: "Supply Chain & Traceability", 
+    url: "/traceability", 
+    icon: TruckIcon,
+    submenu: [
       { title: "Traceability Overview", url: "/traceability" },
-      { title: "Farmer Harvest Traceability", url: "/traceability-farmer-harvest" },
-      { title: "Custom Transaction Fields", url: "/traceability/custom-fields" },
-      { title: "Traceability Purchases", url: "/traceability-purchases" },
+      { title: "Farmer Harvest Trace", url: "/traceability-farmer-harvest" },
+      { title: "Purchases", url: "/traceability-purchases" },
       { title: "Processing", url: "/traceability-processing" },
+      { title: "Warehouse", url: "/harvest-warehouse" },
       { title: "Shipment", url: "/traceability-shipment" },
+      { title: "Deliveries", url: "/harvest-deliveries" },
       { title: "Containers", url: "/traceability-containers" },
       { title: "Locations", url: "/traceability-locations" },
-      { title: "Input Usage", url: "/traceability-input-usage" },
       { title: "Section Deliveries", url: "/traceability-section-deliveries" },
-      { title: "Quota Management", url: "/traceability-quotas" },
-      { title: "Deductions", url: "/traceability-deductions" },
-      { title: "Accounts", url: "/accounts" },
+      { title: "Custom Fields", url: "/traceability/custom-fields" },
+    ]
+  },
+  { 
+    title: "Financial Management", 
+    url: "/accounts", 
+    icon: DollarSign,
+    submenu: [
+      { title: "Accounts Overview", url: "/accounts" },
+      { title: "Harvest Costs", url: "/harvest-costs" },
+      { title: "Harvest Purchases", url: "/harvest-purchases" },
       { title: "Loans", url: "/loans" },
       { title: "Loan Deductions", url: "/loan-deductions" },
       { title: "Savings", url: "/savings" },
@@ -126,6 +147,8 @@ const menuStructure: MenuItem[] = [
       { title: "Farmer Premiums", url: "/farmer-premiums" },
       { title: "Premium Rules", url: "/premium-rules" },
       { title: "Volume Tracking", url: "/premium-volume-tracking" },
+      { title: "Quota Management", url: "/traceability-quotas" },
+      { title: "Deductions", url: "/traceability-deductions" },
       { title: "Payment Locations", url: "/locations" },
     ]
   },
@@ -150,32 +173,6 @@ const menuStructure: MenuItem[] = [
       { title: "Cases & Incidents", url: "/cases" },
       { title: "Fields Deforestation", url: "/fields-deforestation" },
       { title: "Deforestation Summary", url: "/fields-deforestation-summary" },
-    ]
-  },
-  { 
-    title: "Yield Forecasting", 
-    url: "/weekly-yield-forecasts", 
-    icon: TrendingUp,
-    submenu: [
-      { title: "Weekly Yield Forecasts", url: "/weekly-yield-forecasts" },
-      { title: "Harvest Forecasts", url: "/harvest-forecasts" },
-      { title: "Field Productivity", url: "/field-productivity" },
-    ]
-  },
-  { 
-    title: "Sustainability Monitoring", 
-    url: "/reports", 
-    icon: Leaf,
-    submenu: [
-      { title: "Sustainability Reports", url: "/reports" },
-      { title: "Custom Dashboards", url: "/reports/dashboards" },
-      { title: "Report Builder", url: "/reports/builder" },
-      { title: "GA Operator Costs", url: "/ga-operator-costs" },
-      { title: "Training Programs", url: "/trainings" },
-      { title: "Training Events", url: "/training-events" },
-      { title: "Trainers", url: "/trainers" },
-      { title: "Trainer Groups", url: "/trainer-groups" },
-      { title: "Training Topics", url: "/training-topics" },
     ]
   },
   { 
@@ -228,7 +225,7 @@ export function AppSidebar() {
           />
         </div>
       </SidebarHeader>
-      
+
       <SidebarContent>
         <ScrollArea className="h-full">
           <SidebarGroup className="px-2 py-2">

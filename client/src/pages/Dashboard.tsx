@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AIInsights } from "@/components/AIInsights";
 import { 
   Users, MapPin, TrendingUp, TrendingDown, DollarSign, Package, 
   Sprout, AlertTriangle, CheckCircle, Clock, Target, Award,
@@ -80,6 +81,9 @@ export default function Dashboard() {
           </Button>
         </div>
       </div>
+
+      {/* AI Insights Section */}
+      <AIInsights />
 
       {/* Key Metrics Row */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
