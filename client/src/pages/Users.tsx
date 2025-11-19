@@ -28,7 +28,7 @@ import {
 //todo: remove mock functionality
 const mockUsers = [
   {
-    email: "andrea.perez@farmforce.com",
+    email: "andrea.perez@bentangsawit.com",
     firstName: "Andrea",
     lastName: "Perez",
     lastLoggedIn: "",
@@ -58,7 +58,7 @@ const mockUsers = [
     apiAccessOnly: false,
   },
   {
-    email: "frode.torvund@farmforce.com",
+    email: "frode.torvund@bentangsawit.com",
     firstName: "Frode",
     lastName: "Torvund",
     lastLoggedIn: "25/02/2020 18:21",
@@ -88,7 +88,7 @@ const mockUsers = [
     apiAccessOnly: false,
   },
   {
-    email: "muhammad.fadly@farmforce.com",
+    email: "muhammad.fadly@bentangsawit.com",
     firstName: "Muhammad",
     lastName: "Fadly",
     lastLoggedIn: "19/11/2025 01:13",
@@ -98,7 +98,7 @@ const mockUsers = [
     apiAccessOnly: false,
   },
   {
-    email: "nan.haru@farmforce.com",
+    email: "nan.haru@bentangsawit.com",
     firstName: "Nan",
     lastName: "Haru",
     lastLoggedIn: "27/11/2017 14:25",
@@ -108,7 +108,7 @@ const mockUsers = [
     apiAccessOnly: false,
   },
   {
-    email: "nathaphon.mitsattha@farmforce.com",
+    email: "nathaphon.mitsattha@bentangsawit.com",
     firstName: "Nathaphon",
     lastName: "Mitsattha",
     lastLoggedIn: "26/01/2021 14:39",
@@ -118,7 +118,7 @@ const mockUsers = [
     apiAccessOnly: false,
   },
   {
-    email: "nicole.thompson@farmforce.com",
+    email: "nicole.thompson@bentangsawit.com",
     firstName: "Nicole",
     lastName: "Thompson",
     lastLoggedIn: "13/05/2016 11:53",
@@ -128,7 +128,7 @@ const mockUsers = [
     apiAccessOnly: false,
   },
   {
-    email: "reu.nyandoro@farmforce.com",
+    email: "reu.nyandoro@bentangsawit.com",
     firstName: "Reu",
     lastName: "Nyandoro",
     lastLoggedIn: "11/03/2020 04:01",
@@ -148,7 +148,7 @@ const mockUsers = [
     apiAccessOnly: true,
   },
   {
-    email: "surajit.sinha@farmforce.com",
+    email: "surajit.sinha@bentangsawit.com",
     firstName: "Surajit",
     lastName: "Sinha",
     lastLoggedIn: "26/08/2019 12:15",
@@ -158,7 +158,7 @@ const mockUsers = [
     apiAccessOnly: false,
   },
   {
-    email: "thamrongsak.kittisak@farmforce.com",
+    email: "thamrongsak.kittisak@bentangsawit.com",
     firstName: "Thamrongsak",
     lastName: "Kittisak",
     lastLoggedIn: "31/12/2019 10:55",
@@ -168,7 +168,7 @@ const mockUsers = [
     apiAccessOnly: false,
   },
   {
-    email: "vilde.nakkim@farmforce.com",
+    email: "vilde.nakkim@bentangsawit.com",
     firstName: "Vilde",
     lastName: "Nakkim",
     lastLoggedIn: "24/08/2020 16:42",

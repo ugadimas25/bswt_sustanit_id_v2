@@ -3,9 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { LogIn, Clock, Monitor } from "lucide-react";
 
 const sampleData = [
-  { id: "LOG-001", user: "john@farmforce.com", timestamp: "2024-11-19 08:30:15", ipAddress: "192.168.1.100", device: "Desktop", status: "Success" },
-  { id: "LOG-002", user: "maria@farmforce.com", timestamp: "2024-11-19 09:15:42", ipAddress: "192.168.1.105", device: "Mobile", status: "Success" },
-  { id: "LOG-003", user: "david@farmforce.com", timestamp: "2024-11-19 10:22:33", ipAddress: "192.168.1.110", device: "Tablet", status: "Failed" },
+  { id: "LOG-001", user: "john@bentangsawit.com", timestamp: "2024-11-19 08:30:15", ipAddress: "192.168.1.100", device: "Desktop", status: "Success" },
+  { id: "LOG-002", user: "maria@bentangsawit.com", timestamp: "2024-11-19 09:15:42", ipAddress: "192.168.1.105", device: "Mobile", status: "Success" },
+  { id: "LOG-003", user: "david@bentangsawit.com", timestamp: "2024-11-19 10:22:33", ipAddress: "192.168.1.110", device: "Tablet", status: "Failed" },
 ];
 
 export default function AdminLoginLogs() {

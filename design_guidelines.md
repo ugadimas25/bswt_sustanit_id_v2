@@ -1,4 +1,4 @@
-# Farmforce System Redesign - Design Guidelines
+# Bentang Sawit System Redesign - Design Guidelines
 
 ## Design Approach
 
@@ -12,7 +12,7 @@ Combining Material Design principles for data-dense interfaces with modern SaaS 
 
 ## Brand Identity
 
-**Color Palette (Farmforce Official):**
+**Color Palette (Bentang Sawit Official):**
 - Primary (Golden Yellow): #F8BC28 - Main brand color, CTAs, highlights
 - Secondary (Soft Yellow): #E3DB57 - Accents, secondary actions
 - Text (Deep Blue): #0B2534 - Primary text, headers
@@ -31,7 +31,7 @@ The warm yellow and earth-tone palette reflects agricultural heritage while main
 **Font Families:**
 - Primary: Inter (headings, UI elements, data tables)
 - Secondary: System font stack for forms and dense text
-- Consistent with Farmforce brand guidelines
+- Consistent with Bentang Sawit brand guidelines
 
 **Hierarchy:**
 - Page Titles: text-3xl font-semibold

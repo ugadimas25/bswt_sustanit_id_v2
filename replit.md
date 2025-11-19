@@ -1,8 +1,8 @@
-# Farmforce Agricultural Management Platform
+# Bentang Sawit Agricultural Management Platform
 
 ## Overview
 
-Farmforce is a comprehensive agricultural management system designed for tracking and managing agricultural operations at scale. The platform serves as a central hub for farmer data collection, field mapping, planting campaigns, harvest management, input distribution, training coordination, and compliance monitoring. Built for enterprise agricultural operations, it emphasizes data quality, traceability, and certification compliance (RSPO, EUDR, ISPO, Organic).
+Bentang Sawit is a comprehensive agricultural management system designed for tracking and managing agricultural operations at scale. The platform serves as a central hub for farmer data collection, field mapping, planting campaigns, harvest management, input distribution, training coordination, and compliance monitoring. Built for enterprise agricultural operations, it emphasizes data quality, traceability, and certification compliance (RSPO, EUDR, ISPO, Organic).
 
 The system supports multiple stakeholders including farm administrators, field officers, farmers, and certification auditors, providing tools for end-to-end farm management from planting through harvest and delivery.
 
@@ -109,7 +109,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ Comprehensive data-testid attributes for future testing
 
 **Branding Consistency**:
-- All enhancements maintain Farmforce color scheme (golden yellow #F8BC28, deep blue #0B2534)
+- All enhancements maintain Bentang Sawit color scheme (golden yellow #F8BC28, deep blue #0B2534)
 - Consistent badge variants and status indicators
 - Professional data-dense interfaces optimized for agricultural operations
 
