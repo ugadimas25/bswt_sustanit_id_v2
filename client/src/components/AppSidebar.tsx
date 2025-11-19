@@ -45,32 +45,6 @@ const menuStructure: MenuItem[] = [
     submenu: []
   },
   { 
-    title: "Farmers", 
-    url: "/producers", 
-    icon: Users,
-    submenu: [
-      { title: "All Farmers", url: "/producers" },
-      { title: "Farms", url: "/farms" },
-      { title: "Fields", url: "/fields" },
-      { title: "Area Types", url: "/area-types" },
-      { title: "Certifications", url: "/certifications" },
-      { title: "Certificate States", url: "/certificate-states" },
-      { title: "Farmer Certifications", url: "/farmer-certifications" },
-      { title: "Farmer Premiums", url: "/farmer-premiums" },
-      { title: "Farmer Last Activity", url: "/farmer-last-activity" },
-      { title: "Farmers Attributes", url: "/farmers-attributes" },
-      { title: "Family Members", url: "/family-members" },
-      { title: "Family Member Education", url: "/family-member-education" },
-      { title: "Family Member Relationships", url: "/family-member-relationships" },
-      { title: "Farm Objects", url: "/farm-objects" },
-      { title: "Farm Object Images", url: "/farm-object-images" },
-      { title: "Field Quotas", url: "/field-quotas" },
-      { title: "Fields Deforestation", url: "/fields-deforestation" },
-      { title: "Fields Deforestation Summary", url: "/fields-deforestation-summary" },
-      { title: "GA Operator Costs", url: "/ga-operator-costs" },
-    ]
-  },
-  { 
     title: "Planting Campaigns", 
     url: "/planting-campaigns", 
     icon: Sprout,
@@ -84,14 +58,79 @@ const menuStructure: MenuItem[] = [
     ]
   },
   { 
-    title: "Farming Inputs", 
-    url: "/farming-inputs", 
-    icon: Leaf,
+    title: "Farmers", 
+    url: "/producers", 
+    icon: Users,
     submenu: [
-      { title: "All Inputs", url: "/farming-inputs" },
-      { title: "Input Distribution", url: "/input-distribution" },
-      { title: "Input Purchases", url: "/input-purchases" },
-      { title: "Input Costs", url: "/input-costs" },
+      { title: "All Farmers", url: "/producers" },
+      { title: "Farmer Certifications", url: "/farmer-certifications" },
+      { title: "Farmer Last Activity", url: "/farmer-last-activity" },
+      { title: "Farmers Attributes", url: "/farmers-attributes" },
+      { title: "Family Members", url: "/family-members" },
+      { title: "Family Member Education", url: "/family-member-education" },
+      { title: "Family Member Relationships", url: "/family-member-relationships" },
+      { title: "GA Operator Costs", url: "/ga-operator-costs" },
+    ]
+  },
+  { 
+    title: "Fields", 
+    url: "/fields", 
+    icon: MapPinned,
+    submenu: [
+      { title: "All Fields", url: "/fields" },
+      { title: "Farms", url: "/farms" },
+      { title: "Area Types", url: "/area-types" },
+      { title: "Farm Objects", url: "/farm-objects" },
+      { title: "Farm Object Images", url: "/farm-object-images" },
+      { title: "Field Quotas", url: "/field-quotas" },
+      { title: "Fields Deforestation", url: "/fields-deforestation" },
+      { title: "Fields Deforestation Summary", url: "/fields-deforestation-summary" },
+    ]
+  },
+  { 
+    title: "Surveys", 
+    url: "/surveys", 
+    icon: FileText,
+    submenu: [
+      { title: "All Surveys", url: "/surveys" },
+      { title: "Custom Surveys", url: "/surveys/custom" },
+      { title: "Certification", url: "/certifications" },
+      { title: "Certificate States", url: "/certificate-states" },
+      { title: "Farmer Compliance", url: "/survey-farmer-compliance" },
+      { title: "Compliance Categories", url: "/survey-compliance-categories" },
+      { title: "Questions Ranking", url: "/survey-questions-ranking" },
+      { title: "Proposed Actions", url: "/survey-proposed-actions" },
+      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
+      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
+    ]
+  },
+  { 
+    title: "Traceability", 
+    url: "/traceability", 
+    icon: Activity,
+    submenu: [
+      { title: "Overview", url: "/traceability" },
+      { title: "Farmer Harvest", url: "/traceability-farmer-harvest" },
+      { title: "Custom Transaction Fields", url: "/traceability/custom-fields" },
+      { title: "Purchases", url: "/traceability-purchases" },
+      { title: "Processing", url: "/traceability-processing" },
+      { title: "Shipment", url: "/traceability-shipment" },
+      { title: "Containers", url: "/traceability-containers" },
+      { title: "Locations", url: "/traceability-locations" },
+      { title: "Input Usage", url: "/traceability-input-usage" },
+      { title: "Section Deliveries", url: "/traceability-section-deliveries" },
+      { title: "Quota Management", url: "/traceability-quotas" },
+      { title: "Deductions", url: "/traceability-deductions" },
+    ]
+  },
+  { 
+    title: "Premiums", 
+    url: "/farmer-premiums", 
+    icon: Award,
+    submenu: [
+      { title: "Farmer Premiums", url: "/farmer-premiums" },
+      { title: "Premium Rules", url: "/premium-rules" },
+      { title: "Volume Tracking", url: "/premium-volume-tracking" },
     ]
   },
   { 
@@ -113,23 +152,19 @@ const menuStructure: MenuItem[] = [
       { title: "Purchases", url: "/harvest-purchases" },
       { title: "Costs", url: "/harvest-costs" },
       { title: "Alerts", url: "/harvest-alerts" },
-      { title: "Input Store", url: "/harvest-input-store" },
-      { title: "Input Unit", url: "/harvest-input-unit" },
-      { title: "Reports", url: "/harvest-reports" },
     ]
   },
   { 
-    title: "Traceability", 
-    url: "/traceability", 
-    icon: Activity,
+    title: "Farming Inputs", 
+    url: "/farming-inputs", 
+    icon: Leaf,
     submenu: [
-      { title: "Overview", url: "/traceability" },
-      { title: "Farmer Harvest", url: "/traceability-farmer-harvest" },
-      { title: "Containers", url: "/traceability-containers" },
-      { title: "Locations", url: "/traceability-locations" },
-      { title: "Purchases", url: "/traceability-purchases" },
-      { title: "Input Usage", url: "/traceability-input-usage" },
-      { title: "Section Deliveries", url: "/traceability-section-deliveries" },
+      { title: "All Inputs", url: "/farming-inputs" },
+      { title: "Input Distribution", url: "/input-distribution" },
+      { title: "Input Purchases", url: "/input-purchases" },
+      { title: "Input Costs", url: "/input-costs" },
+      { title: "Input Store", url: "/harvest-input-store" },
+      { title: "Input Unit", url: "/harvest-input-unit" },
     ]
   },
   { 
@@ -145,26 +180,13 @@ const menuStructure: MenuItem[] = [
     ]
   },
   { 
-    title: "Surveys", 
-    url: "/surveys", 
-    icon: FileText,
-    submenu: [
-      { title: "All Surveys", url: "/surveys" },
-      { title: "Farmer Compliance", url: "/survey-farmer-compliance" },
-      { title: "Compliance Categories", url: "/survey-compliance-categories" },
-      { title: "Questions Ranking", url: "/survey-questions-ranking" },
-      { title: "Proposed Actions", url: "/survey-proposed-actions" },
-      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
-      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
-    ]
-  },
-  { 
     title: "Financial Services", 
     url: "/accounts", 
     icon: CreditCard,
     submenu: [
       { title: "Accounts", url: "/accounts" },
       { title: "Loans", url: "/loans" },
+      { title: "Loan Deductions", url: "/loan-deductions" },
       { title: "Savings", url: "/savings" },
       { title: "Company Sales", url: "/company-sales" },
       { title: "Locations", url: "/locations" },
@@ -181,9 +203,11 @@ const menuStructure: MenuItem[] = [
   { 
     title: "Reports", 
     url: "/reports", 
-    icon: ChartBar,
+    icon: BarChart3,
     submenu: [
       { title: "All Reports", url: "/reports" },
+      { title: "Custom Dashboards", url: "/reports/dashboards" },
+      { title: "Report Builder", url: "/reports/builder" },
     ]
   },
   { 
@@ -191,9 +215,16 @@ const menuStructure: MenuItem[] = [
     url: "/users", 
     icon: Settings,
     submenu: [
+      { title: "Country Settings", url: "/admin/country" },
+      { title: "Region Settings", url: "/admin/regions" },
+      { title: "Data Import (AI)", url: "/admin/import" },
       { title: "Users", url: "/users" },
+      { title: "Buyers", url: "/admin/buyers" },
+      { title: "Staff", url: "/admin/staff" },
+      { title: "User Login Logs", url: "/admin/login-logs" },
       { title: "Devices", url: "/devices" },
       { title: "Partners", url: "/partners" },
+      { title: "Office Matters", url: "/admin/office" },
     ]
   },
 ];
@@ -280,11 +311,7 @@ export function AppSidebar() {
                           </SidebarMenuButton>
                           <CollapsibleTrigger asChild>
                             <button 
-                              className="h-12 w-10 flex items-center justify-center hover-elevate active-elevate-2 text-sidebar-foreground"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleMenu(item.title);
-                              }}
+                              className="h-12 w-10 flex items-center justify-center hover-elevate active-elevate-2 text-sidebar-foreground rounded-md"
                               data-testid={`button-toggle-${item.title.toLowerCase().replace(/\s/g, '-')}`}
                             >
                               {isOpen ? (
