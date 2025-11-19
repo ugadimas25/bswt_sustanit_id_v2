@@ -88,9 +88,9 @@ const menuStructure: MenuItem[] = [
     ]
   },
   { 
-    title: "Harvesting & Purchasing", 
+    title: "Traceability", 
     url: "/harvests", 
-    icon: Boxes,
+    icon: Activity,
     submenu: [
       { title: "All Harvests", url: "/harvests" },
       { title: "Collections", url: "/harvest-collections" },
@@ -118,33 +118,6 @@ const menuStructure: MenuItem[] = [
       { title: "Section Deliveries", url: "/traceability-section-deliveries" },
       { title: "Quota Management", url: "/traceability-quotas" },
       { title: "Deductions", url: "/traceability-deductions" },
-    ]
-  },
-  { 
-    title: "Deforestation Monitoring", 
-    url: "/fields-deforestation", 
-    icon: TreeDeciduous,
-    submenu: [
-      { title: "Fields Deforestation", url: "/fields-deforestation" },
-      { title: "Deforestation Summary", url: "/fields-deforestation-summary" },
-    ]
-  },
-  { 
-    title: "Child Labour Monitoring", 
-    url: "/family-members", 
-    icon: UserCheck,
-    submenu: [
-      { title: "Family Members", url: "/family-members" },
-      { title: "School Attendance", url: "/family-member-education" },
-      { title: "Family Relationships", url: "/family-member-relationships" },
-      { title: "Cases & Incidents", url: "/cases" },
-    ]
-  },
-  { 
-    title: "Digital Payments", 
-    url: "/accounts", 
-    icon: CreditCard,
-    submenu: [
       { title: "Accounts", url: "/accounts" },
       { title: "Loans", url: "/loans" },
       { title: "Loan Deductions", url: "/loan-deductions" },
@@ -154,6 +127,29 @@ const menuStructure: MenuItem[] = [
       { title: "Premium Rules", url: "/premium-rules" },
       { title: "Volume Tracking", url: "/premium-volume-tracking" },
       { title: "Payment Locations", url: "/locations" },
+    ]
+  },
+  { 
+    title: "Workflow", 
+    url: "/certifications", 
+    icon: GitBranch,
+    submenu: [
+      { title: "Certifications", url: "/certifications" },
+      { title: "Certificate States", url: "/certificate-states" },
+      { title: "Farmer Compliance", url: "/survey-farmer-compliance" },
+      { title: "Compliance Categories", url: "/survey-compliance-categories" },
+      { title: "All Surveys", url: "/surveys" },
+      { title: "Custom Surveys", url: "/surveys/custom" },
+      { title: "Questions Ranking", url: "/survey-questions-ranking" },
+      { title: "Proposed Actions", url: "/survey-proposed-actions" },
+      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
+      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
+      { title: "Family Members", url: "/family-members" },
+      { title: "School Attendance", url: "/family-member-education" },
+      { title: "Family Relationships", url: "/family-member-relationships" },
+      { title: "Cases & Incidents", url: "/cases" },
+      { title: "Fields Deforestation", url: "/fields-deforestation" },
+      { title: "Deforestation Summary", url: "/fields-deforestation-summary" },
     ]
   },
   { 
@@ -167,26 +163,9 @@ const menuStructure: MenuItem[] = [
     ]
   },
   { 
-    title: "Certification Process", 
-    url: "/certifications", 
-    icon: ShieldCheck,
-    submenu: [
-      { title: "Certifications", url: "/certifications" },
-      { title: "Certificate States", url: "/certificate-states" },
-      { title: "Farmer Compliance", url: "/survey-farmer-compliance" },
-      { title: "Compliance Categories", url: "/survey-compliance-categories" },
-      { title: "All Surveys", url: "/surveys" },
-      { title: "Custom Surveys", url: "/surveys/custom" },
-      { title: "Questions Ranking", url: "/survey-questions-ranking" },
-      { title: "Proposed Actions", url: "/survey-proposed-actions" },
-      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
-      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
-    ]
-  },
-  { 
     title: "Sustainability Monitoring", 
     url: "/reports", 
-    icon: Activity,
+    icon: Leaf,
     submenu: [
       { title: "Sustainability Reports", url: "/reports" },
       { title: "Custom Dashboards", url: "/reports/dashboards" },
