@@ -10,6 +10,86 @@ The system supports multiple stakeholders including farm administrators, field o
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### Table Enhancement Project (November 2024)
+
+**Objective**: Systematically enhance tables across all operational categories with AI-powered insights, advanced search/filter/sort capabilities, and better data visualization.
+
+**EnhancedDataTable Component** (`client/src/components/EnhancedDataTable.tsx`):
+- Reusable table component with comprehensive features
+- Advanced search with debouncing
+- Multi-column filtering with type-aware comparisons
+- Type-safe sorting (handles strings, numbers, dates, nulls)
+- Bulk selection with stable row IDs (persists across pagination)
+- CSV export for filtered/sorted datasets
+- Statistics dashboard with trend indicators
+- AI-powered insights panel (anomalies, predictions, recommendations, trends)
+- Row actions and click navigation
+- Pagination with page size controls
+- Comprehensive data-testid attributes for testing
+
+**Enhanced Pages**:
+
+1. **Producers** (`client/src/pages/Producers.tsx`) - Farmer Management:
+   - Certification status tracking
+   - Farm size and crop diversity metrics
+   - Engagement scores and activity status
+   - GPS coverage indicators
+   - AI insights for inactive farmers, certification renewals, land expansion
+
+2. **Harvests** (`client/src/pages/Harvests.tsx`) - Harvest Operations:
+   - Quality grade badges (Premium, Grade A, B, C)
+   - Volume tracking with moisture content
+   - Batch reference and status workflow
+   - Payment status indicators
+   - AI insights for quality trends, volume predictions, pricing optimization
+
+3. **Loans** (`client/src/pages/Loans.tsx`) - Financial Management:
+   - Repayment progress bars with percentages
+   - Risk level assessment (None, Low, Medium, High)
+   - Payment status tracking (Active, Paid, Overdue, At Risk)
+   - Interest rate and balance displays
+   - Individual loan detail pages (`client/src/pages/LoanDetail.tsx`)
+   - AI insights for payment patterns, default risk, repayment predictions
+
+4. **Farming Inputs** (`client/src/pages/FarmingInputs.tsx`) - Input Management:
+   - Stock level indicators with visual progress bars
+   - Stock status badges (Critical, Low Stock, Adequate)
+   - Inventory value tracking
+   - Supplier relationship management
+   - AI insights for reorder alerts, bulk ordering, usage predictions
+
+**AI-Powered Insights**:
+- Anomaly detection (irregular patterns, critical alerts)
+- Recommendations (optimizations, interventions, cost savings)
+- Predictions (harvest volumes, repayments, stock depletion)
+- Trend analysis (performance improvements, pattern recognition)
+
+**Sorting Implementation** (Production-Ready):
+- Numeric value parsing: Handles currency ($1,500), percentages (75%), comma-separated (2,500), negatives (-$4,500)
+- Date parsing: Supports ISO (2024-11-15), dd/MM/YYYY (15/11/2024), mm/dd/YYYY (11/15/2024) with smart disambiguation
+- Null handling: Consistently sinks to end regardless of sort direction
+- Whitespace handling: Trims before parsing to handle padded values
+- Type-safe comparisons with proper fallback chain
+
+**Testing Status**:
+- ✅ EnhancedDataTable sorting verified (architect approved)
+- ✅ FarmingInputs page end-to-end tested (search, sort, filter, AI insights, pagination)
+- ✅ All enhanced pages use consistent UX patterns
+- ✅ Comprehensive data-testid attributes for future testing
+
+**Branding Consistency**:
+- All enhancements maintain Farmforce color scheme (golden yellow #F8BC28, deep blue #0B2534)
+- Consistent badge variants and status indicators
+- Professional data-dense interfaces optimized for agricultural operations
+
+**Next Steps** (Future Enhancements):
+- Apply EnhancedDataTable pattern to 100+ remaining pages across all 12 operational categories
+- Create detail pages for entities (FarmingInputsDetail, ProducersDetail, etc.)
+- Add automated regression tests for sorting comparators
+- Consider locale-specific formatting extensions (e.g., parentheses for negatives)
+
 ## System Architecture
 
 ### Frontend Architecture

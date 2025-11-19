@@ -93,6 +93,65 @@ export function EnhancedDataTable({
     );
   });
 
+  // Helper function to parse numeric values from strings
+  const parseNumericValue = (val: any): number | null => {
+    if (typeof val === 'number') return val;
+    if (typeof val !== 'string') return null;
+    
+    // Trim first to handle leading/trailing whitespace
+    const trimmed = val.trim();
+    
+    // Exclude date-like strings (/, T, : or - not at the start)
+    // Allow leading - for negative numbers, but reject internal hyphens (ISO dates)
+    if (/[\/T:]/.test(trimmed) || /[^-]-/.test(trimmed)) return null;
+    
+    // Remove common formatting: commas, $, %, spaces
+    const cleaned = trimmed.replace(/[\$,\s%]/g, '');
+    
+    // Check if it's a valid number
+    const parsed = parseFloat(cleaned);
+    return isNaN(parsed) ? null : parsed;
+  };
+
+  // Helper function to parse dates from various formats
+  const parseDateValue = (val: any): Date | null => {
+    if (val instanceof Date) return val;
+    if (typeof val !== 'string') return null;
+    
+    const str = val.trim();
+    
+    // Try dd/MM/YYYY or mm/dd/YYYY format
+    const dateMatch = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (dateMatch) {
+      const [, first, second, year] = dateMatch;
+      const firstNum = parseInt(first);
+      const secondNum = parseInt(second);
+      const yearNum = parseInt(year);
+      
+      // If first number > 12, must be dd/MM/YYYY
+      if (firstNum > 12 && secondNum <= 12) {
+        const date = new Date(yearNum, secondNum - 1, firstNum);
+        if (!isNaN(date.getTime())) return date;
+      }
+      
+      // If second number > 12, must be mm/dd/YYYY
+      if (secondNum > 12 && firstNum <= 12) {
+        const date = new Date(yearNum, firstNum - 1, secondNum);
+        if (!isNaN(date.getTime())) return date;
+      }
+      
+      // Ambiguous case: both <= 12. Default to dd/MM/YYYY (international standard)
+      if (firstNum <= 31 && secondNum <= 12) {
+        const date = new Date(yearNum, secondNum - 1, firstNum);
+        if (!isNaN(date.getTime())) return date;
+      }
+    }
+    
+    // Try ISO format or other Date-parseable formats
+    const date = new Date(str);
+    return isNaN(date.getTime()) ? null : date;
+  };
+
   // Sort data with type-safe comparison
   const sortedData = [...filteredData].sort((a, b) => {
     if (!sortColumn) return 0;
@@ -100,17 +159,28 @@ export function EnhancedDataTable({
     const bVal = b[sortColumn];
     const direction = sortDirection === 'asc' ? 1 : -1;
     
-    // Handle null/undefined values
+    // Handle null/undefined values - always keep them at the end
     if (aVal == null && bVal == null) return 0;
-    if (aVal == null) return direction;
-    if (bVal == null) return -direction;
+    if (aVal == null) return 1;  // null always goes to end
+    if (bVal == null) return -1;  // null always goes to end
     
-    // Type-safe comparison
-    if (typeof aVal === 'number' && typeof bVal === 'number') {
-      return (aVal - bVal) * direction;
+    // Try numeric comparison first (handles numbers and numeric strings)
+    const aNum = parseNumericValue(aVal);
+    const bNum = parseNumericValue(bVal);
+    
+    if (aNum !== null && bNum !== null) {
+      return (aNum - bNum) * direction;
     }
     
-    // String comparison
+    // Try date comparison (dd/MM/YYYY, mm/dd/YYYY, ISO formats)
+    const aDate = parseDateValue(aVal);
+    const bDate = parseDateValue(bVal);
+    
+    if (aDate !== null && bDate !== null) {
+      return (aDate.getTime() - bDate.getTime()) * direction;
+    }
+    
+    // Fall back to string comparison
     return String(aVal).localeCompare(String(bVal)) * direction;
   });
 
