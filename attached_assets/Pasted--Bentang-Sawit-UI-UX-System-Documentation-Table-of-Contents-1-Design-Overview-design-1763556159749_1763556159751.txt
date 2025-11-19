@@ -1,0 +1,806 @@
+
+# Bentang Sawit - UI/UX System Documentation
+
+## Table of Contents
+1. [Design Overview](#design-overview)
+2. [Design System](#design-system)
+3. [Component Library](#component-library)
+4. [Page Layouts](#page-layouts)
+5. [User Flows](#user-flows)
+6. [Responsive Design](#responsive-design)
+7. [Accessibility](#accessibility)
+8. [Implementation Reference](#implementation-reference)
+
+---
+
+## Design Overview
+
+### Platform Purpose
+Bentang Sawit is a sustainability and traceability platform for Indonesian palm oil smallholder farmers. The platform must:
+- Support users with varying digital literacy levels
+- Work on low-end Android devices with limited connectivity
+- Display data-dense dashboards clearly
+- Support bilingual content (Indonesian primary, English metadata)
+- Function offline with service worker caching
+
+### Design Philosophy
+**Material Design 3** adapted for agricultural context with focus on:
+- **Clarity Over Complexity**: Every element serves a purpose
+- **Icon-First Communication**: Visual symbols supplement text for accessibility
+- **Data Legibility**: Charts, maps, and metrics must be instantly comprehensible
+- **Progressive Disclosure**: Essential info first, details on demand
+- **Environmental Connection**: Design evokes tropical plantations and stewardship
+
+---
+
+## Design System
+
+### Color Palette
+
+#### Primary Colors
+```css
+/* Light Mode */
+--primary: hsl(96, 85.19%, 73.53%)        /* Vibrant lime green - growth, vitality */
+--primary-foreground: hsl(0, 0%, 0%)      /* Black text on green */
+--primary-border: [calculated opacity]     /* Auto-adjusted border */
+
+/* Dark Mode */
+--primary: hsl(203, 88%, 53%)             /* Deep blue - water, trust */
+--primary-foreground: hsl(0, 0%, 100%)    /* White text on blue */
+```
+
+**Usage**: CTAs, success states, growth indicators, active navigation
+
+#### Secondary Colors
+```css
+/* Light Mode */
+--secondary: hsl(28, 18%, 15%)            /* Rich black - earth, soil */
+--secondary-foreground: hsl(0, 0%, 100%)  /* White text */
+
+/* Dark Mode */
+--secondary: hsl(42, 30%, 88%)            /* Warm beige */
+--secondary-foreground: hsl(28, 18%, 15%) /* Black text */
+```
+
+**Usage**: Secondary actions, headings, admin interfaces
+
+#### Semantic Colors
+```css
+--destructive: hsl(2.04, 74.62%, 61.37%)  /* Warm red - alerts, non-compliance */
+--muted: hsl(42, 30%, 94%)                /* Light neutral - backgrounds */
+--accent: hsl(42, 93%, 57%)               /* Golden yellow - highlights */
+```
+
+#### Chart Data Visualization
+```css
+--chart-1: hsl(203.89, 88.28%, 53.14%)    /* Blue - water/conservation */
+--chart-2: hsl(159.78, 100%, 36.08%)      /* Forest green - sustainability */
+--chart-3: hsl(42.03, 92.83%, 56.27%)     /* Golden yellow - production */
+--chart-4: hsl(147.14, 78.50%, 41.96%)    /* Deep green - compliance */
+--chart-5: hsl(341.49, 75.20%, 50.98%)    /* Magenta - secondary metrics */
+```
+
+#### Surface & Borders
+```css
+/* Light Mode */
+--background: hsl(0, 0%, 100%)            /* Pure white */
+--foreground: hsl(28, 18%, 15%)           /* Dark text */
+--border: hsl(42, 35%, 88%)               /* Subtle borders */
+--card: hsl(45, 25%, 97%)                 /* Card background */
+--card-border: hsl(42, 30%, 85%)          /* Card borders */
+
+/* Dark Mode */
+--background: hsl(147, 20%, 8%)           /* Deep forest green */
+--foreground: hsl(42, 30%, 88%)           /* Light text */
+--border: hsl(147, 15%, 18%)              /* Subtle borders */
+--card: hsl(147, 18%, 12%)                /* Card background */
+```
+
+### Typography
+
+#### Font Stack
+```css
+--font-sans: 'Space Grotesk', sans-serif  /* Primary - modern, legible */
+--font-serif: 'Geist', sans-serif         /* Secondary - technical */
+--font-mono: 'Geist Mono', monospace      /* Data tables, code */
+
+/* Fallback for Indonesian */
+font-family: 'Noto Sans', 'Roboto', sans-serif;
+```
+
+#### Type Scale
+```css
+/* Page Titles */
+text-3xl md:text-4xl font-bold           /* 1.875rem / 2.25rem */
+
+/* Section Headers */
+text-xl font-semibold                     /* 1.25rem */
+
+/* Card Titles */
+text-lg font-medium                       /* 1.125rem */
+
+/* Body Text */
+text-base leading-relaxed                 /* 1rem, 1.625 line-height */
+
+/* Captions */
+text-sm                                   /* 0.875rem */
+
+/* Data Labels */
+text-xs uppercase tracking-wide           /* 0.75rem */
+```
+
+#### Text Styling Guidelines
+- **Headings**: Bold weight, dark foreground color
+- **Body**: Regular weight, slightly increased line-height for readability
+- **Labels**: Medium weight, uppercase for data labels
+- **Links**: Underline on hover, primary color
+- **Muted Text**: Use `text-muted-foreground` for secondary information
+
+### Spacing System
+
+#### Base Unit: 0.25rem (4px)
+```css
+gap-2   /* 0.5rem  - 8px  - tight spacing */
+gap-3   /* 0.75rem - 12px - compact */
+gap-4   /* 1rem    - 16px - default */
+gap-6   /* 1.5rem  - 24px - comfortable */
+gap-8   /* 2rem    - 32px - generous */
+gap-12  /* 3rem    - 48px - section breaks */
+```
+
+#### Component Padding
+- **Mobile**: `p-6` (1.5rem / 24px)
+- **Desktop**: `p-8` (2rem / 32px)
+- **Section Gaps Mobile**: `space-y-8`
+- **Section Gaps Desktop**: `space-y-12`
+- **Card Grids Mobile**: `gap-4`
+- **Card Grids Desktop**: `gap-6`
+- **Form Fields**: `space-y-4`
+
+### Border Radius
+```css
+--radius: 0rem  /* Sharp corners for modern aesthetic */
+
+/* Component-specific */
+rounded-md  /* 0.375rem - 6px  - buttons, inputs */
+rounded-lg  /* 0.5625rem - 9px - cards */
+rounded-xl  /* 0.75rem - 12px  - large containers */
+```
+
+### Elevation & Shadows
+```css
+/* Cards */
+shadow-sm   /* Subtle elevation */
+shadow-md   /* Standard cards */
+shadow-lg   /* Modal dialogs */
+
+/* Interactive States */
+.hover-elevate::after {
+  background-color: var(--elevate-1);  /* rgba(0,0,0, .03) light */
+}
+
+.active-elevate-2::after {
+  background-color: var(--elevate-2);  /* rgba(0,0,0, .08) light */
+}
+```
+
+---
+
+## Component Library
+
+### Navigation Components
+
+#### Top Bar (Web)
+```
+┌─────────────────────────────────────────────────────┐
+│ [☰] Bentang Sawit             [User Avatar] [Menu] │
+└─────────────────────────────────────────────────────┘
+
+Height: 64px (h-16)
+Background: --background
+Border-bottom: 1px --border
+Padding: px-4 py-3
+```
+
+**Elements**:
+- Sidebar trigger (left)
+- Logo + name (center-left)
+- User menu with avatar (right)
+
+#### Sidebar (Desktop)
+```
+Width: 256px (16rem)
+Background: --sidebar
+Border-right: 1px --sidebar-border
+
+┌──────────────────────┐
+│  [🌿] Bentang Sawit │
+│  Platform Keberlanjutan │
+├──────────────────────┤
+│ Menu Utama           │
+│ ◉ Beranda           │
+│ ○ Petani            │
+│ ○ Penilaian         │
+│ ○ Ketertelusuran    │
+│ ○ Pengetahuan       │
+│ ○ Harga Pasar       │
+│ ○ Kalender          │
+│ ○ Bantuan           │
+├──────────────────────┤
+│ Administrator        │
+│ ○ Pengaturan        │
+├──────────────────────┤
+│ [Avatar] User Name   │
+│ Role Badge           │
+│ [Keluar Button]      │
+└──────────────────────┘
+```
+
+**States**:
+- Active: `bg-sidebar-accent text-sidebar-accent-foreground`
+- Hover: `hover:bg-sidebar-accent/50`
+- Icon size: 16px (w-4 h-4)
+
+#### Bottom Navigation (Mobile)
+```
+┌───────────────────────────────────────┐
+│ [Home] [Users] [Check] [Book] [Help] │
+└───────────────────────────────────────┘
+
+Height: 64px (h-16)
+Position: Fixed bottom
+Background: --background
+Border-top: 1px --border
+```
+
+**Touch Targets**: Minimum 44x44px
+
+### Card Components
+
+#### Standard Card
+```tsx
+<Card className="hover-elevate active-elevate-2">
+  <CardHeader>
+    <CardTitle className="flex items-center justify-between">
+      <span>Card Title</span>
+      <Badge variant="outline">Label</Badge>
+    </CardTitle>
+  </CardHeader>
+  <CardContent>
+    {/* Card content */}
+  </CardContent>
+</Card>
+```
+
+**Specifications**:
+- Border-radius: `rounded-xl` (12px)
+- Border: `1px solid --card-border`
+- Background: `--card`
+- Shadow: `shadow-sm`
+- Padding: `p-6`
+
+#### Stat Card
+```
+┌─────────────────────────┐
+│ Total Petani      [👥]  │
+│                         │
+│        4,235            │ <- text-2xl font-bold
+│ Terdaftar di sistem     │ <- text-xs muted
+└─────────────────────────┘
+
+Min-height: 128px (h-32)
+Icon size: 16px (w-4 h-4)
+```
+
+#### Data Card with Icon
+```
+┌────────────────────────────────────┐
+│ [🌿] Kebun Makmur                 │
+│     Desa Suka Maju, Kalimantan    │
+├────────────────────────────────────┤
+│ Luas: 5.2 ha | Pohon: 1,200      │
+│ Umur rata-rata: 12 tahun          │
+│                  [RSPO Certified] │
+└────────────────────────────────────┘
+
+Icon container: 40px × 40px (w-10 h-10)
+Icon background: --primary/10
+Icon color: --primary
+```
+
+### Form Components
+
+#### Text Input
+```tsx
+<Input
+  className="h-9 border-2 border-input"
+  placeholder="Masukkan teks..."
+/>
+```
+
+**Specifications**:
+- Height: 36px (h-9)
+- Border: 2px solid --input
+- Border-radius: `rounded-md` (6px)
+- Focus: `ring-2 ring-primary ring-offset-2`
+- Padding: `px-3 py-2`
+
+#### Select Dropdown
+```tsx
+<Select>
+  <SelectTrigger className="h-9">
+    <SelectValue placeholder="Pilih opsi" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="option1">Opsi 1</SelectItem>
+    <SelectItem value="option2">Opsi 2</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+#### Checkbox / Radio Group
+```
+□ Checkbox Label                    Touch target: 44×44px
+  Helper text in small muted        Icon: 16×16px
+```
+
+#### Buttons
+
+**Primary Button**
+```tsx
+<Button variant="default" size="default">
+  <Icon className="w-4 h-4 mr-2" />
+  Button Text
+</Button>
+```
+- Background: `--primary`
+- Text: `--primary-foreground`
+- Height: 36px (h-9)
+- Padding: `px-4 py-2`
+- Border: `1px solid --primary-border`
+
+**Secondary Button**
+```tsx
+<Button variant="secondary">
+  Secondary Action
+</Button>
+```
+- Background: `--secondary`
+- Text: `--secondary-foreground`
+
+**Outline Button**
+```tsx
+<Button variant="outline">
+  Outline Action
+</Button>
+```
+- Border: `1px solid var(--button-outline)`
+- Background: Transparent
+- Hover: `--accent` background
+
+**Destructive Button**
+```tsx
+<Button variant="destructive">
+  Delete Action
+</Button>
+```
+- Background: `--destructive`
+- Text: `--destructive-foreground`
+
+### Badge Components
+
+```tsx
+<Badge variant="default">Compliant</Badge>
+<Badge variant="secondary">In Progress</Badge>
+<Badge variant="destructive">Non-compliant</Badge>
+<Badge variant="outline">Offline</Badge>
+```
+
+**Specifications**:
+- Padding: `px-2.5 py-0.5`
+- Font-size: `text-xs`
+- Font-weight: `font-semibold`
+- Border-radius: `rounded-md`
+- White-space: `nowrap`
+
+### Data Visualization
+
+#### Chart Container
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Chart Title</CardTitle>
+    <CardDescription>Chart description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <ResponsiveContainer width="100%" height={300}>
+      {/* Chart component */}
+    </ResponsiveContainer>
+  </CardContent>
+</Card>
+```
+
+**Chart Types**:
+1. **Bar Charts**: Production volume, regional distribution
+2. **Line Charts**: Trends over time, assessment scores
+3. **Donut Charts**: Compliance status distribution
+4. **Area Charts**: Cumulative metrics
+
+**Chart Styling**:
+- Grid: `stroke="hsl(var(--border))" opacity={0.3}`
+- Axis text: `stroke="hsl(var(--muted-foreground))" fontSize={12}`
+- Tooltips: `bg-card border-border rounded-md`
+- Colors: Use `--chart-1` through `--chart-5`
+
+---
+
+## Page Layouts
+
+### Dashboard (Home)
+```
+┌─────────────────────────────────────────────────┐
+│ Selamat Datang, User! [Subtitle]               │
+├─────────────────────────────────────────────────┤
+│ [Stat 1] [Stat 2] [Stat 3] [Stat 4]           │ <- 4 columns desktop
+├─────────────────────────────────────────────────┤
+│ ┌─────────────────────┐ ┌───────────────────┐ │
+│ │ Production Chart    │ │ Compliance Pie    │ │
+│ │ (2 cols)            │ │ (1 col)           │ │
+│ └─────────────────────┘ └───────────────────┘ │
+├─────────────────────────────────────────────────┤
+│ ┌──────────┐ ┌────────────────────────────────┐│
+│ │Assessment│ │ Regional Distribution (2 cols) ││
+│ │Trends    │ └────────────────────────────────┘│
+│ │(1 col)   │                                    │
+│ └──────────┘                                    │
+├─────────────────────────────────────────────────┤
+│ [Quick Access Cards - 3 columns]               │
+└─────────────────────────────────────────────────┘
+```
+
+**Grid**: `grid md:grid-cols-2 lg:grid-cols-3 gap-4`
+
+### List View (Farmers, Transactions)
+```
+┌─────────────────────────────────────────────────┐
+│ Page Title                      [+ Add Button]  │
+│ Subtitle description                            │
+├─────────────────────────────────────────────────┤
+│ ┌─────────────────────────────────────────────┐│
+│ │ [🔍 Search bar...............]              ││
+│ └─────────────────────────────────────────────┘│
+├─────────────────────────────────────────────────┤
+│ ┌─────────────────────────────────────────────┐│
+│ │ [Icon] Item Title              [Badge]      ││
+│ │        Subtitle info                        ││
+│ │        Meta data | Meta data | Meta data   ││
+│ └─────────────────────────────────────────────┘│
+│ ┌─────────────────────────────────────────────┐│
+│ │ [Icon] Item Title              [Badge]      ││
+│ │        Subtitle info                        ││
+│ │        Meta data | Meta data | Meta data   ││
+│ └─────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────┘
+```
+
+### Form Dialog
+```
+┌─────────────────────────────────────┐
+│ Dialog Title                    [×] │
+├─────────────────────────────────────┤
+│ Field Label                         │
+│ [Input Field........................]│
+│                                     │
+│ Field Label                         │
+│ [Input Field........................]│
+│                                     │
+│ ┌───────────────┐ ┌───────────────┐│
+│ │ Field (50%)   │ │ Field (50%)   ││
+│ └───────────────┘ └───────────────┘│
+├─────────────────────────────────────┤
+│              [Cancel] [Save Button] │
+└─────────────────────────────────────┘
+
+Max-width: 672px (max-w-2xl)
+Max-height: 90vh with overflow-y-auto
+```
+
+---
+
+## User Flows
+
+### Assessment Flow
+1. **Landing**: Click "Mulai Penilaian Baru" button
+2. **Select Standard**: Choose RSPO or ISPO tab
+3. **Select Farmer**: Dropdown with searchable farmer list
+4. **Question Loop**:
+   - Display indicator code and principle
+   - Show question in Indonesian
+   - Radio options: Ya/Sebagian/Tidak
+   - Progress bar at top
+   - Previous/Next navigation
+5. **Completion**: Calculate score, save responses, show summary
+
+### Traceability Entry Flow
+1. **Click**: "Catat Transaksi" button
+2. **Auto-generate**: Batch ID
+3. **Input**:
+   - Select buyer type
+   - Enter buyer ID
+   - Input quantity (kg)
+   - Input price per kg
+   - Toggle certification checkbox
+   - If certified, select standard
+4. **Calculate**: Auto-calculate total price
+5. **Submit**: Save transaction, show in list
+
+---
+
+## Responsive Design
+
+### Breakpoints
+```css
+/* Mobile-first approach */
+default:  < 768px   /* Mobile */
+md:       ≥ 768px   /* Tablet */
+lg:       ≥ 1024px  /* Desktop */
+xl:       ≥ 1280px  /* Large desktop */
+```
+
+### Grid Transformations
+
+**Dashboard Stats**
+- Mobile: 1 column (`grid-cols-1`)
+- Tablet: 2 columns (`md:grid-cols-2`)
+- Desktop: 4 columns (`lg:grid-cols-4`)
+
+**Content Cards**
+- Mobile: 1 column
+- Tablet: 2 columns (`md:grid-cols-2`)
+- Desktop: 3 columns (`lg:grid-cols-3`)
+
+**Form Layouts**
+- Mobile: Single column, full width
+- Desktop: `grid md:grid-cols-2 gap-4` for paired fields
+- Maximum width: `max-w-2xl` (672px)
+
+### Mobile Optimizations
+1. **Navigation**: Bottom nav replaces sidebar
+2. **Touch Targets**: Minimum 44×44px
+3. **Font Sizes**: Base 16px, never smaller than 14px
+4. **Spacing**: Reduced gaps (`gap-3` vs `gap-4`)
+5. **Charts**: Height 250px mobile, 300px desktop
+6. **Dialogs**: Full screen on mobile (`h-screen`)
+
+---
+
+## Accessibility
+
+### WCAG 2.1 Level AA Compliance
+
+#### Color Contrast
+- Text: Minimum 4.5:1 contrast ratio
+- UI Components: Minimum 3:1 contrast ratio
+- Current implementation meets standards
+
+#### Keyboard Navigation
+- All interactive elements focusable via Tab
+- Focus rings visible: `ring-2 ring-primary ring-offset-2`
+- Skip links for main content
+- Arrow keys for dropdown navigation
+
+#### Screen Reader Support
+```tsx
+// Semantic HTML
+<nav aria-label="Main navigation">
+<button aria-label="Close dialog">
+<img alt="Descriptive text">
+
+// ARIA attributes
+aria-current="page"        // Active nav item
+aria-expanded="true"       // Accordion state
+aria-hidden="true"         // Decorative icons
+role="alert"               // Error messages
+```
+
+#### Form Accessibility
+- Labels always visible (never just placeholders)
+- Error messages associated with inputs
+- Required fields indicated
+- Helper text for complex inputs
+
+#### Icon + Text Pattern
+```tsx
+<Button>
+  <Icon className="w-4 h-4" aria-hidden="true" />
+  <span>Button Label</span>
+</Button>
+```
+- Icons are decorative (`aria-hidden`)
+- Text always present for screen readers
+
+---
+
+## Implementation Reference
+
+### File Structure
+```
+client/src/
+├── components/
+│   ├── ui/              # Shadcn/ui components
+│   │   ├── button.tsx
+│   │   ├── card.tsx
+│   │   ├── input.tsx
+│   │   └── ...
+│   └── app-sidebar.tsx  # Application sidebar
+├── pages/               # Page components
+│   ├── home.tsx
+│   ├── farmers.tsx
+│   ├── assessments.tsx
+│   └── ...
+├── lib/
+│   ├── utils.ts         # cn() utility
+│   └── types.ts         # TypeScript types
+└── index.css            # Global styles + theme
+```
+
+### Theme Implementation
+
+**CSS Variables** (client/src/index.css):
+```css
+:root {
+  /* Light mode variables */
+  --primary: 96 85% 74%;
+  --background: 0 0% 100%;
+  /* ... */
+}
+
+.dark {
+  /* Dark mode overrides */
+  --primary: 203 88% 53%;
+  --background: 147 20% 8%;
+  /* ... */
+}
+```
+
+**Tailwind Configuration** (tailwind.config.ts):
+```typescript
+theme: {
+  extend: {
+    colors: {
+      primary: {
+        DEFAULT: "hsl(var(--primary) / <alpha-value>)",
+        foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
+      },
+      // ... other colors
+    }
+  }
+}
+```
+
+### Component Example
+
+```tsx
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Sprout } from "lucide-react";
+
+export function FarmerCard({ farmer }) {
+  return (
+    <Card className="hover-elevate active-elevate-2 cursor-pointer">
+      <CardContent className="pt-6">
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Sprout className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg">{farmer.farmName}</h3>
+              <p className="text-sm text-muted-foreground">
+                {farmer.village}, {farmer.district}
+              </p>
+            </div>
+          </div>
+          <Badge variant="default">{farmer.certificationStatus}</Badge>
+        </div>
+        <div className="flex gap-4 mt-3 text-sm">
+          <div>
+            <span className="text-muted-foreground">Luas:</span>{" "}
+            <span className="font-medium">{farmer.farmSize} ha</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Pohon:</span>{" "}
+            <span className="font-medium">{farmer.numberOfTrees}</span>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### Utility Classes
+
+**Elevation System**:
+```tsx
+// Hover elevation
+className="hover-elevate"
+
+// Active (pressed) elevation
+className="active-elevate-2"
+
+// Combined
+className="hover-elevate active-elevate-2"
+```
+
+**Responsive Utilities**:
+```tsx
+// Mobile: column, Desktop: row
+className="flex flex-col md:flex-row"
+
+// Hide on mobile
+className="hidden md:block"
+
+// Different sizes
+className="text-base md:text-lg"
+```
+
+---
+
+## Design Review Checklist
+
+### Visual Design
+- [ ] Colors match brand palette
+- [ ] Sufficient contrast ratios
+- [ ] Consistent spacing (4px grid)
+- [ ] Typography hierarchy clear
+- [ ] Icons align with 16px/24px grid
+
+### Component Quality
+- [ ] Interactive states defined (hover, active, focus, disabled)
+- [ ] Loading states implemented
+- [ ] Error states visible
+- [ ] Empty states helpful
+- [ ] Touch targets ≥ 44px
+
+### Responsive Design
+- [ ] Mobile layout (375px) works
+- [ ] Tablet layout (768px) works
+- [ ] Desktop layout (1280px) works
+- [ ] Charts responsive
+- [ ] Navigation adapts
+
+### Accessibility
+- [ ] Semantic HTML used
+- [ ] ARIA labels where needed
+- [ ] Keyboard navigation works
+- [ ] Focus indicators visible
+- [ ] Screen reader tested
+
+### Performance
+- [ ] Images optimized
+- [ ] Fonts subset/optimized
+- [ ] No layout shift
+- [ ] Smooth animations (<200ms)
+- [ ] Offline functionality
+
+---
+
+## Contact & Resources
+
+### Design Files
+- Figma: [To be created by designer]
+- Style Guide: `design_guidelines.md`
+- Component Library: Shadcn/ui documentation
+
+### Technical References
+- Implementation: `/client/src/components/ui/`
+- Theme: `/client/src/index.css`
+- Types: `/shared/schema.ts`
+
+### Questions?
+Contact the development team for:
+- Component API details
+- Implementation constraints
+- Data structure requirements
+- Localization needs
