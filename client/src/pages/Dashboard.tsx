@@ -75,27 +75,27 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="space-y-6 -m-6 p-6">
+    <div className="space-y-4 sm:space-y-6 -m-3 sm:-m-4 md:-m-6 p-3 sm:p-4 md:p-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
         <div>
-          <h1 className="text-3xl font-bold text-foreground" data-testid="text-dashboard-title">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Comprehensive agricultural management overview</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground" data-testid="text-dashboard-title">Dashboard</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">Comprehensive agricultural management overview</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" data-testid="button-refresh">
-            <Activity className="h-4 w-4 mr-2" />
-            Refresh
+          <Button variant="outline" size="sm" data-testid="button-refresh" className="flex-1 sm:flex-none">
+            <Activity className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Refresh</span>
           </Button>
-          <Button variant="outline" size="sm" data-testid="button-export">
-            <BarChart3 className="h-4 w-4 mr-2" />
-            Export
+          <Button variant="outline" size="sm" data-testid="button-export" className="flex-1 sm:flex-none">
+            <BarChart3 className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Export</span>
           </Button>
         </div>
       </div>
 
       {/* Key Metrics Row */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Farmers</CardTitle>
@@ -176,11 +176,11 @@ export default function Dashboard() {
       {/* Farm Distribution Map */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Farm Distribution Map</CardTitle>
-          <p className="text-sm text-muted-foreground">Geographic distribution of registered farms across regions</p>
+          <CardTitle className="text-base sm:text-lg">Farm Distribution Map</CardTitle>
+          <p className="text-xs sm:text-sm text-muted-foreground">Geographic distribution of registered farms across regions</p>
         </CardHeader>
         <CardContent>
-          <div className="relative w-full h-[400px] bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-950 dark:from-blue-950 rounded-lg overflow-hidden border">
+          <div className="relative w-full h-[300px] sm:h-[400px] bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-950 dark:from-blue-950 rounded-lg overflow-hidden border">
             <svg viewBox="0 0 100 100" className="w-full h-full" data-testid="svg-farm-map">
               {/* Background regions with subtle colors */}
               <g opacity="0.3">
