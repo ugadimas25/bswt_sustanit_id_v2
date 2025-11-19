@@ -22,7 +22,7 @@ export default function Bantuan() {
     },
     { 
       icon: HelpCircle, 
-      title: "FAQ", 
+      title: "Pertanyaan Umum", 
       description: "Pertanyaan yang sering diajukan",
       count: 78,
       color: "text-orange-600"
@@ -30,7 +30,7 @@ export default function Bantuan() {
     { 
       icon: MessageCircle, 
       title: "Hubungi Kami", 
-      description: "Dapatkan bantuan dari tim support",
+      description: "Dapatkan bantuan dari tim dukungan",
       count: null,
       color: "text-purple-600"
     },
@@ -38,9 +38,9 @@ export default function Bantuan() {
 
   const faqItems = [
     {
-      category: "Akun & Login",
+      category: "Akun & Masuk",
       question: "Bagaimana cara mengatur ulang kata sandi?",
-      answer: "Klik 'Lupa Kata Sandi' di halaman login, masukkan email Anda, dan ikuti instruksi yang dikirim ke email."
+      answer: "Klik 'Lupa Kata Sandi' di halaman masuk, masukkan email Anda, dan ikuti instruksi yang dikirim ke email."
     },
     {
       category: "Penilaian",
@@ -54,8 +54,8 @@ export default function Bantuan() {
     },
     {
       category: "Teknis",
-      question: "Apakah aplikasi bisa digunakan offline?",
-      answer: "Ya, aplikasi mobile dapat menyimpan data sementara dan akan sinkronisasi otomatis saat koneksi tersedia."
+      question: "Apakah aplikasi bisa digunakan tanpa internet?",
+      answer: "Ya, aplikasi seluler dapat menyimpan data sementara dan akan sinkronisasi otomatis saat koneksi tersedia."
     },
   ];
 
@@ -69,14 +69,14 @@ export default function Bantuan() {
     {
       icon: Mail,
       title: "Email",
-      value: "support@bentangsawit.id",
+      value: "dukungan@bentangsawit.id",
       description: "Respon dalam 24 jam"
     },
     {
       icon: MessageCircle,
       title: "WhatsApp",
       value: "+62 812 3456 7890",
-      description: "Chat langsung dengan tim kami"
+      description: "Obrolan langsung dengan tim kami"
     },
   ];
 
@@ -91,7 +91,7 @@ export default function Bantuan() {
         <div className="relative flex-1">
           <HelpCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
           <Input 
-            placeholder="Cari bantuan, panduan, atau FAQ..." 
+            placeholder="Cari bantuan, panduan, atau pertanyaan umum..." 
             className="pl-10"
             data-testid="input-search-help"
           />
@@ -128,7 +128,7 @@ export default function Bantuan() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Pertanyaan yang Sering Diajukan (FAQ)</CardTitle>
+          <CardTitle>Pertanyaan yang Sering Diajukan</CardTitle>
           <CardDescription>Jawaban atas pertanyaan umum tentang Bentang Sawit</CardDescription>
         </CardHeader>
         <CardContent>
@@ -163,7 +163,7 @@ export default function Bantuan() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Hubungi Tim Support</CardTitle>
+          <CardTitle>Hubungi Tim Dukungan</CardTitle>
           <CardDescription>Butuh bantuan lebih lanjut? Tim kami siap membantu Anda</CardDescription>
         </CardHeader>
         <CardContent>

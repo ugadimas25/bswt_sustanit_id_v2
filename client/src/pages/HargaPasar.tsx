@@ -4,10 +4,10 @@ import { TrendingUp, TrendingDown, DollarSign, MapPin } from "lucide-react";
 
 export default function HargaPasar() {
   const priceStats = [
-    { label: "Harga TBS Rata-rata", value: "Rp 2,850", unit: "/kg", icon: DollarSign, trend: "+5.2%", up: true },
-    { label: "Harga CPO", value: "Rp 12,500", unit: "/kg", icon: TrendingUp, trend: "+3.8%", up: true },
-    { label: "Harga Tertinggi", value: "Rp 3,200", unit: "/kg", icon: TrendingUp, trend: "+2.1%", up: true },
-    { label: "Harga Terendah", value: "Rp 2,400", unit: "/kg", icon: TrendingDown, trend: "-1.5%", up: false },
+    { label: "Harga TBS Rata-rata", value: "Rp 2.850", unit: "/kg", icon: DollarSign, trend: "+5,2%", up: true },
+    { label: "Harga CPO", value: "Rp 12.500", unit: "/kg", icon: TrendingUp, trend: "+3,8%", up: true },
+    { label: "Harga Tertinggi", value: "Rp 3.200", unit: "/kg", icon: TrendingUp, trend: "+2,1%", up: true },
+    { label: "Harga Terendah", value: "Rp 2.400", unit: "/kg", icon: TrendingDown, trend: "-1,5%", up: false },
   ];
 
   const regionalPrices = [
@@ -17,7 +17,7 @@ export default function HargaPasar() {
       price: 2950,
       change: 5.2,
       lastUpdate: "19 Nov 2025",
-      marketStatus: "Active"
+      marketStatus: "Aktif"
     },
     {
       region: "Riau",
@@ -25,7 +25,7 @@ export default function HargaPasar() {
       price: 2875,
       change: 3.8,
       lastUpdate: "19 Nov 2025",
-      marketStatus: "Active"
+      marketStatus: "Aktif"
     },
     {
       region: "Kalimantan Tengah",
@@ -33,7 +33,7 @@ export default function HargaPasar() {
       price: 2820,
       change: -1.2,
       lastUpdate: "19 Nov 2025",
-      marketStatus: "Active"
+      marketStatus: "Aktif"
     },
     {
       region: "Kalimantan Barat",
@@ -41,7 +41,7 @@ export default function HargaPasar() {
       price: 2765,
       change: 2.5,
       lastUpdate: "18 Nov 2025",
-      marketStatus: "Active"
+      marketStatus: "Aktif"
     },
     {
       region: "Jambi",
@@ -49,7 +49,7 @@ export default function HargaPasar() {
       price: 2890,
       change: 4.1,
       lastUpdate: "18 Nov 2025",
-      marketStatus: "Active"
+      marketStatus: "Aktif"
     },
   ];
 

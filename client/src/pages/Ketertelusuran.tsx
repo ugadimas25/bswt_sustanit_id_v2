@@ -6,7 +6,7 @@ import { Activity, Package, TruckIcon, MapPin, Plus } from "lucide-react";
 export default function Ketertelusuran() {
   const traceabilityStats = [
     { label: "Total Transaksi", value: "3,542", icon: Activity, color: "text-primary" },
-    { label: "Batch Aktif", value: "156", icon: Package, color: "text-blue-600" },
+    { label: "Lot Aktif", value: "156", icon: Package, color: "text-blue-600" },
     { label: "Dalam Pengiriman", value: "24", icon: TruckIcon, color: "text-orange-600" },
     { label: "Lokasi Terdaftar", value: "87", icon: MapPin, color: "text-green-600" },
   ];
@@ -15,12 +15,12 @@ export default function Ketertelusuran() {
     { 
       id: "BS-2025-001", 
       farmer: "Pak Budi Santoso", 
-      quantity: "1,250 kg", 
+      quantity: "1.250 kg", 
       buyer: "PT Sawit Makmur",
       certified: true,
       standard: "RSPO",
       date: "18 Nov 2025",
-      status: "Delivered"
+      status: "Terkirim"
     },
     { 
       id: "BS-2025-002", 
@@ -30,17 +30,17 @@ export default function Ketertelusuran() {
       certified: true,
       standard: "ISPO",
       date: "17 Nov 2025",
-      status: "In Transit"
+      status: "Dalam Transit"
     },
     { 
       id: "BS-2025-003", 
       farmer: "Pak Ahmad Yani", 
-      quantity: "2,100 kg", 
+      quantity: "2.100 kg", 
       buyer: "PT Sawit Makmur",
       certified: false,
       standard: "-",
       date: "16 Nov 2025",
-      status: "Delivered"
+      status: "Terkirim"
     },
   ];
 
@@ -93,7 +93,7 @@ export default function Ketertelusuran() {
                     <Activity className="w-5 h-5 text-primary" />
                     <div>
                       <p className="font-medium" data-testid={`text-batch-id-${transaction.id}`}>
-                        Batch ID: {transaction.id}
+                        Lot ID: {transaction.id}
                       </p>
                       <p className="text-sm text-muted-foreground">{transaction.farmer}</p>
                     </div>
@@ -109,11 +109,11 @@ export default function Ketertelusuran() {
                 <div className="flex items-center gap-2 flex-wrap">
                   {transaction.certified && (
                     <Badge variant="default" data-testid={`badge-certified-${transaction.id}`}>
-                      {transaction.standard} Certified
+                      {transaction.standard} Tersertifikasi
                     </Badge>
                   )}
                   <Badge 
-                    variant={transaction.status === "Delivered" ? "default" : "secondary"}
+                    variant={transaction.status === "Terkirim" ? "default" : "secondary"}
                     data-testid={`badge-status-${transaction.id}`}
                   >
                     {transaction.status}

@@ -23,7 +23,7 @@ import { Link, useLocation } from "wouter";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
-import bentangSawitLogo from "@assets/bswt logo_1763556342679.webp";
+import bentangSawitLogo from "@assets/bswt coklat_1763558253607.png";
 
 interface MenuItem {
   title: string;
@@ -83,11 +83,6 @@ const menuStructure: MenuItem[] = [
       { title: "Penilaian Keberlanjutan", url: "/penilaian" },
       { title: "Survei", url: "/surveys" },
       { title: "Survei Kustom", url: "/surveys/custom" },
-      { title: "Respon per Staf", url: "/survey-responses-by-staff" },
-      { title: "Survei per Staf", url: "/survey-surveys-by-staff" },
-      { title: "Sertifikasi Rainforest Alliance", url: "/workflow/rainforest-alliance" },
-      { title: "Sertifikasi Fairtrade", url: "/workflow/fairtrade" },
-      { title: "Sertifikasi Organik", url: "/workflow/organic" },
       { title: "Regulasi EUDR", url: "/workflow/eudr" },
       { title: "Kategori Kepatuhan", url: "/survey-compliance-categories" },
       { title: "Peringkat Pertanyaan", url: "/survey-questions-ranking" },
@@ -108,36 +103,6 @@ const menuStructure: MenuItem[] = [
       { title: "Aktivitas", url: "/harvest-activities" },
       { title: "Penjadwalan", url: "/harvest-scheduling" },
       { title: "Pelacakan", url: "/harvest-tracking" },
-      { title: "Kontrol Kualitas", url: "/harvest-quality" },
-      { title: "Batch", url: "/harvest-batches" },
-      { title: "Gudang", url: "/harvest-warehouse" },
-      { title: "Biaya", url: "/harvest-costs" },
-      { title: "Peringatan", url: "/harvest-alerts" },
-      { title: "Kampanye Penanaman", url: "/planting-campaigns" },
-      { title: "Grup Kampanye", url: "/planting-campaign-groups" },
-      { title: "Template Kampanye", url: "/planting-campaign-templates" },
-      { title: "Produktivitas Lahan", url: "/field-productivity" },
-      { title: "Biaya Input", url: "/input-costs" },
-      { title: "Ketertelusuran Panen Petani", url: "/traceability-farmer-harvest" },
-      { title: "Pemrosesan", url: "/traceability-processing" },
-      { title: "Pengiriman Batch", url: "/traceability-shipment" },
-      { title: "Kontainer", url: "/traceability-containers" },
-      { title: "Manajemen Kuota", url: "/traceability-quotas" },
-      { title: "Potongan", url: "/traceability-deductions" },
-      { title: "Keuangan Siklus Tanam", url: "/cropping-cycle-financials" },
-      { title: "Premi Petani", url: "/farmer-premiums" },
-      { title: "Aturan Premi", url: "/premium-rules" },
-      { title: "Pelacakan Volume Premi", url: "/premium-volume-tracking" },
-      { title: "Input Pertanian", url: "/farming-inputs" },
-      { title: "Distribusi Input", url: "/input-distribution" },
-      { title: "Pembelian Input", url: "/input-purchases" },
-      { title: "Pupuk", url: "/fertilizers" },
-      { title: "Aplikasi Pupuk", url: "/fertilizer-applications" },
-      { title: "Aplikasi Kimia", url: "/chemical-applications" },
-      { title: "Target Kimia", url: "/chemical-application-targets" },
-      { title: "Jenis Kimia", url: "/chemical-application-varieties" },
-      { title: "Input Lainnya", url: "/other-inputs" },
-      { title: "Aplikasi Lainnya", url: "/other-applications" },
     ]
   },
   { 
@@ -147,13 +112,6 @@ const menuStructure: MenuItem[] = [
     submenu: [
       { title: "Pusat Pengetahuan", url: "/pengetahuan" },
       { title: "Program Pelatihan", url: "/trainings" },
-      { title: "Acara Pelatihan", url: "/training-events" },
-      { title: "Pelatih", url: "/trainers" },
-      { title: "Kelompok Pelatih", url: "/trainer-groups" },
-      { title: "Topik Pelatihan", url: "/training-topics" },
-      { title: "Prakiraan Hasil Mingguan", url: "/weekly-yield-forecasts" },
-      { title: "Prakiraan Panen", url: "/harvest-forecasts" },
-      { title: "Analitik Penjualan", url: "/company-sales" },
     ]
   },
   { 

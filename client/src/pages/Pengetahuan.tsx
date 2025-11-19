@@ -16,8 +16,8 @@ export default function Pengetahuan() {
     {
       id: 1,
       title: "Panduan Praktik Pertanian Berkelanjutan",
-      type: "Article",
-      category: "Best Practices",
+      type: "Artikel",
+      category: "Praktik Terbaik",
       description: "Teknik budidaya kelapa sawit yang ramah lingkungan dan meningkatkan produktivitas",
       views: 1245,
       duration: "15 menit"
@@ -26,7 +26,7 @@ export default function Pengetahuan() {
       id: 2,
       title: "Standar Sertifikasi RSPO untuk Petani Swadaya",
       type: "Video",
-      category: "Certification",
+      category: "Sertifikasi",
       description: "Memahami persyaratan dan proses sertifikasi RSPO untuk petani kelapa sawit",
       views: 892,
       duration: "23 menit"
@@ -34,8 +34,8 @@ export default function Pengetahuan() {
     {
       id: 3,
       title: "Pengelolaan Hama dan Penyakit Kelapa Sawit",
-      type: "Training",
-      category: "Pest Management",
+      type: "Pelatihan",
+      category: "Pengelolaan Hama",
       description: "Cara mengidentifikasi dan mengatasi hama serta penyakit pada tanaman kelapa sawit",
       views: 1567,
       duration: "2 jam"
@@ -43,8 +43,8 @@ export default function Pengetahuan() {
     {
       id: 4,
       title: "Sistem Ketertelusuran Produksi Sawit",
-      type: "Article",
-      category: "Traceability",
+      type: "Artikel",
+      category: "Ketertelusuran",
       description: "Pentingnya ketertelusuran dalam rantai pasok kelapa sawit dan cara implementasinya",
       views: 745,
       duration: "10 menit"
@@ -67,7 +67,7 @@ export default function Pengetahuan() {
               data-testid="input-search"
             />
           </div>
-          <Button variant="outline" data-testid="button-filter">Filter</Button>
+          <Button variant="outline" data-testid="button-filter">Saring</Button>
         </div>
       </div>
 
@@ -109,7 +109,7 @@ export default function Pengetahuan() {
                 </div>
                 <div className="p-2 rounded-lg bg-muted text-primary">
                   {resource.type === 'Video' ? <Video className="w-5 h-5" /> : 
-                   resource.type === 'Training' ? <BookOpen className="w-5 h-5" /> : 
+                   resource.type === 'Pelatihan' ? <BookOpen className="w-5 h-5" /> : 
                    <FileText className="w-5 h-5" />}
                 </div>
               </div>

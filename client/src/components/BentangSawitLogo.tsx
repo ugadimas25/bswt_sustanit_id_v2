@@ -1,4 +1,4 @@
-import bentangSawitLogo from "@assets/bswt logo_1763556342679.webp";
+import bentangSawitLogo from "@assets/bswt coklat_1763558253607.png";
 
 export function BentangSawitLogo() {
   return (

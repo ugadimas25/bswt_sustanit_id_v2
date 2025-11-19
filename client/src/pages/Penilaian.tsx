@@ -7,15 +7,15 @@ export default function Penilaian() {
   const assessmentStats = [
     { label: "Total Penilaian", value: "1,245", icon: ClipboardCheck, color: "text-primary" },
     { label: "Selesai Bulan Ini", value: "89", icon: TrendingUp, color: "text-green-600" },
-    { label: "Menunggu Review", value: "23", icon: FileText, color: "text-orange-600" },
+    { label: "Menunggu Tinjauan", value: "23", icon: FileText, color: "text-orange-600" },
     { label: "Tingkat Kepatuhan", value: "78%", icon: Award, color: "text-blue-600" },
   ];
 
   const recentAssessments = [
-    { id: 1, farmer: "Pak Budi Santoso", standard: "RSPO", score: 85, status: "Compliant", date: "15 Nov 2025" },
-    { id: 2, farmer: "Ibu Sri Wahyuni", standard: "ISPO", score: 72, status: "Partial", date: "14 Nov 2025" },
-    { id: 3, farmer: "Pak Ahmad Yani", standard: "RSPO", score: 91, status: "Compliant", date: "13 Nov 2025" },
-    { id: 4, farmer: "Ibu Dewi Lestari", standard: "ISPO", score: 68, status: "Partial", date: "12 Nov 2025" },
+    { id: 1, farmer: "Pak Budi Santoso", standard: "RSPO", score: 85, status: "Sesuai", date: "15 Nov 2025" },
+    { id: 2, farmer: "Ibu Sri Wahyuni", standard: "ISPO", score: 72, status: "Sebagian", date: "14 Nov 2025" },
+    { id: 3, farmer: "Pak Ahmad Yani", standard: "RSPO", score: 91, status: "Sesuai", date: "13 Nov 2025" },
+    { id: 4, farmer: "Ibu Dewi Lestari", standard: "ISPO", score: 68, status: "Sebagian", date: "12 Nov 2025" },
   ];
 
   return (
@@ -74,7 +74,7 @@ export default function Penilaian() {
                 <div className="flex items-center gap-3 mt-3 sm:mt-0">
                   <Badge variant="outline" data-testid={`badge-standard-${assessment.id}`}>{assessment.standard}</Badge>
                   <Badge 
-                    variant={assessment.status === "Compliant" ? "default" : "secondary"}
+                    variant={assessment.status === "Sesuai" ? "default" : "secondary"}
                     data-testid={`badge-status-${assessment.id}`}
                   >
                     {assessment.status}

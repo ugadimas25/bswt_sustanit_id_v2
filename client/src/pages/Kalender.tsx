@@ -8,60 +8,60 @@ export default function Kalender() {
     {
       id: 1,
       title: "Pelatihan Praktik Pertanian Berkelanjutan",
-      type: "Training",
+      type: "Pelatihan",
       date: "22 Nov 2025",
       time: "09:00 - 15:00",
       location: "Desa Suka Maju, Kalimantan Tengah",
       participants: 45,
-      status: "Confirmed"
+      status: "Dikonfirmasi"
     },
     {
       id: 2,
       title: "Penilaian RSPO - Kelompok Tani Makmur",
-      type: "Assessment",
+      type: "Penilaian",
       date: "24 Nov 2025",
       time: "08:00 - 12:00",
       location: "Desa Harapan Jaya, Riau",
       participants: 12,
-      status: "Confirmed"
+      status: "Dikonfirmasi"
     },
     {
       id: 3,
       title: "Pengumpulan Hasil Panen",
-      type: "Collection",
+      type: "Pengumpulan",
       date: "25 Nov 2025",
       time: "06:00 - 11:00",
       location: "Pabrik Kelapa Sawit Sentosa",
       participants: 8,
-      status: "Scheduled"
+      status: "Dijadwalkan"
     },
     {
       id: 4,
-      title: "Workshop Sistem Ketertelusuran",
-      type: "Workshop",
+      title: "Lokakarya Sistem Ketertelusuran",
+      type: "Lokakarya",
       date: "27 Nov 2025",
       time: "13:00 - 17:00",
       location: "Kantor Solidaridad, Jakarta",
       participants: 30,
-      status: "Confirmed"
+      status: "Dikonfirmasi"
     },
     {
       id: 5,
       title: "Penilaian ISPO - Kelompok Tani Sejahtera",
-      type: "Assessment",
+      type: "Penilaian",
       date: "29 Nov 2025",
       time: "09:00 - 14:00",
       location: "Desa Karya Bakti, Jambi",
       participants: 15,
-      status: "Scheduled"
+      status: "Dijadwalkan"
     },
   ];
 
   const typeColors: Record<string, string> = {
-    Training: "bg-blue-100 text-blue-700 border-blue-200",
-    Assessment: "bg-green-100 text-green-700 border-green-200",
-    Collection: "bg-orange-100 text-orange-700 border-orange-200",
-    Workshop: "bg-purple-100 text-purple-700 border-purple-200",
+    Pelatihan: "bg-blue-100 text-blue-700 border-blue-200",
+    Penilaian: "bg-green-100 text-green-700 border-green-200",
+    Pengumpulan: "bg-orange-100 text-orange-700 border-orange-200",
+    Lokakarya: "bg-purple-100 text-purple-700 border-purple-200",
   };
 
   return (
@@ -175,7 +175,7 @@ export default function Kalender() {
                     </div>
                   </div>
                   <Badge 
-                    variant={event.status === "Confirmed" ? "default" : "secondary"}
+                    variant={event.status === "Dikonfirmasi" ? "default" : "secondary"}
                     data-testid={`badge-event-status-${event.id}`}
                   >
                     {event.status}
