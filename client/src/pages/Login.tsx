@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
-import { Sprout, Mail, Lock, Globe } from "lucide-react";
+import { Sprout, Mail, Lock } from "lucide-react";
 import { SiGoogle } from "react-icons/si";
+import { WelcomePanel } from "@/components/WelcomePanel";
 
 export default function Login() {
+  const [, setLocation] = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -15,12 +18,14 @@ export default function Login() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Login attempted with:", { email, password, rememberMe });
-    // In a real app, this would authenticate
+    // Redirect to dashboard after login
+    setLocation("/");
   };
 
   const handleGoogleLogin = () => {
     console.log("Google login initiated");
-    // In a real app, this would redirect to Google OAuth
+    // Redirect to dashboard after Google login
+    setLocation("/");
   };
 
   return (
@@ -151,59 +156,9 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Right side - Illustration/Branding */}
-      <div className="hidden lg:flex flex-1 bg-primary/5 items-center justify-center p-8">
-        <div className="max-w-md space-y-6 text-center">
-          <div className="relative">
-            {/* World Map Illustration */}
-            <div className="relative h-64 flex items-center justify-center">
-              <Globe className="h-48 w-48 text-primary/20" />
-              
-              {/* Farmer silhouettes around the globe */}
-              <div className="absolute inset-0">
-                {/* Top */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2">
-                  <Sprout className="h-8 w-8 text-primary/40" />
-                </div>
-                {/* Right */}
-                <div className="absolute right-8 top-1/2 -translate-y-1/2">
-                  <Sprout className="h-8 w-8 text-primary/40" />
-                </div>
-                {/* Bottom */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
-                  <Sprout className="h-8 w-8 text-primary/40" />
-                </div>
-                {/* Left */}
-                <div className="absolute left-8 top-1/2 -translate-y-1/2">
-                  <Sprout className="h-8 w-8 text-primary/40" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <h3 className="text-2xl font-semibold">Global Agricultural Management</h3>
-            <p className="text-muted-foreground">
-              Empowering farmers worldwide with digital tools for sustainable agriculture,
-              compliance tracking, and better farm management.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-3 gap-4 pt-6">
-            <div className="space-y-1">
-              <div className="text-2xl font-bold text-primary">50K+</div>
-              <div className="text-xs text-muted-foreground">Active Farmers</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-2xl font-bold text-primary">120+</div>
-              <div className="text-xs text-muted-foreground">Countries</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-2xl font-bold text-primary">1M+</div>
-              <div className="text-xs text-muted-foreground">Fields Mapped</div>
-            </div>
-          </div>
-        </div>
+      {/* Right side - Welcome Panel */}
+      <div className="hidden lg:flex flex-1">
+        <WelcomePanel />
       </div>
     </div>
   );
