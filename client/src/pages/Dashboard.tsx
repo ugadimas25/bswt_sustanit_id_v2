@@ -75,9 +75,9 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="space-y-4 sm:space-y-6 -m-3 sm:-m-4 md:-m-6 p-3 sm:p-4 md:p-6">
+    <div className="space-y-6 -m-6 p-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground" data-testid="text-dashboard-title">Dashboard</h1>
           <p className="text-sm sm:text-base text-muted-foreground mt-1">Comprehensive agricultural management overview</p>
@@ -95,7 +95,7 @@ export default function Dashboard() {
       </div>
 
       {/* Key Metrics Row */}
-      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Farmers</CardTitle>
@@ -176,11 +176,11 @@ export default function Dashboard() {
       {/* Farm Distribution Map */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base sm:text-lg">Farm Distribution Map</CardTitle>
-          <p className="text-xs sm:text-sm text-muted-foreground">Geographic distribution of registered farms across regions</p>
+          <CardTitle className="text-lg">Farm Distribution Map</CardTitle>
+          <p className="text-sm text-muted-foreground">Geographic distribution of registered farms across regions</p>
         </CardHeader>
         <CardContent>
-          <div className="relative w-full h-[300px] sm:h-[400px] bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-950 dark:from-blue-950 rounded-lg overflow-hidden border">
+          <div className="relative w-full h-[400px] bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-950 dark:from-blue-950 rounded-lg overflow-hidden border">
             <svg viewBox="0 0 100 100" className="w-full h-full" data-testid="svg-farm-map">
               {/* Background regions with subtle colors */}
               <g opacity="0.3">
@@ -283,7 +283,7 @@ export default function Dashboard() {
       </Card>
 
       {/* Charts Section */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
         {/* Monthly Harvest Trend */}
         <Card>
           <CardHeader>
@@ -466,9 +466,9 @@ export default function Dashboard() {
           <CardTitle className="text-lg">Regional Performance Overview</CardTitle>
           <p className="text-sm text-muted-foreground">Comparing metrics across all regions</p>
         </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full">
+        <CardContent className="p-4 sm:p-6">
+          <div className="overflow-x-auto -mx-4 sm:mx-0">
+            <table className="w-full min-w-[600px]">
               <thead>
                 <tr className="border-b">
                   <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Region</th>
@@ -500,7 +500,7 @@ export default function Dashboard() {
       </Card>
 
       {/* Quick Stats Grid */}
-      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
+      <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">

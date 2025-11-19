@@ -103,23 +103,23 @@ export function AIInsights() {
 
   return (
     <Card className="col-span-full">
-      <CardHeader>
-        <div className="flex items-center justify-between">
+      <CardHeader className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-primary" />
-            <CardTitle className="text-lg">AI-Powered Insights & Automation</CardTitle>
+            <CardTitle className="text-base sm:text-lg">AI-Powered Insights & Automation</CardTitle>
           </div>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="self-start sm:self-auto">
             <Target className="h-4 w-4 mr-2" />
             Configure AI
           </Button>
         </div>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs sm:text-sm text-muted-foreground mt-2">
           Intelligent recommendations and predictive analytics for your farm operations
         </p>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {sampleInsights.map((insight) => {
             const Icon = insight.icon;
             return (

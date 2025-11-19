@@ -136,7 +136,7 @@ function Router() {
       <Route path="/planting-campaign-groups" component={PlantingCampaignGroups} />
       <Route path="/planting-campaign-templates" component={PlantingCampaignTemplates} />
       <Route path="/weekly-yield-forecasts" component={WeeklyYieldForecasts} />
-      
+
       <Route path="/farming-inputs" component={FarmingInputs} />
       <Route path="/input-costs" component={InputCosts} />
       <Route path="/input-distribution" component={InputDistribution} />
@@ -149,7 +149,7 @@ function Router() {
       <Route path="/other-inputs" component={OtherInputs} />
       <Route path="/other-applications" component={OtherApplications} />
       <Route path="/planted-area" component={PlantedArea} />
-      
+
       <Route path="/harvests" component={Harvests} />
       <Route path="/harvest-group-bags" component={HarvestGroupBags} />
       <Route path="/harvest-activities" component={HarvestActivities} />
@@ -167,7 +167,7 @@ function Router() {
       <Route path="/harvest-reports" component={HarvestReports} />
       <Route path="/harvest-input-store" component={HarvestInputStore} />
       <Route path="/harvest-input-unit" component={HarvestInputUnit} />
-      
+
       <Route path="/traceability" component={Traceability} />
       <Route path="/traceability-farmer-harvest" component={TraceabilityFarmerHarvest} />
       <Route path="/traceability/custom-fields" component={TraceabilityCustomFields} />
@@ -180,13 +180,13 @@ function Router() {
       <Route path="/traceability-purchases" component={TraceabilityPurchases} />
       <Route path="/traceability-input-usage" component={TraceabilityInputUsage} />
       <Route path="/traceability-section-deliveries" component={TraceabilitySectionDeliveries} />
-      
+
       <Route path="/trainings" component={Trainings} />
       <Route path="/trainer-groups" component={TrainerGroups} />
       <Route path="/trainers" component={Trainers} />
       <Route path="/training-events" component={TrainingEvents} />
       <Route path="/training-topics" component={TrainingTopics} />
-      
+
       <Route path="/surveys" component={Surveys} />
       <Route path="/surveys/custom" component={CustomSurveys} />
       <Route path="/survey-compliance-categories" component={SurveyComplianceCategories} />
@@ -258,13 +258,13 @@ function App() {
         <SidebarProvider style={style as React.CSSProperties}>
           <div className="flex h-screen w-full">
             <AppSidebar />
-            <div className="flex flex-col flex-1 min-w-0">
-              <header className="flex items-center justify-between p-2 sm:p-4 border-b bg-card shadow-sm">
+            <div className="flex flex-col flex-1">
+              <header className="flex items-center justify-between p-4 border-b bg-card shadow-sm">
                 <SidebarTrigger data-testid="button-sidebar-toggle" className="h-10 w-10" />
                 <ThemeToggle />
               </header>
-              <main className="flex-1 overflow-auto">
-                <div className="p-3 sm:p-4 md:p-6 max-w-7xl mx-auto w-full">
+              <main className="flex-1 overflow-y-auto p-4 sm:p-6 bg-background">
+                <div className="p-6 max-w-7xl mx-auto">
                   <Router />
                 </div>
               </main>

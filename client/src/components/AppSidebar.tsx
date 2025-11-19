@@ -212,12 +212,12 @@ export function AppSidebar() {
 
   return (
     <Sidebar data-testid="sidebar-main" className="border-r">
-      <SidebarHeader className="p-6 border-b border-sidebar-border bg-sidebar">
+      <SidebarHeader className="p-4 sm:p-6 border-b border-sidebar-border bg-sidebar">
         <div className="flex items-center justify-center">
           <img 
             src={farmforceLogo} 
             alt="Farmforce" 
-            className="h-10 w-auto"
+            className="h-8 sm:h-10 w-auto"
             data-testid="img-farmforce-logo"
           />
         </div>
@@ -239,7 +239,7 @@ export function AppSidebar() {
                         <SidebarMenuButton
                           asChild
                           isActive={isActive}
-                          className="h-12 px-4 text-base font-medium"
+                          className="min-h-12 px-4 text-sm sm:text-base font-medium"
                           data-testid={`link-sidebar-${item.title.toLowerCase().replace(/\s/g, '-')}`}
                         >
                           <Link href={item.url}>
