@@ -1,12 +1,11 @@
 const CACHE_NAME = 'bentang-sawit-v1';
-const urlsToCache = [
+const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
-  '/src/main.tsx',
-  '/src/index.css',
   '/icon-192.png',
   '/icon-512.png',
-  '/favicon.png'
+  '/favicon.png',
+  '/manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
@@ -14,7 +13,7 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        return cache.addAll(STATIC_CACHE_URLS);
       })
       .catch((error) => {
         console.log('Cache install failed:', error);
@@ -23,35 +22,86 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
+const isStaticAsset = (url) => {
+  const staticExtensions = ['.js', '.css', '.woff', '.woff2', '.ttf', '.png', '.jpg', '.jpeg', '.svg', '.webp', '.ico'];
+  return staticExtensions.some(ext => url.pathname.endsWith(ext)) || 
+         url.pathname === '/' || 
+         url.pathname === '/index.html' ||
+         url.pathname.startsWith('/assets/') ||
+         url.pathname.startsWith('/src/');
+};
+
+const isAPIRequest = (url) => {
+  return url.pathname.startsWith('/api/');
+};
+
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        if (response) {
+  const url = new URL(event.request.url);
+  
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
           return response;
-        }
-        
-        return fetch(event.request).then(
-          (response) => {
-            if (!response || response.status !== 200 || response.type !== 'basic') {
+        })
+        .catch(() => {
+          return caches.match('/index.html').then((cachedResponse) => {
+            return cachedResponse || caches.match('/');
+          });
+        })
+    );
+    return;
+  }
+
+  if (isAPIRequest(url)) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          return response;
+        })
+        .catch(() => {
+          return new Response(
+            JSON.stringify({ error: 'Network unavailable', offline: true }),
+            { 
+              status: 503,
+              headers: { 'Content-Type': 'application/json' }
+            }
+          );
+        })
+    );
+    return;
+  }
+
+  if (isStaticAsset(url)) {
+    event.respondWith(
+      caches.match(event.request)
+        .then((response) => {
+          if (response) {
+            return response;
+          }
+          
+          return fetch(event.request).then((response) => {
+            if (!response || response.status !== 200) {
               return response;
             }
 
             const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
 
             return response;
-          }
-        );
-      })
-      .catch(() => {
-        return caches.match('/');
-      })
-  );
+          });
+        })
+        .catch(() => {
+          return caches.match('/index.html');
+        })
+    );
+  }
 });
 
 self.addEventListener('activate', (event) => {
