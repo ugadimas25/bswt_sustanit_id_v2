@@ -100,6 +100,7 @@ import FarmerCertifications from "@/pages/FarmerCertifications";
 import FarmerLastActivity from "@/pages/FarmerLastActivity";
 import FarmerPremiums from "@/pages/FarmerPremiums";
 import FarmersAttributes from "@/pages/FarmersAttributes";
+import FarmerLivelihood from "@/pages/FarmerLivelihood";
 import FieldQuotas from "@/pages/FieldQuotas";
 import FieldsDeforestation from "@/pages/FieldsDeforestation";
 import FieldsDeforestationSummary from "@/pages/FieldsDeforestationSummary";
@@ -227,6 +228,7 @@ function Router() {
       <Route path="/premium-rules" component={PremiumRules} />
       <Route path="/premium-volume-tracking" component={PremiumVolumeTracking} />
       <Route path="/farmers-attributes" component={FarmersAttributes} />
+      <Route path="/farmer-livelihood" component={FarmerLivelihood} />
       <Route path="/field-quotas" component={FieldQuotas} />
       <Route path="/fields-deforestation" component={FieldsDeforestation} />
       <Route path="/fields-deforestation-summary" component={FieldsDeforestationSummary} />

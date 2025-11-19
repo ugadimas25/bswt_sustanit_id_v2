@@ -16,7 +16,7 @@ import {
   Settings, LayoutDashboard, Sprout, TrendingUp, DollarSign, 
   MapPinned, Leaf, 
   Activity, Boxes, BarChart3,
-  ShieldCheck, ChevronDown, ChevronRight
+  ShieldCheck, ChevronDown, ChevronRight, GitBranch
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -38,10 +38,15 @@ interface SubMenuItem {
 
 const menuStructure: MenuItem[] = [
   { 
-    title: "Dashboard", 
+    title: "Dashboard and Report", 
     url: "/", 
     icon: LayoutDashboard,
-    submenu: []
+    submenu: [
+      { title: "Dashboard Overview", url: "/" },
+      { title: "Sustainability Reports", url: "/reports" },
+      { title: "Custom Dashboards", url: "/reports/dashboards" },
+      { title: "Report Builder", url: "/reports/builder" },
+    ]
   },
   { 
     title: "Farmer Management", 
@@ -52,11 +57,12 @@ const menuStructure: MenuItem[] = [
       { title: "Farmer Certifications", url: "/farmer-certifications" },
       { title: "Farmer Last Activity", url: "/farmer-last-activity" },
       { title: "Farmers Attributes", url: "/farmers-attributes" },
-      { title: "Family Members", url: "/family-members" },
-      { title: "Family Member Education", url: "/family-member-education" },
-      { title: "Family Member Relationships", url: "/family-member-relationships" },
-      { title: "GA Operator Costs", url: "/ga-operator-costs" },
-      { title: "Partners", url: "/partners" },
+      { title: "Farmers Household", url: "/family-members" },
+      { title: "Farmer Livelihood / Income", url: "/farmer-livelihood" },
+      { title: "Loans", url: "/loans" },
+      { title: "Loan Deductions", url: "/loan-deductions" },
+      { title: "Savings", url: "/savings" },
+      { title: "Payment Locations", url: "/locations" },
     ]
   },
   { 
@@ -84,7 +90,7 @@ const menuStructure: MenuItem[] = [
       { title: "Campaign Groups", url: "/planting-campaign-groups" },
       { title: "Campaign Templates", url: "/planting-campaign-templates" },
       { title: "Field Productivity", url: "/field-productivity" },
-      { title: "Cropping Cycle Financials", url: "/cropping-cycle-financials" },
+      { title: "Input Costs", url: "/input-costs" },
     ]
   },
   { 
@@ -95,7 +101,6 @@ const menuStructure: MenuItem[] = [
       { title: "Farming Inputs Overview", url: "/farming-inputs" },
       { title: "Input Distribution", url: "/input-distribution" },
       { title: "Input Purchases", url: "/input-purchases" },
-      { title: "Input Costs", url: "/input-costs" },
       { title: "Fertilizers", url: "/fertilizers" },
       { title: "Fertilizer Applications", url: "/fertilizer-applications" },
       { title: "Chemical Applications", url: "/chemical-applications" },
@@ -106,71 +111,44 @@ const menuStructure: MenuItem[] = [
     ]
   },
   { 
-    title: "Harvest Operations", 
+    title: "Harvest Ops & Supply Chain", 
     url: "/harvests", 
     icon: Boxes,
     submenu: [
       { title: "All Harvests", url: "/harvests" },
       { title: "Collections", url: "/harvest-collections" },
       { title: "Deliveries", url: "/harvest-deliveries" },
+      { title: "Purchases", url: "/harvest-purchases" },
       { title: "Activities", url: "/harvest-activities" },
       { title: "Scheduling", url: "/harvest-scheduling" },
       { title: "Tracking", url: "/harvest-tracking" },
       { title: "Quality Control", url: "/harvest-quality" },
       { title: "Batches", url: "/harvest-batches" },
-      { title: "Group Bags", url: "/harvest-group-bags" },
       { title: "Warehouse", url: "/harvest-warehouse" },
-      { title: "Purchases", url: "/harvest-purchases" },
       { title: "Costs", url: "/harvest-costs" },
-      { title: "Input Store", url: "/harvest-input-store" },
-      { title: "Input Unit", url: "/harvest-input-unit" },
       { title: "Alerts", url: "/harvest-alerts" },
-      { title: "Reports", url: "/harvest-reports" },
-    ]
-  },
-  { 
-    title: "Supply Chain & Traceability", 
-    url: "/traceability", 
-    icon: Activity,
-    submenu: [
       { title: "Traceability Overview", url: "/traceability" },
       { title: "Farmer Harvest Traceability", url: "/traceability-farmer-harvest" },
-      { title: "Custom Transaction Fields", url: "/traceability/custom-fields" },
-      { title: "Purchases", url: "/traceability-purchases" },
       { title: "Processing", url: "/traceability-processing" },
       { title: "Shipment", url: "/traceability-shipment" },
       { title: "Containers", url: "/traceability-containers" },
-      { title: "Locations", url: "/traceability-locations" },
-      { title: "Input Usage", url: "/traceability-input-usage" },
-      { title: "Section Deliveries", url: "/traceability-section-deliveries" },
       { title: "Quota Management", url: "/traceability-quotas" },
       { title: "Deductions", url: "/traceability-deductions" },
-    ]
-  },
-  { 
-    title: "Financial Management", 
-    url: "/accounts", 
-    icon: DollarSign,
-    submenu: [
-      { title: "Accounts", url: "/accounts" },
-      { title: "Loans", url: "/loans" },
-      { title: "Loan Deductions", url: "/loan-deductions" },
-      { title: "Savings", url: "/savings" },
-      { title: "Company Sales", url: "/company-sales" },
+      { title: "Cropping Cycle Financials", url: "/cropping-cycle-financials" },
       { title: "Farmer Premiums", url: "/farmer-premiums" },
       { title: "Premium Rules", url: "/premium-rules" },
-      { title: "Volume Tracking", url: "/premium-volume-tracking" },
-      { title: "Payment Locations", url: "/locations" },
+      { title: "Premium Volume Tracking", url: "/premium-volume-tracking" },
     ]
   },
   { 
-    title: "Compliance & Certification", 
+    title: "Workflow", 
     url: "/certifications", 
-    icon: ShieldCheck,
+    icon: GitBranch,
     submenu: [
-      { title: "Certifications", url: "/certifications" },
-      { title: "Certificate States", url: "/certificate-states" },
-      { title: "Farmer Compliance", url: "/survey-farmer-compliance" },
+      { title: "Certification - Rainforest Alliance", url: "/certifications" },
+      { title: "Certification - Fairtrade", url: "/certificate-states" },
+      { title: "Certification - Organic", url: "/farmer-certifications" },
+      { title: "Regulation - EUDR", url: "/survey-farmer-compliance" },
       { title: "Compliance Categories", url: "/survey-compliance-categories" },
       { title: "Questions Ranking", url: "/survey-questions-ranking" },
       { title: "Proposed Actions", url: "/survey-proposed-actions" },
@@ -207,32 +185,22 @@ const menuStructure: MenuItem[] = [
     submenu: [
       { title: "Weekly Yield Forecasts", url: "/weekly-yield-forecasts" },
       { title: "Harvest Forecasts", url: "/harvest-forecasts" },
-    ]
-  },
-  { 
-    title: "Sustainability & Reports", 
-    url: "/reports", 
-    icon: BarChart3,
-    submenu: [
-      { title: "Sustainability Reports", url: "/reports" },
-      { title: "Custom Dashboards", url: "/reports/dashboards" },
-      { title: "Report Builder", url: "/reports/builder" },
+      { title: "Company Sales Analytics", url: "/company-sales" },
     ]
   },
   { 
     title: "Administration", 
-    url: "/users", 
+    url: "/admin/import", 
     icon: Settings,
     submenu: [
-      { title: "Users", url: "/users" },
+      { title: "Data Import (AI Adapter)", url: "/admin/import" },
+      { title: "Users & Approval Tiers", url: "/users" },
       { title: "Staff Management", url: "/admin/staff" },
+      { title: "Region & Supply Chain Setup", url: "/admin/regions" },
+      { title: "Traceability Wizard Setup", url: "/traceability/custom-fields" },
+      { title: "Devices", url: "/devices" },
       { title: "Buyers", url: "/admin/buyers" },
       { title: "Country Settings", url: "/admin/country" },
-      { title: "Region Settings", url: "/admin/regions" },
-      { title: "Data Import (AI)", url: "/admin/import" },
-      { title: "User Login Logs", url: "/admin/login-logs" },
-      { title: "Devices", url: "/devices" },
-      { title: "Office Matters", url: "/admin/office" },
     ]
   },
 ];
