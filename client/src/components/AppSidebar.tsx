@@ -79,25 +79,6 @@ const menuStructure: MenuItem[] = [
       { title: "Farm Object Images", url: "/farm-object-images" },
       { title: "Fields Deforestation", url: "/fields-deforestation" },
       { title: "Deforestation Summary", url: "/fields-deforestation-summary" },
-    ]
-  },
-  { 
-    title: "Crop Production", 
-    url: "/planting-campaigns", 
-    icon: Sprout,
-    submenu: [
-      { title: "Planting Campaigns", url: "/planting-campaigns" },
-      { title: "Campaign Groups", url: "/planting-campaign-groups" },
-      { title: "Campaign Templates", url: "/planting-campaign-templates" },
-      { title: "Field Productivity", url: "/field-productivity" },
-      { title: "Input Costs", url: "/input-costs" },
-    ]
-  },
-  { 
-    title: "Input Management", 
-    url: "/farming-inputs", 
-    icon: Leaf,
-    submenu: [
       { title: "Farming Inputs Overview", url: "/farming-inputs" },
       { title: "Input Distribution", url: "/input-distribution" },
       { title: "Input Purchases", url: "/input-purchases" },
@@ -108,6 +89,44 @@ const menuStructure: MenuItem[] = [
       { title: "Chemical Varieties", url: "/chemical-application-varieties" },
       { title: "Other Inputs", url: "/other-inputs" },
       { title: "Other Applications", url: "/other-applications" },
+    ]
+  },
+  { 
+    title: "Training & Development", 
+    url: "/trainings", 
+    icon: GraduationCap,
+    submenu: [
+      { title: "Training Programs", url: "/trainings" },
+      { title: "Training Events", url: "/training-events" },
+      { title: "Trainers", url: "/trainers" },
+      { title: "Trainer Groups", url: "/trainer-groups" },
+      { title: "Training Topics", url: "/training-topics" },
+    ]
+  },
+  { 
+    title: "Surveys & Assessments", 
+    url: "/surveys", 
+    icon: FileText,
+    submenu: [
+      { title: "All Surveys", url: "/surveys" },
+      { title: "Custom Surveys", url: "/surveys/custom" },
+      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
+      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
+    ]
+  },
+  { 
+    title: "Workflow", 
+    url: "/workflow/rainforest-alliance", 
+    icon: GitBranch,
+    submenu: [
+      { title: "Certification - Rainforest Alliance", url: "/workflow/rainforest-alliance" },
+      { title: "Certification - Fairtrade", url: "/workflow/fairtrade" },
+      { title: "Certification - Organic", url: "/workflow/organic" },
+      { title: "Regulation - EUDR", url: "/workflow/eudr" },
+      { title: "Compliance Categories", url: "/survey-compliance-categories" },
+      { title: "Questions Ranking", url: "/survey-questions-ranking" },
+      { title: "Proposed Actions", url: "/survey-proposed-actions" },
+      { title: "Cases & Incidents", url: "/cases" },
     ]
   },
   { 
@@ -127,6 +146,11 @@ const menuStructure: MenuItem[] = [
       { title: "Warehouse", url: "/harvest-warehouse" },
       { title: "Costs", url: "/harvest-costs" },
       { title: "Alerts", url: "/harvest-alerts" },
+      { title: "Planting Campaigns", url: "/planting-campaigns" },
+      { title: "Campaign Groups", url: "/planting-campaign-groups" },
+      { title: "Campaign Templates", url: "/planting-campaign-templates" },
+      { title: "Field Productivity", url: "/field-productivity" },
+      { title: "Input Costs", url: "/input-costs" },
       { title: "Traceability Overview", url: "/traceability" },
       { title: "Farmer Harvest Traceability", url: "/traceability-farmer-harvest" },
       { title: "Processing", url: "/traceability-processing" },
@@ -138,44 +162,6 @@ const menuStructure: MenuItem[] = [
       { title: "Farmer Premiums", url: "/farmer-premiums" },
       { title: "Premium Rules", url: "/premium-rules" },
       { title: "Premium Volume Tracking", url: "/premium-volume-tracking" },
-    ]
-  },
-  { 
-    title: "Workflow", 
-    url: "/workflow/rainforest-alliance", 
-    icon: GitBranch,
-    submenu: [
-      { title: "Certification - Rainforest Alliance", url: "/workflow/rainforest-alliance" },
-      { title: "Certification - Fairtrade", url: "/workflow/fairtrade" },
-      { title: "Certification - Organic", url: "/workflow/organic" },
-      { title: "Regulation - EUDR", url: "/workflow/eudr" },
-      { title: "Compliance Categories", url: "/survey-compliance-categories" },
-      { title: "Questions Ranking", url: "/survey-questions-ranking" },
-      { title: "Proposed Actions", url: "/survey-proposed-actions" },
-      { title: "Cases & Incidents", url: "/cases" },
-    ]
-  },
-  { 
-    title: "Surveys & Assessments", 
-    url: "/surveys", 
-    icon: FileText,
-    submenu: [
-      { title: "All Surveys", url: "/surveys" },
-      { title: "Custom Surveys", url: "/surveys/custom" },
-      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
-      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
-    ]
-  },
-  { 
-    title: "Training & Development", 
-    url: "/trainings", 
-    icon: GraduationCap,
-    submenu: [
-      { title: "Training Programs", url: "/trainings" },
-      { title: "Training Events", url: "/training-events" },
-      { title: "Trainers", url: "/trainers" },
-      { title: "Trainer Groups", url: "/trainer-groups" },
-      { title: "Training Topics", url: "/training-topics" },
     ]
   },
   { 
