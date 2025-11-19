@@ -16,13 +16,14 @@ import {
   Settings, LayoutDashboard, Sprout, TrendingUp, DollarSign, 
   MapPinned, Leaf, 
   Activity, Boxes, BarChart3,
-  ShieldCheck, ChevronDown, ChevronRight, GitBranch
+  ShieldCheck, ChevronDown, ChevronRight, GitBranch,
+  BookOpen, HelpCircle, Calendar as CalendarIcon, ClipboardCheck
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
-import farmforceLogo from "@assets/Farmforce_Logo_WHITE_1763527950704.png";
+import bentangSawitLogo from "@assets/bswt logo_1763556342679.webp";
 
 interface MenuItem {
   title: string;
@@ -38,155 +39,151 @@ interface SubMenuItem {
 
 const menuStructure: MenuItem[] = [
   { 
-    title: "Dashboard and Report", 
+    title: "Beranda", 
     url: "/", 
     icon: LayoutDashboard,
     submenu: [
-      { title: "Dashboard Overview", url: "/" },
-      { title: "Sustainability Reports", url: "/reports" },
-      { title: "Custom Dashboards", url: "/reports/dashboards" },
-      { title: "Report Builder", url: "/reports/builder" },
+      { title: "Ringkasan Dashboard", url: "/" },
+      { title: "Laporan Keberlanjutan", url: "/reports" },
+      { title: "Dashboard Kustom", url: "/reports/dashboards" },
+      { title: "Pembuat Laporan", url: "/reports/builder" },
     ]
   },
   { 
-    title: "Farmer Management", 
+    title: "Petani", 
     url: "/producers", 
     icon: Users,
     submenu: [
-      { title: "All Farmers", url: "/producers" },
-      { title: "Farmer Certifications", url: "/farmer-certifications" },
-      { title: "Farmer Last Activity", url: "/farmer-last-activity" },
-      { title: "Farmers Attributes", url: "/farmers-attributes" },
-      { title: "Farmers Household", url: "/family-members" },
-      { title: "Farmer Livelihood / Income", url: "/farmer-livelihood" },
-      { title: "Loans", url: "/loans" },
-      { title: "Loan Deductions", url: "/loan-deductions" },
-      { title: "Savings", url: "/savings" },
-      { title: "Payment Locations", url: "/locations" },
+      { title: "Semua Petani", url: "/producers" },
+      { title: "Sertifikasi Petani", url: "/farmer-certifications" },
+      { title: "Aktivitas Terakhir", url: "/farmer-last-activity" },
+      { title: "Atribut Petani", url: "/farmers-attributes" },
+      { title: "Anggota Keluarga", url: "/family-members" },
+      { title: "Mata Pencaharian", url: "/farmer-livelihood" },
+      { title: "Pinjaman", url: "/loans" },
+      { title: "Potongan Pinjaman", url: "/loan-deductions" },
+      { title: "Tabungan", url: "/savings" },
+      { title: "Lokasi Pembayaran", url: "/locations" },
+      { title: "Lahan GPS", url: "/fields" },
+      { title: "Kebun", url: "/farms" },
+      { title: "Area Tanam", url: "/planted-area" },
+      { title: "Kuota Lahan", url: "/field-quotas" },
+      { title: "Tipe Area", url: "/area-types" },
+      { title: "Objek Kebun", url: "/farm-objects" },
+      { title: "Foto Objek Kebun", url: "/farm-object-images" },
+      { title: "Deforestasi Lahan", url: "/fields-deforestation" },
+      { title: "Ringkasan Deforestasi", url: "/fields-deforestation-summary" },
     ]
   },
   { 
-    title: "Land & Field Management", 
-    url: "/fields", 
-    icon: MapPinned,
+    title: "Penilaian", 
+    url: "/penilaian", 
+    icon: ClipboardCheck,
     submenu: [
-      { title: "GPS-Mapped Fields", url: "/fields" },
-      { title: "Farms", url: "/farms" },
-      { title: "Planted Area", url: "/planted-area" },
-      { title: "Field Quotas", url: "/field-quotas" },
-      { title: "Area Types", url: "/area-types" },
-      { title: "Farm Objects", url: "/farm-objects" },
-      { title: "Farm Object Images", url: "/farm-object-images" },
-      { title: "Fields Deforestation", url: "/fields-deforestation" },
-      { title: "Deforestation Summary", url: "/fields-deforestation-summary" },
-      { title: "Farming Inputs Overview", url: "/farming-inputs" },
-      { title: "Input Distribution", url: "/input-distribution" },
-      { title: "Input Purchases", url: "/input-purchases" },
-      { title: "Fertilizers", url: "/fertilizers" },
-      { title: "Fertilizer Applications", url: "/fertilizer-applications" },
-      { title: "Chemical Applications", url: "/chemical-applications" },
-      { title: "Chemical Targets", url: "/chemical-application-targets" },
-      { title: "Chemical Varieties", url: "/chemical-application-varieties" },
-      { title: "Other Inputs", url: "/other-inputs" },
-      { title: "Other Applications", url: "/other-applications" },
+      { title: "Penilaian Keberlanjutan", url: "/penilaian" },
+      { title: "Survei", url: "/surveys" },
+      { title: "Survei Kustom", url: "/surveys/custom" },
+      { title: "Respon per Staf", url: "/survey-responses-by-staff" },
+      { title: "Survei per Staf", url: "/survey-surveys-by-staff" },
+      { title: "Sertifikasi Rainforest Alliance", url: "/workflow/rainforest-alliance" },
+      { title: "Sertifikasi Fairtrade", url: "/workflow/fairtrade" },
+      { title: "Sertifikasi Organik", url: "/workflow/organic" },
+      { title: "Regulasi EUDR", url: "/workflow/eudr" },
+      { title: "Kategori Kepatuhan", url: "/survey-compliance-categories" },
+      { title: "Peringkat Pertanyaan", url: "/survey-questions-ranking" },
+      { title: "Tindakan yang Diusulkan", url: "/survey-proposed-actions" },
+      { title: "Kasus & Insiden", url: "/cases" },
     ]
   },
   { 
-    title: "Training & Development", 
-    url: "/trainings", 
-    icon: GraduationCap,
+    title: "Ketertelusuran", 
+    url: "/ketertelusuran", 
+    icon: Activity,
     submenu: [
-      { title: "Training Programs", url: "/trainings" },
-      { title: "Training Events", url: "/training-events" },
-      { title: "Trainers", url: "/trainers" },
-      { title: "Trainer Groups", url: "/trainer-groups" },
-      { title: "Training Topics", url: "/training-topics" },
+      { title: "Ringkasan Ketertelusuran", url: "/ketertelusuran" },
+      { title: "Panen Keseluruhan", url: "/harvests" },
+      { title: "Pengumpulan", url: "/harvest-collections" },
+      { title: "Pengiriman", url: "/harvest-deliveries" },
+      { title: "Pembelian", url: "/harvest-purchases" },
+      { title: "Aktivitas", url: "/harvest-activities" },
+      { title: "Penjadwalan", url: "/harvest-scheduling" },
+      { title: "Pelacakan", url: "/harvest-tracking" },
+      { title: "Kontrol Kualitas", url: "/harvest-quality" },
+      { title: "Batch", url: "/harvest-batches" },
+      { title: "Gudang", url: "/harvest-warehouse" },
+      { title: "Biaya", url: "/harvest-costs" },
+      { title: "Peringatan", url: "/harvest-alerts" },
+      { title: "Kampanye Penanaman", url: "/planting-campaigns" },
+      { title: "Grup Kampanye", url: "/planting-campaign-groups" },
+      { title: "Template Kampanye", url: "/planting-campaign-templates" },
+      { title: "Produktivitas Lahan", url: "/field-productivity" },
+      { title: "Biaya Input", url: "/input-costs" },
+      { title: "Ketertelusuran Panen Petani", url: "/traceability-farmer-harvest" },
+      { title: "Pemrosesan", url: "/traceability-processing" },
+      { title: "Pengiriman Batch", url: "/traceability-shipment" },
+      { title: "Kontainer", url: "/traceability-containers" },
+      { title: "Manajemen Kuota", url: "/traceability-quotas" },
+      { title: "Potongan", url: "/traceability-deductions" },
+      { title: "Keuangan Siklus Tanam", url: "/cropping-cycle-financials" },
+      { title: "Premi Petani", url: "/farmer-premiums" },
+      { title: "Aturan Premi", url: "/premium-rules" },
+      { title: "Pelacakan Volume Premi", url: "/premium-volume-tracking" },
+      { title: "Input Pertanian", url: "/farming-inputs" },
+      { title: "Distribusi Input", url: "/input-distribution" },
+      { title: "Pembelian Input", url: "/input-purchases" },
+      { title: "Pupuk", url: "/fertilizers" },
+      { title: "Aplikasi Pupuk", url: "/fertilizer-applications" },
+      { title: "Aplikasi Kimia", url: "/chemical-applications" },
+      { title: "Target Kimia", url: "/chemical-application-targets" },
+      { title: "Jenis Kimia", url: "/chemical-application-varieties" },
+      { title: "Input Lainnya", url: "/other-inputs" },
+      { title: "Aplikasi Lainnya", url: "/other-applications" },
     ]
   },
   { 
-    title: "Surveys & Assessments", 
-    url: "/surveys", 
-    icon: FileText,
+    title: "Pengetahuan", 
+    url: "/pengetahuan", 
+    icon: BookOpen,
     submenu: [
-      { title: "All Surveys", url: "/surveys" },
-      { title: "Custom Surveys", url: "/surveys/custom" },
-      { title: "Responses by Staff", url: "/survey-responses-by-staff" },
-      { title: "Surveys by Staff", url: "/survey-surveys-by-staff" },
+      { title: "Pusat Pengetahuan", url: "/pengetahuan" },
+      { title: "Program Pelatihan", url: "/trainings" },
+      { title: "Acara Pelatihan", url: "/training-events" },
+      { title: "Pelatih", url: "/trainers" },
+      { title: "Kelompok Pelatih", url: "/trainer-groups" },
+      { title: "Topik Pelatihan", url: "/training-topics" },
+      { title: "Prakiraan Hasil Mingguan", url: "/weekly-yield-forecasts" },
+      { title: "Prakiraan Panen", url: "/harvest-forecasts" },
+      { title: "Analitik Penjualan", url: "/company-sales" },
     ]
   },
   { 
-    title: "Workflow", 
-    url: "/workflow/rainforest-alliance", 
-    icon: GitBranch,
-    submenu: [
-      { title: "Certification - Rainforest Alliance", url: "/workflow/rainforest-alliance" },
-      { title: "Certification - Fairtrade", url: "/workflow/fairtrade" },
-      { title: "Certification - Organic", url: "/workflow/organic" },
-      { title: "Regulation - EUDR", url: "/workflow/eudr" },
-      { title: "Compliance Categories", url: "/survey-compliance-categories" },
-      { title: "Questions Ranking", url: "/survey-questions-ranking" },
-      { title: "Proposed Actions", url: "/survey-proposed-actions" },
-      { title: "Cases & Incidents", url: "/cases" },
-    ]
+    title: "Harga Pasar", 
+    url: "/harga-pasar", 
+    icon: DollarSign,
   },
   { 
-    title: "Harvest Ops & Supply Chain", 
-    url: "/harvests", 
-    icon: Boxes,
-    submenu: [
-      { title: "All Harvests", url: "/harvests" },
-      { title: "Collections", url: "/harvest-collections" },
-      { title: "Deliveries", url: "/harvest-deliveries" },
-      { title: "Purchases", url: "/harvest-purchases" },
-      { title: "Activities", url: "/harvest-activities" },
-      { title: "Scheduling", url: "/harvest-scheduling" },
-      { title: "Tracking", url: "/harvest-tracking" },
-      { title: "Quality Control", url: "/harvest-quality" },
-      { title: "Batches", url: "/harvest-batches" },
-      { title: "Warehouse", url: "/harvest-warehouse" },
-      { title: "Costs", url: "/harvest-costs" },
-      { title: "Alerts", url: "/harvest-alerts" },
-      { title: "Planting Campaigns", url: "/planting-campaigns" },
-      { title: "Campaign Groups", url: "/planting-campaign-groups" },
-      { title: "Campaign Templates", url: "/planting-campaign-templates" },
-      { title: "Field Productivity", url: "/field-productivity" },
-      { title: "Input Costs", url: "/input-costs" },
-      { title: "Traceability Overview", url: "/traceability" },
-      { title: "Farmer Harvest Traceability", url: "/traceability-farmer-harvest" },
-      { title: "Processing", url: "/traceability-processing" },
-      { title: "Shipment", url: "/traceability-shipment" },
-      { title: "Containers", url: "/traceability-containers" },
-      { title: "Quota Management", url: "/traceability-quotas" },
-      { title: "Deductions", url: "/traceability-deductions" },
-      { title: "Cropping Cycle Financials", url: "/cropping-cycle-financials" },
-      { title: "Farmer Premiums", url: "/farmer-premiums" },
-      { title: "Premium Rules", url: "/premium-rules" },
-      { title: "Premium Volume Tracking", url: "/premium-volume-tracking" },
-    ]
+    title: "Kalender", 
+    url: "/kalender", 
+    icon: CalendarIcon,
   },
   { 
-    title: "Forecasting & Analytics", 
-    url: "/weekly-yield-forecasts", 
-    icon: TrendingUp,
-    submenu: [
-      { title: "Weekly Yield Forecasts", url: "/weekly-yield-forecasts" },
-      { title: "Harvest Forecasts", url: "/harvest-forecasts" },
-      { title: "Company Sales Analytics", url: "/company-sales" },
-    ]
+    title: "Bantuan", 
+    url: "/bantuan", 
+    icon: HelpCircle,
   },
   { 
-    title: "Administration", 
+    title: "Pengaturan", 
     url: "/admin/import", 
     icon: Settings,
     submenu: [
-      { title: "Data Import (AI Adapter)", url: "/admin/import" },
-      { title: "Users & Approval Tiers", url: "/users" },
-      { title: "Staff Management", url: "/admin/staff" },
-      { title: "Region & Supply Chain Setup", url: "/admin/regions" },
-      { title: "Traceability Wizard Setup", url: "/traceability/custom-fields" },
-      { title: "Devices", url: "/devices" },
-      { title: "Buyers", url: "/admin/buyers" },
-      { title: "Country Settings", url: "/admin/country" },
+      { title: "Import Data (AI Adapter)", url: "/admin/import" },
+      { title: "Pengguna & Tingkat Persetujuan", url: "/users" },
+      { title: "Manajemen Staf", url: "/admin/staff" },
+      { title: "Pengaturan Wilayah & Rantai Pasok", url: "/admin/regions" },
+      { title: "Pengaturan Wizard Ketertelusuran", url: "/traceability/custom-fields" },
+      { title: "Perangkat", url: "/devices" },
+      { title: "Pembeli", url: "/admin/buyers" },
+      { title: "Pengaturan Negara", url: "/admin/country" },
     ]
   },
 ];
@@ -213,13 +210,14 @@ export function AppSidebar() {
   return (
     <Sidebar data-testid="sidebar-main" className="border-r">
       <SidebarHeader className="p-4 sm:p-6 border-b border-sidebar-border bg-sidebar">
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-2">
           <img 
-            src={farmforceLogo} 
-            alt="Farmforce" 
-            className="h-8 sm:h-10 w-auto"
-            data-testid="img-farmforce-logo"
+            src={bentangSawitLogo} 
+            alt="Bentang Sawit" 
+            className="h-10 sm:h-12 w-auto"
+            data-testid="img-bentang-sawit-logo"
           />
+          <p className="text-xs text-muted-foreground text-center">Platform Keberlanjutan</p>
         </div>
       </SidebarHeader>
       

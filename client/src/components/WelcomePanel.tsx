@@ -1,4 +1,4 @@
-import { FarmforceLogo } from './FarmforceLogo';
+import { BentangSawitLogo } from './BentangSawitLogo';
 import { 
   Users, MapPinned, Sprout, Leaf, Boxes, TrendingUp, 
   Activity, DollarSign, ShieldCheck, FileText, GraduationCap, BarChart3 
@@ -23,14 +23,14 @@ export function WelcomePanel() {
   return (
     <div className="bg-gradient-to-br from-[#0b2534] to-[#0a1f2e] text-white p-12 flex flex-col justify-between min-h-screen overflow-y-auto">
       <div className="space-y-10">
-        <FarmforceLogo />
+        <BentangSawitLogo />
         
         <div className="space-y-4 max-w-lg">
           <h1 className="text-4xl font-bold leading-tight">
-            Welcome to<br />FarmForce
+            Selamat Datang di<br />Bentang Sawit
           </h1>
           <p className="text-white/90 text-lg leading-relaxed">
-            Gain the visibility into your First Mile that is inherent with accurate data.
+            Platform keberlanjutan dan ketertelusuran untuk petani kelapa sawit Indonesia.
           </p>
         </div>
 
@@ -46,24 +46,24 @@ export function WelcomePanel() {
         </div>
 
         <div className="mt-10 pt-10 border-t border-white/10 space-y-4">
-          <h2 className="text-2xl font-semibold">Enhanced Solutions</h2>
+          <h2 className="text-2xl font-semibold">Solusi Keberlanjutan</h2>
           <p className="text-white/80 text-base leading-relaxed">
-            Modern companies need more in-depth traceability to meet sustainability goals and regulatory requirements. FarmForce provides end-to-end visibility across your entire agricultural supply chain.
+            Bentang Sawit menyediakan platform digital untuk meningkatkan keberlanjutan dan ketertelusuran produksi kelapa sawit Indonesia, mendukung petani swadaya dalam memenuhi standar RSPO dan ISPO.
           </p>
         </div>
 
         <div className="grid grid-cols-3 gap-6 pt-6">
           <div className="space-y-2">
-            <div className="text-3xl font-bold text-[#f8bc28]">100K+</div>
-            <div className="text-sm text-white/70">Active Farmers</div>
+            <div className="text-3xl font-bold text-[#f8bc28]">4,200+</div>
+            <div className="text-sm text-white/70">Petani Terdaftar</div>
           </div>
           <div className="space-y-2">
-            <div className="text-3xl font-bold text-[#f8bc28]">150+</div>
-            <div className="text-sm text-white/70">Countries</div>
+            <div className="text-3xl font-bold text-[#f8bc28]">12</div>
+            <div className="text-sm text-white/70">Provinsi</div>
           </div>
           <div className="space-y-2">
-            <div className="text-3xl font-bold text-[#f8bc28]">2M+</div>
-            <div className="text-sm text-white/70">Fields Mapped</div>
+            <div className="text-3xl font-bold text-[#f8bc28]">15K+</div>
+            <div className="text-sm text-white/70">Lahan Terpetakan</div>
           </div>
         </div>
       </div>

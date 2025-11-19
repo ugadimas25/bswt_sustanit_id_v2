@@ -121,6 +121,12 @@ import AdminBuyers from "@/pages/AdminBuyers";
 import AdminStaff from "@/pages/AdminStaff";
 import AdminLoginLogs from "@/pages/AdminLoginLogs";
 import AdminOffice from "@/pages/AdminOffice";
+import Penilaian from "@/pages/Penilaian";
+import Ketertelusuran from "@/pages/Ketertelusuran";
+import Pengetahuan from "@/pages/Pengetahuan";
+import HargaPasar from "@/pages/HargaPasar";
+import Kalender from "@/pages/Kalender";
+import Bantuan from "@/pages/Bantuan";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -128,6 +134,12 @@ function Router() {
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/" component={Dashboard} />
+      <Route path="/penilaian" component={Penilaian} />
+      <Route path="/ketertelusuran" component={Ketertelusuran} />
+      <Route path="/pengetahuan" component={Pengetahuan} />
+      <Route path="/harga-pasar" component={HargaPasar} />
+      <Route path="/kalender" component={Kalender} />
+      <Route path="/bantuan" component={Bantuan} />
       <Route path="/producers" component={Producers} />
       <Route path="/producers/:id" component={ProducerDetail} />
       <Route path="/planting-campaigns" component={PlantingCampaigns} />
