@@ -122,6 +122,8 @@ import AdminStaff from "@/pages/AdminStaff";
 import AdminLoginLogs from "@/pages/AdminLoginLogs";
 import AdminOffice from "@/pages/AdminOffice";
 import Penilaian from "@/pages/Penilaian";
+import RSPO from "@/pages/RSPO";
+import ISPO from "@/pages/ISPO";
 import Ketertelusuran from "@/pages/Ketertelusuran";
 import Pengetahuan from "@/pages/Pengetahuan";
 import HargaPasar from "@/pages/HargaPasar";
@@ -135,6 +137,8 @@ function Router() {
       <Route path="/login" component={Login} />
       <Route path="/" component={Dashboard} />
       <Route path="/penilaian" component={Penilaian} />
+      <Route path="/penilaian/rspo" component={RSPO} />
+      <Route path="/penilaian/ispo" component={ISPO} />
       <Route path="/ketertelusuran" component={Ketertelusuran} />
       <Route path="/pengetahuan" component={Pengetahuan} />
       <Route path="/harga-pasar" component={HargaPasar} />

@@ -81,6 +81,8 @@ const menuStructure: MenuItem[] = [
     icon: ClipboardCheck,
     submenu: [
       { title: "Penilaian Keberlanjutan", url: "/penilaian" },
+      { title: "ISPO", url: "/penilaian/ispo" },
+      { title: "RSPO", url: "/penilaian/rspo" },
       { title: "Survei", url: "/surveys" },
       { title: "Survei Kustom", url: "/surveys/custom" },
       { title: "Regulasi EUDR", url: "/workflow/eudr" },
