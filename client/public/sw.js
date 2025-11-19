@@ -1,24 +1,7 @@
 const CACHE_NAME = 'bentang-sawit-v1';
-const STATIC_CACHE_URLS = [
-  '/',
-  '/index.html',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/favicon.png',
-  '/manifest.json'
-];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Opened cache');
-        return cache.addAll(STATIC_CACHE_URLS);
-      })
-      .catch((error) => {
-        console.log('Cache install failed:', error);
-      })
-  );
+  console.log('Service worker installed');
   self.skipWaiting();
 });
 
