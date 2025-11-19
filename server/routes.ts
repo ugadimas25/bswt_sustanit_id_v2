@@ -3,11 +3,16 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // put application routes here
-  // prefix all routes with /api
-
-  // use storage to perform CRUD operations on the storage interface
-  // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
+  // API endpoint to get all plots
+  app.get("/api/plots", async (req, res) => {
+    try {
+      const plots = await storage.getAllPlots();
+      res.json(plots);
+    } catch (error) {
+      console.error("Error fetching plots:", error);
+      res.status(500).json({ error: "Failed to fetch plots" });
+    }
+  });
 
   const httpServer = createServer(app);
 

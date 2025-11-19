@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -7,6 +7,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { InstallPWA } from "@/components/InstallPWA";
+import { useEffect } from "react";
 import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 import Producers from "@/pages/Producers";
@@ -264,6 +265,33 @@ function Router() {
 }
 
 function App() {
+  const [location, setLocation] = useLocation();
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
+  useEffect(() => {
+    // Redirect to login if not authenticated and not already on login page
+    if (!isAuthenticated && location !== "/login") {
+      setLocation("/login");
+    }
+  }, [location, isAuthenticated, setLocation]);
+
+  // If on login page, show only login
+  if (location === "/login") {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Login />
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
+    );
+  }
+
+  // If not authenticated, show nothing while redirecting
+  if (!isAuthenticated) {
+    return null;
+  }
+
   const style = {
     "--sidebar-width": "20rem",
     "--sidebar-width-icon": "4rem",

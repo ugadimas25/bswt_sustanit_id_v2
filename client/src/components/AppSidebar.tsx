@@ -10,6 +10,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 import { 
   Users, GraduationCap, FileText, 
@@ -17,7 +18,7 @@ import {
   MapPinned, Leaf, 
   Activity, Boxes, BarChart3,
   ShieldCheck, ChevronDown, ChevronRight, GitBranch,
-  BookOpen, HelpCircle, Calendar as CalendarIcon, ClipboardCheck
+  BookOpen, HelpCircle, Calendar as CalendarIcon, ClipboardCheck, LogOut
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -157,7 +158,7 @@ function isPathActive(currentPath: string, itemUrl: string, submenu?: SubMenuIte
 }
 
 export function AppSidebar() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
 
   const toggleMenu = (title: string) => {
@@ -165,6 +166,12 @@ export function AppSidebar() {
       ...prev,
       [title]: !prev[title]
     }));
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("rememberedEmail");
+    setLocation("/login");
   };
 
   return (
@@ -270,6 +277,20 @@ export function AppSidebar() {
           </SidebarGroup>
         </ScrollArea>
       </SidebarContent>
+      
+      <SidebarFooter className="border-t border-sidebar-border p-2">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              onClick={handleLogout}
+              className="min-h-12 px-4 text-sm sm:text-base font-medium text-red-600 hover:text-red-700 hover:bg-red-50"
+            >
+              <LogOut className="w-5 h-5" />
+              <span>Logout</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }

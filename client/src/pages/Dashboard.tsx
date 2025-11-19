@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { FarmMap } from "@/components/FarmMap";
 import { 
   Users, MapPin, TrendingUp, TrendingDown, DollarSign, Package, 
   Sprout, AlertTriangle, CheckCircle, Clock, Target, Award,
@@ -174,113 +175,7 @@ export default function Dashboard() {
       </div>
 
       {/* Farm Distribution Map */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Farm Distribution Map</CardTitle>
-          <p className="text-sm text-muted-foreground">Geographic distribution of registered farms across regions</p>
-        </CardHeader>
-        <CardContent>
-          <div className="relative w-full h-[400px] bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-950 dark:from-blue-950 rounded-lg overflow-hidden border">
-            <svg viewBox="0 0 100 100" className="w-full h-full" data-testid="svg-farm-map">
-              {/* Background regions with subtle colors */}
-              <g opacity="0.3">
-                <path d="M 10,10 L 50,10 L 50,35 L 10,35 Z" fill="#22c55e" className="hover:opacity-50 transition-opacity" />
-                <path d="M 10,40 L 60,40 L 60,70 L 10,70 Z" fill="#3b82f6" className="hover:opacity-50 transition-opacity" />
-                <path d="M 65,25 L 90,25 L 90,60 L 65,60 Z" fill="#f59e0b" className="hover:opacity-50 transition-opacity" />
-                <path d="M 5,75 L 30,75 L 30,95 L 5,95 Z" fill="#ef4444" className="hover:opacity-50 transition-opacity" />
-              </g>
-
-              {/* Farm location markers */}
-              {farmLocations.map((location) => {
-                const colors: Record<string, string> = {
-                  high: "#22c55e",
-                  medium: "#f59e0b",
-                  low: "#ef4444"
-                };
-                const radius = Math.min(8, 3 + location.farmers / 40);
-                const color = colors[location.status] || "#6b7280";
-                
-                return (
-                  <g key={location.id}>
-                    <circle
-                      cx={location.x}
-                      cy={location.y}
-                      r={radius}
-                      fill={color}
-                      opacity="0.6"
-                      className="hover:opacity-100 transition-opacity cursor-pointer"
-                      data-testid={`marker-${location.id}`}
-                    >
-                      <title>{`${location.name}\n${location.farmers} farmers`}</title>
-                    </circle>
-                    <circle
-                      cx={location.x}
-                      cy={location.y}
-                      r={radius - 1}
-                      fill={color}
-                      opacity="0.9"
-                      className="hover:opacity-100 transition-opacity cursor-pointer pointer-events-none"
-                    />
-                    <MapPin 
-                      className="absolute"
-                      style={{
-                        left: `${location.x}%`,
-                        top: `${location.y}%`,
-                        transform: 'translate(-50%, -100%)',
-                        width: '16px',
-                        height: '16px',
-                        color: color
-                      }}
-                    />
-                  </g>
-                );
-              })}
-
-              {/* Region labels */}
-              <text x="30" y="22" fontSize="3" fill="currentColor" opacity="0.7" fontWeight="bold">Northern</text>
-              <text x="30" y="55" fontSize="3" fill="currentColor" opacity="0.7" fontWeight="bold">Central</text>
-              <text x="70" y="42" fontSize="3" fill="currentColor" opacity="0.7" fontWeight="bold">Eastern</text>
-              <text x="12" y="85" fontSize="3" fill="currentColor" opacity="0.7" fontWeight="bold">Western</text>
-            </svg>
-          </div>
-
-          {/* Legend */}
-          <div className="mt-4 flex items-center justify-center gap-6">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-green-500" />
-              <span className="text-xs text-muted-foreground">High Density (100+ farmers)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-amber-500" />
-              <span className="text-xs text-muted-foreground">Medium Density (50-100 farmers)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-red-500" />
-              <span className="text-xs text-muted-foreground">Low Density (&lt;50 farmers)</span>
-            </div>
-          </div>
-
-          {/* Quick stats for map */}
-          <div className="grid grid-cols-4 gap-4 mt-4 pt-4 border-t">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-foreground">{farmLocations.length}</p>
-              <p className="text-xs text-muted-foreground">Districts</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-foreground">{farmLocations.reduce((sum, loc) => sum + loc.farmers, 0)}</p>
-              <p className="text-xs text-muted-foreground">Total Farmers</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-foreground">{farmLocations.filter(l => l.status === "high").length}</p>
-              <p className="text-xs text-muted-foreground">High Density</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-green-600 dark:text-green-400">92%</p>
-              <p className="text-xs text-muted-foreground">GPS Coverage</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <FarmMap />
 
       {/* Charts Section */}
       <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
