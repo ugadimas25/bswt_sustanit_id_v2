@@ -142,13 +142,13 @@ const menuStructure: MenuItem[] = [
   },
   { 
     title: "Workflow", 
-    url: "/certifications", 
+    url: "/workflow/rainforest-alliance", 
     icon: GitBranch,
     submenu: [
-      { title: "Certification - Rainforest Alliance", url: "/certifications" },
-      { title: "Certification - Fairtrade", url: "/certificate-states" },
-      { title: "Certification - Organic", url: "/farmer-certifications" },
-      { title: "Regulation - EUDR", url: "/survey-farmer-compliance" },
+      { title: "Certification - Rainforest Alliance", url: "/workflow/rainforest-alliance" },
+      { title: "Certification - Fairtrade", url: "/workflow/fairtrade" },
+      { title: "Certification - Organic", url: "/workflow/organic" },
+      { title: "Regulation - EUDR", url: "/workflow/eudr" },
       { title: "Compliance Categories", url: "/survey-compliance-categories" },
       { title: "Questions Ranking", url: "/survey-questions-ranking" },
       { title: "Proposed Actions", url: "/survey-proposed-actions" },

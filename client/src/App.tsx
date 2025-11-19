@@ -103,6 +103,10 @@ import FarmersAttributes from "@/pages/FarmersAttributes";
 import FarmerLivelihood from "@/pages/FarmerLivelihood";
 import FieldQuotas from "@/pages/FieldQuotas";
 import FieldsDeforestation from "@/pages/FieldsDeforestation";
+import WorkflowRainforestAlliance from "@/pages/WorkflowRainforestAlliance";
+import WorkflowFairtrade from "@/pages/WorkflowFairtrade";
+import WorkflowOrganic from "@/pages/WorkflowOrganic";
+import WorkflowEUDR from "@/pages/WorkflowEUDR";
 import FieldsDeforestationSummary from "@/pages/FieldsDeforestationSummary";
 import GAOperatorCosts from "@/pages/GAOperatorCosts";
 import PremiumRules from "@/pages/PremiumRules";
@@ -231,6 +235,10 @@ function Router() {
       <Route path="/farmer-livelihood" component={FarmerLivelihood} />
       <Route path="/field-quotas" component={FieldQuotas} />
       <Route path="/fields-deforestation" component={FieldsDeforestation} />
+      <Route path="/workflow/rainforest-alliance" component={WorkflowRainforestAlliance} />
+      <Route path="/workflow/fairtrade" component={WorkflowFairtrade} />
+      <Route path="/workflow/organic" component={WorkflowOrganic} />
+      <Route path="/workflow/eudr" component={WorkflowEUDR} />
       <Route path="/fields-deforestation-summary" component={FieldsDeforestationSummary} />
       <Route path="/ga-operator-costs" component={GAOperatorCosts} />
       <Route component={NotFound} />
