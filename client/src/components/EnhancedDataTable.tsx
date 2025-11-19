@@ -265,21 +265,21 @@ export function EnhancedDataTable({
   };
 
   return (
-    <div className="space-y-6" data-testid="enhanced-data-table">
+    <div className="space-y-4 sm:space-y-6" data-testid="enhanced-data-table">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">{title}</h1>
-          {description && <p className="text-muted-foreground mt-1">{description}</p>}
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{title}</h1>
+          {description && <p className="text-sm sm:text-base text-muted-foreground mt-1">{description}</p>}
         </div>
       </div>
 
       {/* Stats Grid */}
       {stats && stats.length > 0 && (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <Card key={index}>
-              <CardContent className="pt-6">
+              <CardContent className="pt-4 sm:pt-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
                     <p className="text-sm text-muted-foreground">{stat.label}</p>
@@ -331,11 +331,11 @@ export function EnhancedDataTable({
 
       {/* Actions Bar */}
       <Card>
-        <CardContent className="pt-6">
-          <div className="flex flex-wrap items-center gap-2">
+        <CardContent className="pt-4 sm:pt-6">
+          <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2">
             {/* Search */}
             {searchable && (
-              <div className="relative flex-1 min-w-[200px] max-w-sm">
+              <div className="relative flex-1 min-w-full sm:min-w-[200px] sm:max-w-sm">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search..."

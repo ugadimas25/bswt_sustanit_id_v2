@@ -258,13 +258,13 @@ function App() {
         <SidebarProvider style={style as React.CSSProperties}>
           <div className="flex h-screen w-full">
             <AppSidebar />
-            <div className="flex flex-col flex-1">
-              <header className="flex items-center justify-between p-4 border-b bg-card shadow-sm">
+            <div className="flex flex-col flex-1 min-w-0">
+              <header className="flex items-center justify-between p-2 sm:p-4 border-b bg-card shadow-sm">
                 <SidebarTrigger data-testid="button-sidebar-toggle" className="h-10 w-10" />
                 <ThemeToggle />
               </header>
               <main className="flex-1 overflow-auto">
-                <div className="p-6 max-w-7xl mx-auto">
+                <div className="p-3 sm:p-4 md:p-6 max-w-7xl mx-auto w-full">
                   <Router />
                 </div>
               </main>
