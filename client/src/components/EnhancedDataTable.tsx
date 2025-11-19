@@ -332,7 +332,7 @@ export function EnhancedDataTable({
       {/* Actions Bar */}
       <Card>
         <CardContent className="pt-4 sm:pt-6">
-          <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2">
+          <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-2">
             {/* Search */}
             {searchable && (
               <div className="relative flex-1 min-w-full sm:min-w-[200px] sm:max-w-sm">

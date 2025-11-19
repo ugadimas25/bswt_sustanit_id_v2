@@ -77,7 +77,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-4 sm:space-y-6 -m-3 sm:-m-4 md:-m-6 p-3 sm:p-4 md:p-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground" data-testid="text-dashboard-title">Dashboard</h1>
           <p className="text-sm sm:text-base text-muted-foreground mt-1">Comprehensive agricultural management overview</p>
