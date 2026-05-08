@@ -116,6 +116,7 @@ import PremiumVolumeTracking from "@/pages/PremiumVolumeTracking";
 import LoanDeductions from "@/pages/LoanDeductions";
 import ReportsDashboards from "@/pages/ReportsDashboards";
 import ReportsBuilder from "@/pages/ReportsBuilder";
+import ReportDetail from "@/pages/ReportDetail";
 import AdminCountry from "@/pages/AdminCountry";
 import AdminRegions from "@/pages/AdminRegions";
 import AdminImport from "@/pages/AdminImport";
@@ -225,6 +226,7 @@ function Router() {
       <Route path="/reports" component={Reports} />
       <Route path="/reports/dashboards" component={ReportsDashboards} />
       <Route path="/reports/builder" component={ReportsBuilder} />
+      <Route path="/reports/:slug" component={ReportDetail} />
       <Route path="/users" component={Users} />
       <Route path="/admin/country" component={AdminCountry} />
       <Route path="/admin/regions" component={AdminRegions} />
