@@ -4,14 +4,11 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import pkg from "pg";
 const { Pool } = pkg;
 
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is not set. Define it in .env (e.g. postgresql://user:pass@host:5432/bswt)");
+}
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  // Explicitly parse connection string to ensure password is string
-  user: 'postgres',
-  password: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  database: 'bentang_sawit'
 });
 const db = drizzle(pool);
 

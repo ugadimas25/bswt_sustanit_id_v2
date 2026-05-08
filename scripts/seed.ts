@@ -1,13 +1,17 @@
 import pkg from "pg";
 const { Pool } = pkg;
 
-const pool = new Pool({
-  user: "postgres",
-  password: "postgres",
-  host: "localhost",
-  port: 5432,
-  database: "bentang_sawit",
-});
+const pool = new Pool(
+  process.env.DATABASE_URL
+    ? { connectionString: process.env.DATABASE_URL }
+    : {
+        user: "postgres",
+        password: "postgres",
+        host: "localhost",
+        port: 5432,
+        database: "bswt",
+      },
+);
 
 type Region = {
   province: string;
